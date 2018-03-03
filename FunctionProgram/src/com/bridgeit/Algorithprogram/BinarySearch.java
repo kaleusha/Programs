@@ -63,34 +63,6 @@ public class BinarySearch
 		        {
 		            System.out.println(list.get(i));
 		        }
-			 /* int numberOfWords = 0;
-		        for (int i = 0; i < line.length(); i++) {
-		            char ch = line.charAt(i);
-		            if (ch == ' ') {
-		                numberOfWords++;
-		            }
 			
-	    }    System.out.println("number of words: "+numberOfWords);	  
-	    
-	    
-	    String words[]= new String[numberOfWords];
-	    System.out.println(words);
-	    for(int i=0; i<words.length; i++)
-        {
-	    	System.out.println(words.length);
-            for(int j=1; j<words.length; j++)
-            {
-                if(words[j-1].compareTo(words[j])>0)
-                {
-                    temp=words[j-1];
-                    words[j-1]=words[j];
-                    words[j]=temp;
-                }
-            }
-        }System.out.println("\nSorted names are: ");
-        for(int i=0;i<numberOfWords;i++)
-        {
-            System.out.println(words[i]);
-        }*/
 	}
 }
