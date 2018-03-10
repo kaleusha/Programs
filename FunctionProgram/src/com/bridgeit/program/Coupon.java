@@ -1,22 +1,22 @@
-package com.bridgeit.program;
+/******************************************************************************
+ *  Purpose: Read N Coupon Numbers And Print The Distinct Coupon Number
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   05-03-2018
+ ******************************************************************************/
 
-import java.util.Random;
-import java.util.Scanner;
+package com.bridgeit.program;
 
 import com.bridgeit.utility.Utility;
 
-public class Coupon
-{	
-	
-	public static void main(String[] args)
-	{
-		
-	     Scanner scanner=new Scanner(System.in);
-	     System.out.println("Enter number of element");
-	     int number=scanner.nextInt();
-	     Utility.couponRandom(number);
-	     
-	}
-    }
+public class Coupon {
 
-	
+	public static void main(String[] args) {
+		Utility utility = new Utility();
+		System.out.println("Enter number of element");
+		int number = utility.inputInteger();
+		Utility.couponRandom(number);
+
+	}
+}

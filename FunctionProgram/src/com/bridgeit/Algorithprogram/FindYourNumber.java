@@ -1,58 +1,36 @@
+/******************************************************************************
+ *  Purpose: Find The Number
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   06-03-2018
+ ******************************************************************************/
 package com.bridgeit.Algorithprogram;
 
-import java.util.Scanner;
+import com.bridgeit.utility.Utility;
 
 public class FindYourNumber {
-
+	
 	public static void main(String[] args) 
 	{
-		int first=0,mid=0,last;
-		Scanner scanner=new Scanner(System.in);
-		System.out.println("Enter How Many Elements In Array");
-		int number=scanner.nextInt();
-		int Array[]=new int[number];
-		System.out.println("Enter Array Elements:");
-		for(int i=0;i<number;i++)
-		{
-			Array[i]=scanner.nextInt();
-		}System.out.println("Enter Search Element: ");
-		int search=scanner.nextInt();
-		last=number-1;
-		mid=(first+last)/2;
-		while(first<last)
-		{
-			 if ( Array[mid] < search )
-			 {
-				 System.out.println("True");
-			        first = mid + 1;
-			        
-			 }
-			      else if ( Array[mid] == search ) 
-			      {
-			        System.out.println(search + " found at location " + (mid + 1) + ".");
-			        break;
-			      }
-			      
-			 if(Array[mid]>search)
-			 {
-
-			     System.out.println("True");
-			     last = mid - 1;
-			 
-			 }
-			 else if ( Array[mid] == search ) 
-		      {
-		        System.out.println(search + " found at location " + (mid - 1) + ".");
-		        break;
-		      }
-			      mid = (first + last)/2;
-			      
-			   }
-			   if ( first > last )
-			      System.out.println(search + " is not present in the list.\n");
-			  
+		Utility utility=new Utility();
+		int range,count,low,high,middle;
+		System.out.println("Enter any number: ");
+		int num = utility.inputInteger();
+		range = (int) Math.pow(2, num-1);
+		System.out.println("Take number between '0' to "+range);
+		count=0;
 		
-	}	
+		low=0;
+		high=range;
+		middle=(low+high/2);
+		Utility.binarySearch(low,high,middle,count,num);
+		
+		
+		
+	}
+	
+		
 
 	
 }

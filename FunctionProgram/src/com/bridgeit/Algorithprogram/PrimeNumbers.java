@@ -1,29 +1,20 @@
+/******************************************************************************
+ *  Purpose: Read N Integers And Print Sorted  
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   06-03-2018
+ ******************************************************************************/
 package com.bridgeit.Algorithprogram;
+
+import com.bridgeit.utility.Utility;
 
 public class PrimeNumbers {
 	public static void main(String[] args) 
 	{
-		int flag=0;
-		for(int i=1; i<=1000; i++)
-        {
-            for(int j=2; j<=i-1; j++)
-            {
-                if(i%j== 0)
-                {
-                    flag= 0;
-                    break;
-                }
-                else
-                {
-                    flag= 1;
-                }
-            }
-            if(flag== 1)
-            {
-                System.out.print(i);
-            }System.out.print(" ");
-        }
-		
+
+		Utility.primeNumber();
+
 	}
 
 }

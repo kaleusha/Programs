@@ -1,22 +1,26 @@
+/******************************************************************************
+ *  Purpose: Read N Integers And Print Sorted  
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   06-03-2018
+ ******************************************************************************/
 package com.bridgeit.Algorithprogram;
 
-import java.util.Scanner;
+import com.bridgeit.utility.Utility;
 
 public class MonthlyPayment {
 
 	public static void main(String[] args) 
 	{
-		Scanner scanner=new Scanner(System.in);
+		Utility utility=new Utility();
 		System.out.println("Enter The Value Of principal");
-		int P=scanner.nextInt();
+		int P=utility.inputInteger();
 		System.out.println("Enter The Value Of Rate");
-		double R=scanner.nextInt();
+		double R=utility.inputInteger();
 		System.out.println("Enter the Year");
-		int Y=scanner.nextInt();
-		int n=12*Y;
-		double r=R/(12*100);
-		double payment=(P*r)/(1-Math.pow((1+r), (-1)));
-		System.out.println("Monthly Payment Is: "+payment );
+		int Y=utility.inputInteger();
+		Utility.monthlyPayment(P,R,Y);
 	}
 
 }

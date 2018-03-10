@@ -1,23 +1,24 @@
 /******************************************************************************
- *  Purpose: Read Given String Replace Substring With User Name
+ *  Purpose: Find How Many Ways To Arrange One String
  *  
  *  @author  Usha Kale
  *  @version 1.0
  *  @since   05-03-2018
  ******************************************************************************/
-
 package com.bridgeit.program;
 
 import com.bridgeit.utility.Utility;
 
-public class StringReplace {
-	public static void main(String[] args) {
-
-		Utility utility = new Utility();
-		System.out.println("Enter user Name");
-		String input = utility.toString();
-		Utility.stringReplace(input);
-
+public class Permutation 
+{
+	public static void main(String[] args) 
+	{
+		Utility utility=new Utility();
+		System.out.println("Enter the String: ");
+		String str = utility.inputString();
+		int n = str.length();
+		Utility.permute(str, 0, n-1);
 	}
+
 
 }

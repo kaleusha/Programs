@@ -1,48 +1,33 @@
+/******************************************************************************
+ *  Purpose: Read N Integers And Print Sorted  
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   06-03-2018
+ ******************************************************************************/
 package com.bridgeit.Algorithprogram;
 
-import java.util.Scanner;
+
+import com.bridgeit.utility.Utility;
 
 public class InsertionSort {
-	 static void sort(int arr[])
-	    {
-	        int n = arr.length;
-	        for (int i=1; i<n; ++i)
-	        {
-	            int key = arr[i];
-	            int j = i-1;
-	 
-	            while (j>=0 && arr[j] > key)
-	            {
-	                arr[j+1] = arr[j];
-	                j = j-1;
-	            }
-	            arr[j+1] = key;
-	        }
-	    }
-	 static void printArray(int arr[])
-	    {
-	        int n = arr.length;
-	        for (int i=0; i<n; ++i)
-	            System.out.print(arr[i] + " ");
-	 
-	        System.out.println();
-	    }
-
+	
 	public static void main(String[] args)
 	{
 		  int i;
-	      Scanner scanner=new Scanner(System.in);
+		  Utility utility=new Utility();
+	      
 	      System.out.println("Enter How many Elements in Array");
-	      int number=scanner.nextInt();
+	      int number=utility.inputInteger();
 	      System.out.println("Enter Array Elements:");
 	      int arr[]=new int[number];
 	      for(i=0;i<number;i++)
 	      {
-	    	  arr[i]=scanner.nextInt();
+	    	  arr[i]=utility.inputInteger();
 	      }
-	      sort(arr);
+	      Utility.insertionSort(arr,number);
 	      System.out.println("Sorted Elements Are: ");
-	      printArray(arr);
+	      utility.printArray(arr,number);
 
 	}
 

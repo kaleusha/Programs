@@ -1,16 +1,20 @@
+/******************************************************************************
+ *  Purpose: Check Entered Year is Leap or Not
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   05-03-2018
+ ******************************************************************************/
 package com.bridgeit.program;
-
-import java.util.Scanner;
 
 import com.bridgeit.utility.Utility;
 
 public class LeaPYear {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+		Utility utility = new Utility();
 		System.out.println("Enter year");
-
-		int year = scanner.nextInt();
+		int year = utility.inputInteger();
 		Utility.leapYear(year);
 
 	}
