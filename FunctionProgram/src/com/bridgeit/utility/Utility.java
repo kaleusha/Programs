@@ -1,15 +1,23 @@
 package com.bridgeit.utility;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.xml.soap.Node;
+
+import com.bridgeit.DataStructure.LinkedListStructure;
+import com.bridgeit.DataStructure.OrderedListStructure;
 
 public class Utility {
 
@@ -39,7 +47,7 @@ public class Utility {
 		return 0;
 	}
 
-	// INPUT Integer
+	// INPUT Long
 	public long inputLong() {
 		try {
 			return scanner.nextInt();
@@ -49,6 +57,17 @@ public class Utility {
 		return 0;
 
 	}
+	// INPUT Double
+		public long inputDouble() {
+			try {
+				return scanner.nextInt();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			return 0;
+			
+
+		}
 
 	/**
 	 * Purpose:Print Leap Year or Not
@@ -420,7 +439,7 @@ public class Utility {
 
 			if (flag == 0) {
 				System.out.print(i + " ");
-				// list.add(Integer.toString(i));
+				list.add(i);
 			}
 
 		}
@@ -454,16 +473,16 @@ public class Utility {
 	 * @param string2
 	 * @return
 	 */
-	public static <E> boolean anagram(E chArray1[], E chArray2) {
+	public static <E> boolean anagram(String string1, String string2) {
 		boolean status = true;
 		
 		
-		if ( charArray1.length()!= charArray2.length()) {
+		if ( string1.length()!= string2.length()) {
 			status = false;
 		} else {
-			E ArrayS1 = ch;
+			char [] ArrayS1 = string1.toCharArray();
 			Arrays.sort(ArrayS1);
-			char ArrayS2[] = 
+			char ArrayS2[] = string2.toCharArray();
 			Arrays.sort(ArrayS2);
 			status = Arrays.equals(ArrayS1, ArrayS2);
 
@@ -635,15 +654,15 @@ public class Utility {
 	/**
 	 * Purpose:Print Monthly Payment
 	 * 
-	 * @param P
-	 * @param R
-	 * @param Y
+	 * @param principal
+	 * @param rate
+	 * @param year
 	 */
-	public static void monthlyPayment(int P, double R, int Y) {
+	public static void monthlyPayment(int principal, double rate, int year) {
 		// TODO Auto-generated method stub
-		int n = 12 * Y;
-		double r = R / (12 * 100);
-		double payment = (P * r) / (1 - Math.pow((1 + r), (-1)));
+		int n = 12 * year;
+		double r = rate / (12 * 100);
+		double payment = (principal * rate) / (1 - Math.pow((1 + rate), (-1)));
 		System.out.println("Monthly Payment Is: " + payment);
 
 	}
@@ -653,22 +672,28 @@ public class Utility {
 	 * 
 	 * @param strArray
 	 */
-	public static void extendPrime(String[] strArray) {
+	public static void extendPrime(int[] strArray) {
 		// TODO Auto-generated method stub
 		System.out.println("\nprime number That Are Anagarm:");
 		for (int i = 0; i < strArray.length; i++) {
 			for (int j = i + 1; j < strArray.length; j++) {
 
-				if (Utility.anagram(strArray[i], strArray[j])) {
+				if (Utility.anagram(strArray[i]+ " ", strArray[j]+ " ")) {
 					System.out.println(strArray[i] + " -> " + strArray[j]);
 				}
 			}
 		}
+		
+		
 		System.out.println("Prime Numbers That Are pallindrom: ");
-		for (int i = 0; i < strArray.length; i++) {
-			String temp = new StringBuffer(strArray[i]).reverse().toString();
-			if (temp.equals(strArray[i])) {
-				System.out.println(strArray[i] + " ");
+		for (int i = 0; i < strArray.length; i++) 
+		{
+			String s=String.valueOf(strArray[i]);
+			StringBuffer sb = new StringBuffer(s);
+			sb=sb.reverse();
+			String str=sb.toString();
+			if (str.equals(s)) {
+				System.out.println(str+ " ");
 			}
 		}
 
@@ -947,5 +972,169 @@ public class Utility {
 		return binary;
 
 	}
+
+	/**
+	 * Purpose:
+	 * @param cel
+	 */
+	public void celTofar(double cel) { double far=(cel*(9/5))+32;
+	        System.out.println("\nFahrenheit : "+far);
+	    }
+	    public void farTocel(double far) 
+	    {
+	        double cel=((far-32)*(5/9));
+	        System.out.println("\nCelsius Temperature : "+cel);
+	    }
+
+		/**
+		 * @param words
+		 */
+		@SuppressWarnings("unchecked")
+		public static void hashing(String[] words) {
+			
+			HashMap<Integer, LinkedListStructure> hashmap = new HashMap<Integer, LinkedListStructure >();
+			int hash = 0;
+			int hasharray[]=new int[words.length];
+			for(int i=0;i<words.length;i++)
+			{
+				hasharray[i]=Integer.parseInt(words[i]);
+			}
+			for(int i=0;i<hasharray.length;i++)
+			{
+				hash=hasharray[i]%11;
+				if(hashmap.containsKey(hash))
+				{
+					@SuppressWarnings("rawtypes")
+					LinkedListStructure linkedlist=hashmap.get(hash);
+					linkedlist.add(hasharray[i]);
+				}
+				else
+				{
+					hashmap.put(hash, new LinkedListStructure());
+					LinkedListStructure linkedlist=hashmap.get(hash);
+					linkedlist.add(hasharray[i]);
+				}
+			}
+			Scanner scanner=new Scanner(System.in);
+			System.out.println("Enter the key to search");
+			int search = scanner.nextInt();
+			
+			hash= search % 11;
+		    System.out.println("New Hash:"+hash);
+
+			if(hashmap.containsKey(hash))
+			{
+			    //System.out.println("fddffg"+hash);
+
+				LinkedListStructure linkedlist=hashmap.get(hash);
+				
+				if(linkedlist.search(search))
+				{
+					linkedlist.remove(search);
+					System.out.println(search+" Element found and removed from the list");
+					
+				}
+				else
+				{
+					linkedlist.add(search);
+					System.out.println(search+"element Not found and added to the list");
+					
+				}
+			}
+			else
+			{
+				hashmap.put(hash, new LinkedListStructure());
+				LinkedListStructure linkedlist=hashmap.get(hash);
+				
+			    linkedlist.add(search);
+
+			}
+			Set<Integer> keys = hashmap.keySet(); 
+			for(Integer key1: keys)
+			{ 
+				LinkedListStructure value = hashmap.get(key1);
+			    System.out.print(key1+"->");
+			    value.printlist();
+			    System.out.println();
+			}
+			
+		}
+
+		/**
+		 * @param list
+		 */
+		public static<T> void writeFileinteger(OrderedListStructure<T> list) { 
+			String string = list.toString();
+			try {
+				FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/hashing");
+				BufferedWriter write = new BufferedWriter(writer);
+				write.write(string);
+				
+				write.close();
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+
+		/**
+		 * @param array
+		 */
+		public void prime2D(int[][] array) {
+			int initial=2,temp=100;
+			int i,j,k;
+			for(i=0; i<10; i++) {
+				int size=0;
+				for(j=initial; j<temp; j++)
+				{
+					boolean flag=true;
+					for(k=2; k<j; k++)
+					{
+						if(j%k==0)
+						{
+							flag=false;
+							break;
+						}					
+					}
+					if(flag==true)
+					{
+						size++;
+					}
+				}
+				array[i]=new int[size];
+				j=0;
+				int m;
+				for(m=initial; m<temp; m++)
+				{
+					boolean temp1=true;
+					for(int q=2; q<m; q++)
+					{
+						if(m%q==0)
+						{
+							temp1=false;
+							break;
+						}
+					}
+					
+					if(temp1==true)
+					{
+						array[i][j]=m;
+						System.out.print(array[i][j]+"  ");
+						j++;
+					}
+				}
+				System.out.println();
+				initial=temp;
+				temp=temp+100;
+			}
+
+
+			
+		}
+
+	
 
 }

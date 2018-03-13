@@ -1,6 +1,6 @@
 package com.bridgeit.DataStructure;
 
-public class BankingQueueStructure 
+public class QueueStructure 
 {
 	int array[]=new int[20];
 	int front=-1;

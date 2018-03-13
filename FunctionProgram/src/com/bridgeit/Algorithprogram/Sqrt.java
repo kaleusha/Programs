@@ -1,15 +1,21 @@
+/******************************************************************************
+ *  Purpose: Find The Roots Of Non-negative NUmbers 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-03-2018
+ ******************************************************************************/
 package com.bridgeit.Algorithprogram;
 
-import java.util.Scanner;
+import com.bridgeit.utility.Utility;
 
 public class Sqrt /* Newtons law is used finding the root of nonnegative numbers */
 {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-        Scanner scanner=new Scanner(System.in);
+	public static void main(String[] args) { 
+        Utility utility=new Utility();
         System.out.println("Enter The Value of c");
-        double c=scanner.nextInt();
+        double c=utility.inputInteger();
         double epsilon = 1e-15;    
         double t = c;              
         while (Math.abs(t - c/t) > epsilon*t) {

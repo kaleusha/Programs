@@ -1,40 +1,35 @@
+/******************************************************************************
+ *  Purpose: Temperature Conversion 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-03-2018
+ ******************************************************************************/
 package com.bridgeit.Algorithprogram;
 
-import java.util.Scanner;
+import com.bridgeit.utility.Utility;
 
 public class TempratureConversion
 {
-	public void celTofar(double cel) 
-	{
-         
-        double far=(cel*(9/5))+32;
-        System.out.println("\nFahrenheit : "+far);
-    }
-    public void farTocel(double far) 
-    {
-        double cel=((far-32)*(5/9));
-        System.out.println("\nCelsius Temperature : "+cel);
-    }
-
+	
 	public static void main(String[] args)
 	{
-		TempratureConversion tc=new TempratureConversion();
-		    Scanner scan = new Scanner (System.in);
-		    System.out.println("1.C->F \n2.F->C");
+            Utility utility=new Utility();
+		    System.out.println("1.Celsius->Fahrenheit \n2.Fahrenheit->Celsius");
 		    System.out.println("Select choice: ");
-		    int ch= scan.nextInt();
+		    int ch= utility.inputInteger();
 		    
 		    if (ch == 1) 
 		    {
 		    	 System.out.print("\nEnter celsius temperature : ");
-	                double cel=scan.nextDouble(); 
-	                tc.celTofar(cel);
-		    }//if(ch == 2)
+	                double cel=utility.inputDouble();
+	                utility.celTofar(cel);
+		    }
 		    else
             {
                 System.out.print("\nEnter fahrenheit temperature : ");
-                double far=scan.nextDouble();
-                tc.farTocel(far);
+                double far=utility.inputDouble();
+                utility.farTocel(far);
             }
 		        
 		    

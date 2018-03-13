@@ -1,3 +1,12 @@
+/******************************************************************************
+ *  Purpose: Convert Decimal To Binary And Add Padding For Converting 8-Bit
+ *           And Swap Nibbles
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-03-2018
+ ******************************************************************************/
+
 package com.bridgeit.Algorithprogram;
 
 import com.bridgeit.utility.Utility;

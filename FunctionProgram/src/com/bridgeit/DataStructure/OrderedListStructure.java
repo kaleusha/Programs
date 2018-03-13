@@ -1,79 +1,33 @@
 package com.bridgeit.DataStructure;
-/******************************************************************************  
- *  Purpose: Linked list 
- * @author  
- *  @version 1.0
- *  @since   07-03-2018
- ******************************************************************************/
-class Node<T>
+
+import com.bridgeit.utility.Utility;
+
+class OrderNode<T> 
 {
 	T data;
-	Node<T> next;
-	public Node(T data)
+	OrderNode<T> next;
+	public OrderNode(T data)
 	{
 		this.data = data;
 		next = null;
 	}
 }
-public class LinkedListStructure<T>
+public class OrderedListStructure<T> 
 {
-		Node<T> root;
-		Node<T> end;
+	OrderNode<T> root;
+	OrderNode<T> end;
 		int size;
 		
 		/**
 		 * public constructor 
 		 */
-		public LinkedListStructure()
+		public void OrderListStructure()
 		{
 			root = null;
 			end = null;
 			size = 0;
 		}
 		
-		
-		/**
-		 * @param add the data into the list
-		 */
-		public void add(T hasharray)
-		{
-			Node<T> node = new Node<T>(hasharray);
-			if(root == null) 
-			{
-				root = node;
-			}
-			else
-			{
-				//end.next = node;
-				Node<T> temp =root;
-				while(temp.next != null)
-				{
-					temp = temp.next;
-				}
-				temp.next = node;
-			}
-			//end = node;
-		}
-		
-		/**
-		 * @param search the data from the file
-		 * @return
-		 */
-		public boolean search(T data)
-		{
-			Node<T> temp =root;
-			while(temp != null)
-			{
-				if(temp.data.equals(data))
-				{
-					 return true;
-				
-				}
-				temp = temp.next;
-			}
-			return false;
-		}
-
 		/**
 		 * @if list is empty then return true otherwise false
 		 */
@@ -90,29 +44,66 @@ public class LinkedListStructure<T>
 		}
 		
 		/**
+		 * @param add the data into the list
+		 */
+		public void add(T data)
+		{
+			OrderNode<T> node = new OrderNode<T>(data);
+			if(root == null) 
+			{
+				root = node;
+			}
+			else
+			{
+				end.next = node;
+			}
+			end = node;
+		}
+		
+		/**
+		 * @param search the data from the file
+		 * @return
+		 */
+		public boolean search(T data)
+		{
+			OrderNode<T> temp =root;
+			boolean isPresent=false;
+			while(temp != null)
+			{
+				if(temp.data.equals(data))
+				{
+					isPresent=true;
+				}
+				temp = temp.next;
+			}
+			return isPresent;
+		}
+		
+		/**
 		 * @param insert the data at appropriate position
 		 * @param data
 		 */
-		public void insert(int pos,T data)
+		public void insert(T data,int pos)
 		{
-			int tempPos=0;
-			Node<T> node = new Node<T>(data);
-			Node<T> currNode,prevNode;
-			currNode = prevNode = root;
+			
+			OrderNode<T> node = new OrderNode<T>(data);
+			OrderNode<T> temp = root;
+			
 			if(size < pos)
 			{
 				add(data);
 			}
 			else
 			{
-				while(pos != tempPos)
+				int count=1;
+				while(count<=pos)
 				{
-					prevNode = currNode;
-					currNode = currNode.next;
-					tempPos++;
+					temp=temp.next;
+					count++;
 				}
-				prevNode.next = node;
-				node.next = currNode;
+				node.next=temp.next.next;
+				temp.next=node;
+				
 			}
 		}
 		/**
@@ -120,8 +111,7 @@ public class LinkedListStructure<T>
 		 */
 		public void remove(T data)
 		{
-
-			Node<T> temp = root;
+			OrderNode<T> temp = root;
 			
 			if(root.data.equals(data)) 
 			{
@@ -130,19 +120,21 @@ public class LinkedListStructure<T>
 			
 			else
 			{
-				Node<T> prev = null;
-				while(temp.next != null && temp.data!=data)
+				while(temp != null)
 				{
-					prev = temp;
+					if(temp.data.equals(data))
+					{
+						temp.next = temp.next.next;
+						break;
+					}
 					temp = temp.next;
-				}
-				if(temp.data.equals(data))
-				{
-					prev.next = temp.next;
-				
+					
 				}
 			}
-			
+			if(size != 0)
+			{
+				size--;
+			}
 		}
 		
 		/**
@@ -151,8 +143,8 @@ public class LinkedListStructure<T>
 		public void removeAt(int pos)
 		{
 			int tempPos=0;
-			Node<T> prevNode=root;
-			Node<T> currNode = root;
+			OrderNode<T> prevNode=root;
+			OrderNode<T> currNode = root;
 			if(pos == 0)
 			{
 				root = root.next;
@@ -192,7 +184,7 @@ public class LinkedListStructure<T>
 		 */
 		public int size()
 		{
-			Node<T> temp = root;
+			OrderNode<T> temp = root;
 			int size=0;
 			while(temp != null)
 			{
@@ -207,8 +199,8 @@ public class LinkedListStructure<T>
 		 */
 		public void printlist()
 		{
-			Node<T> temp = root;
-			//System.out.println("YOUR FILE DATA IS:==>>");
+			OrderNode<T> temp = root;
+			System.out.println("YOUR FILE DATA IS:==>>");
 			while(temp != null)
 			{
 				System.out.print(temp.data+" ");
@@ -222,7 +214,7 @@ public class LinkedListStructure<T>
 		
 		public int index(T data)
 		{
-			Node<T> temp =root;
+			OrderNode<T> temp =root;
 			int index=0;
 			while(temp != null)
 			{
@@ -241,15 +233,15 @@ public class LinkedListStructure<T>
 			removeAt(this.size()-1);
 			return data;
 		}
-		public T pop(int pos)
+		public int pop(int pos)
 		{
-			T tempData=get(pos);
+			int tempData=get(pos);
 			removeAt(pos);
 			return tempData;
 		}
-		public T get(int index)
+		public int get(int index)
 		{
-			Node<T> tempCurrent=new Node<T>(null);
+			OrderNode<T> tempCurrent=new OrderNode<T>(null);
 			if(index>=0 && index<this.size())
 			{
 				tempCurrent=root;
@@ -263,7 +255,51 @@ public class LinkedListStructure<T>
 				System.out.println("Invalid index");
 			}
 			
-			return tempCurrent.data;
+			return index;
 		}
-	}
+		
+		public String toString()
+		{
+			String string="";
+			
+			OrderNode<T> temp=root;
+			while(temp !=  null)
+			{
+				string = string+temp.data+" ";
+				temp = temp.next;
+			}
+			return string;
+		}
+		
+		public void sort(String arr[])
+		{
+			for(int i=0;i<arr.length;i++)
+			{
+				for(int j=i+1;j<arr.length;j++)
+				{
+					if(arr[i].compareToIgnoreCase(arr[j]) > 0)
+					{
+						String temp = arr[i];
+						arr[i] = arr[j];
+						arr[j] = temp;
+					}
+				}
+			}
+			System.out.println("Array After Bubble Sort");  
+	        for(int i=0; i < arr.length; i++)
+	        {  
+	                System.out.print(arr[i] + " ");  
+	        }  
+				
+		}
+		public void sortList(OrderedListStructure<T> list)
+		{
+			String string = list.toString();
+			String array[] = string.split(" ");
+			sort(array);
+			Utility.writeFileinteger(list);
+		}
+		
+		
 
+}

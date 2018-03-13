@@ -3,7 +3,7 @@
  *  
  *  @author  Usha Kale
  *  @version 1.0
- *  @since   06-03-2018
+ *  @since   09-03-2018
  ******************************************************************************/
 package com.bridgeit.Algorithprogram;
 
@@ -15,12 +15,12 @@ public class MonthlyPayment {
 	{
 		Utility utility=new Utility();
 		System.out.println("Enter The Value Of principal");
-		int P=utility.inputInteger();
+		int principal=utility.inputInteger();
 		System.out.println("Enter The Value Of Rate");
-		double R=utility.inputInteger();
+		double rate=utility.inputInteger();
 		System.out.println("Enter the Year");
-		int Y=utility.inputInteger();
-		Utility.monthlyPayment(P,R,Y);
+		int year=utility.inputInteger();
+		Utility.monthlyPayment(principal,rate,year);
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.bridgeit.DataStructure;
 
-import java.util.Scanner;
-
 import com.bridgeit.utility.Utility;
 
 public class BankingCashCounter
@@ -11,7 +9,7 @@ public class BankingCashCounter
 		
 		Utility utility=new Utility();
 		int ch;
-		BankingQueueStructure qs=new BankingQueueStructure();
+		QueueStructure qs=new QueueStructure();
 		do {
 			System.out.println("\n1.For enter to Queue\n2.Procede with Transaction");
 			System.out.println("Enter choice");
@@ -35,14 +33,14 @@ public class BankingCashCounter
 		{
 		case 1:
 			    System.out.println("Enter the amount to deoposite");
-			    double amunt=utility.hashCode();
+			    double amunt=utility.inputDouble();
 			    qs.exit();
 			    Utility.enqueue(amunt);
 			    break;
 		
 		case 2:
 			   System.out.println("Enter the amount to withdraw");
-			   double amuntw=utility.hashCode();
+			   double amuntw=utility.inputDouble();
 			   qs.exit();
 			   Utility.dequeue(amuntw);
 			   break;
