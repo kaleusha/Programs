@@ -9,7 +9,7 @@ public class BankingCashCounter
 		
 		Utility utility=new Utility();
 		int ch;
-		QueueStructure qs=new QueueStructure();
+		BankingQueueStructure qs=new BankingQueueStructure();
 		do {
 			System.out.println("\n1.For enter to Queue\n2.Procede with Transaction");
 			System.out.println("Enter choice");

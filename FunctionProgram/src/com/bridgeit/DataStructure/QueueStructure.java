@@ -1,33 +1,76 @@
 package com.bridgeit.DataStructure;
 
-public class QueueStructure 
-{
-	int array[]=new int[20];
-	int front=-1;
-	int rear=-1;
-	static int count=0;
+import java.util.NoSuchElementException;
+
+class ListNode1 {
+
+	public int data;
+	public ListNode1 next;
 	
-	public void add()
-	{
-		count++;
-		System.out.println("queue Size Is: "+count);
+	public ListNode1(int data2){
+		
+		this.data = data2;
+		this.next = null;
 	}
-	public void exit()
+
+}
+public class QueueStructure {
+	private ListNode1 front;
+	private ListNode1 rear;
+	private int length;
+
+
+	public QueueStructure()
 	{
-		count--;
+		this.front = null;
+		this.rear = null;
+		this.length = 0;
 	}
-	public boolean size()
+	public boolean isEmpty()
 	{
-		return true;
+		return length == 0;
 	}
-	public boolean empty()
+	public void insert(int data)
 	{
-		return count==0;
+		ListNode1 temp = new ListNode1(data);
+		if(isEmpty())
+		{
+			front = temp;
+		}
+		else
+		{
+			rear.next =temp;
+		}
+		rear = temp;
+		length++;
 	}
+	public int delete()
+	{
+		if(isEmpty())
+		{
+			throw new NoSuchElementException();
+		}	
+		int result = front.data;
+		front = front.next;
+		if(front == null)
+		{
+			rear = null;
+		}
+		length--;
+		return result;
+	}
+
+	public void print(){
+		if(isEmpty()){
+			return;
+		}
+		ListNode1 current = front;
+		while(current != null)
+		{
+			System.out.print(current.data+"   ");
+			current = current.next;
+		}
+		
 	
-	public boolean full()
-	{
-		return count==20;
 	}
-	
 }

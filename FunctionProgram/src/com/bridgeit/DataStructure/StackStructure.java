@@ -1,44 +1,69 @@
+/******************************************************************************
+ *  Purpose: Print Calendar Using Stack
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   14-03-2018
+ ******************************************************************************/
 package com.bridgeit.DataStructure;
+
+import java.util.EmptyStackException;
 
 public class StackStructure 
 {
-	private int maxSize;
-	private long[] stackArray;
-	private int top;
+	public ListNode1 top;
+	int length;
+	
+	public int length(){
+		return length;
+	}
+	public boolean isEmpty(){
+		return length == 0;	
+	}
+	public void push(int data)
+	{
+		ListNode1 temp = new ListNode1(data);
+		temp.next = top;
+		top = temp;
+		length++;
+	}
+	
+	public int pop(){
+		if(isEmpty()) {
+			throw new EmptyStackException();
+		}
+		int result = top.data;
+		top = top.next;
+		length--;
+		return result;	
+	}
+	public int peek()
+	{
+		if(isEmpty()){
+			throw new EmptyStackException();	
+		}
+		return top.data;		
+	}
+	
+	public void reverse()
+	{
+		if(isEmpty())
+		{
+			throw new EmptyStackException();
+		}
+	}
+		public void print(){
+			if(isEmpty()){
+				return;
+			}
+			ListNode1 current = top;
+			while(current != null)
+			{
+				System.out.print(current.data+"   ");
+				current = current.next;
+			}
+	
+		}
 
-	//for size  
-	public StackStructure(int s)
-	{
-	    maxSize = s;
-	    stackArray = new long[maxSize];
-	    top = -1;
-	}
-	//for push   
-	public void push(long j)
-	{
-	    stackArray[++top] = j;
-	}
-	//for pop   
-	public long pop() 
-	{
-		
-	    return stackArray[top--];
-	}
-	//for peek   
-	public long peek() 
-	{
-	    return stackArray[top];
-	}
-	//to check whether stack is empty	   
-	public boolean isEmpty()
-	{
-		
-	   return (top == -1);
-	}
-	//to check whether stack is full	   
-	public boolean isFull()
-	{
-	   return (top == maxSize - 1);
-	}
 
 }

@@ -30,8 +30,8 @@ public class ExtendPrime {
           
          
           
-          Utility.extendPrime(strArray);
-          
+          Utility.primeAnagram(strArray);
+           Utility.pallindrom(strArray);
          
 
 	}

@@ -2,6 +2,7 @@ package com.bridgeit.utility;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
@@ -16,8 +18,16 @@ import java.util.Set;
 
 import javax.xml.soap.Node;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.bridgeit.DataStructure.LinkedListStructure;
 import com.bridgeit.DataStructure.OrderedListStructure;
+import com.bridgeit.DataStructure.QueueStructure;
+import com.bridgeit.DataStructure.StackCalender10;
+import com.bridgeit.DataStructure.StackStructure;
 
 public class Utility {
 
@@ -672,7 +682,7 @@ public class Utility {
 	 * 
 	 * @param strArray
 	 */
-	public static void extendPrime(int[] strArray) {
+	public static void primeAnagram(int[] strArray) {
 		// TODO Auto-generated method stub
 		System.out.println("\nprime number That Are Anagarm:");
 		for (int i = 0; i < strArray.length; i++) {
@@ -685,17 +695,7 @@ public class Utility {
 		}
 		
 		
-		System.out.println("Prime Numbers That Are pallindrom: ");
-		for (int i = 0; i < strArray.length; i++) 
-		{
-			String s=String.valueOf(strArray[i]);
-			StringBuffer sb = new StringBuffer(s);
-			sb=sb.reverse();
-			String str=sb.toString();
-			if (str.equals(s)) {
-				System.out.println(str+ " ");
-			}
-		}
+		
 
 	}
 
@@ -974,7 +974,8 @@ public class Utility {
 	}
 
 	/**
-	 * Purpose:
+	 * Purpose: Temperature Conversion
+	 * 
 	 * @param cel
 	 */
 	public void celTofar(double cel) { double far=(cel*(9/5))+32;
@@ -987,6 +988,8 @@ public class Utility {
 	    }
 
 		/**
+		 * Purpose: Hashing
+		 * 
 		 * @param words
 		 */
 		@SuppressWarnings("unchecked")
@@ -1020,7 +1023,7 @@ public class Utility {
 			int search = scanner.nextInt();
 			
 			hash= search % 11;
-		    System.out.println("New Hash:"+hash);
+		    //System.out.println("New Hash:"+hash);
 
 			if(hashmap.containsKey(hash))
 			{
@@ -1061,6 +1064,8 @@ public class Utility {
 		}
 
 		/**
+		 * Purpose: Write in file
+		 * 
 		 * @param list
 		 */
 		public static<T> void writeFileinteger(OrderedListStructure<T> list) { 
@@ -1080,61 +1085,296 @@ public class Utility {
 			
 		}
 
+		
 		/**
+		 * Purpose: Print Prime Numbers In 2D Array
+		 * 
 		 * @param array
 		 */
-		public void prime2D(int[][] array) {
-			int initial=2,temp=100;
-			int i,j,k;
-			for(i=0; i<10; i++) {
-				int size=0;
-				for(j=initial; j<temp; j++)
+		public <T>void prime2D(ArrayList<T> array) {
+
+			int array2D[][]=new int[10][30]; 
+			int result=0;
+			int i=0,j=0;
+			Iterator<Integer> iterator=(Iterator<Integer>) array.iterator();
+			while(iterator.hasNext())
+			{
+				int element=iterator.next();
+				int d=element/100;
+				if(d!=result)
 				{
-					boolean flag=true;
-					for(k=2; k<j; k++)
-					{
-						if(j%k==0)
-						{
-							flag=false;
-							break;
-						}					
-					}
-					if(flag==true)
-					{
-						size++;
-					}
+					result=d;
+					i++;
+					j=0;
 				}
-				array[i]=new int[size];
-				j=0;
-				int m;
-				for(m=initial; m<temp; m++)
+				array2D[i][j++]=element;
+			}
+			for(int r=0;r<array2D.length;r++)
+			{
+				for(int s=0;s<array2D[r].length;s++)
 				{
-					boolean temp1=true;
-					for(int q=2; q<m; q++)
+					if(array2D[r][s]==0) {
+						System.out.print(" ");
+					}else
 					{
-						if(m%q==0)
-						{
-							temp1=false;
-							break;
-						}
-					}
-					
-					if(temp1==true)
-					{
-						array[i][j]=m;
-						System.out.print(array[i][j]+"  ");
-						j++;
+						System.out.printf("%3d ",array2D[r][s]);
 					}
 				}
 				System.out.println();
-				initial=temp;
-				temp=temp+100;
 			}
-
-
 			
 		}
 
-	
+		/**
+		 * Purpose: Print Pallindrom numbers
+		 * 
+		 * @param strArray
+		 */
+		public static void pallindrom(int[] strArray) {
+			// TODO Auto-generated method stub
+			System.out.println("Prime Numbers That Are pallindrom: ");
+			for (int i = 0; i < strArray.length; i++) 
+			{
+				String s=String.valueOf(strArray[i]);
+				StringBuffer sb = new StringBuffer(s);
+				sb=sb.reverse();
+				String str=sb.toString();
+				if (str.equals(s)) {
+					System.out.println(str+ " ");
+				}
+			}
+			
+		}
 
+		/**
+		 * Purpose: Print Anagram from Stack
+		 * 
+		 * @param strArray
+		 */
+		public static void stackAnagram(int[] strArray) {
+			StackStructure stack=new StackStructure();
+			for (int i = 0; i < strArray.length; i++) {
+				for (int j = i + 1; j < strArray.length; j++) {
+
+					if (Utility.anagram(strArray[i]+ " ", strArray[j]+ " ")) {
+						stack.push(strArray[i]);
+						stack.push(strArray[j]);
+					}
+				}
+		}
+              stack.print();
+	
+		}
+
+		/**
+		 * Purpose: Print Anagram from Queue
+		 * 
+		 * @param strArray
+		 */
+		public static void queueAnagram(int[] strArray) {
+			// TODO Auto-generated method stub
+			QueueStructure queue=new QueueStructure();
+			for (int i = 0; i < strArray.length; i++) {
+				for (int j = i + 1; j < strArray.length; j++) {
+
+					if (Utility.anagram(strArray[i]+ " ", strArray[j]+ " ")) {
+						queue.insert(strArray[i]);
+						queue.insert(strArray[j]);
+					}
+				}
+		}
+			queue.print();
+	
+			
+		}
+
+		
+			public static int maxDay(int month,int year)
+			{
+				if(month==1 || month==3 || month==5 || month == 7 || month == 8 || month == 10 || month == 12)
+				{
+					return 31;
+				}
+				else if(month ==4 || month == 6|| month == 9|| month ==11)
+				{
+					return 30;
+				}
+				else
+				{
+					if(isLeapYear(year))
+					{
+						return 29;
+					}
+					else
+					{
+						return 28;
+					}
+				}
+			
+		}
+
+			public static void calenderWithStack(int month, int year) {
+				// TODO Auto-generated method stub
+
+				StackCalender10 week = new StackCalender10();
+				int start = Utility.dayOfWeek(month,1, year);
+				int maxDay = Utility.maxDay(month, year);
+				int numberOfObject;
+				int date = 0;
+				if(maxDay + start>35)
+				{
+					numberOfObject = 6;
+				}
+				else
+				{
+					numberOfObject = 5; }
+				for(int i = 0; i < numberOfObject;i++)
+				{
+					week.add(new StackCalender10());
+				}
+				for(int i = 0; i < numberOfObject;i++)
+				{
+					StackCalender10 stack =week.dataAtPosition(i);
+					if(i==0)
+					{
+						for(int j = 0; j <start; j++)
+						{
+							stack.add(" ");
+						}
+						for(int j = start;j<7;j++)
+						{
+							stack.add(++date);
+						}
+					}
+					else
+					{
+						for(int j = 0; j <7;j++)
+						{
+							stack.add(++date);
+							if(date == maxDay)
+							{
+								break;
+							}
+						}	
+					}
+				}
+				System.out.println("SUN"+"\t"+"M"+"\t"+"TU"+"\t"+"WED"+"\t"+"TH"+"\t"+"FRI"+"\t"+"SAT");
+				for(int i = 0; i < numberOfObject; i++)
+				{
+					StackCalender10 stack =  week.dataAtPosition(i);
+					int length = stack.size();
+					for(int j = 0; j <length; j++)
+					{
+						
+						String s1 = stack.dataAtPosition(j).toString();
+						System.out.print(s1);
+						System.out.print("\t");
+					}
+					System.out.println();
+				}
+				
+			}
+
+			@SuppressWarnings("unchecked")
+			public void writeFile(File file) {
+				try {
+					FileWriter writer = new FileWriter(file);
+					JSONObject object1 = new JSONObject();
+					
+					
+					
+					
+					//input for rice
+					System.out.println("Enter the name of rice: ");
+					String name = scanner.next();
+					System.out.println("Enter the weight of rice: ");
+					double weight = scanner.nextDouble();
+					System.out.println("Enter the price of rice: ");
+					double price = scanner.nextDouble();
+					object1.put("name", name);
+					object1.put("weight", weight);
+					object1.put("price", price);
+					
+					
+					//input for pulses
+					JSONObject object2 = new JSONObject();
+					System.out.println("Enter the name of pulse: ");
+					name = scanner.next();
+					System.out.println("Enter the weight of pulse: ");
+					weight =scanner.nextDouble();
+					System.out.println("Enter the price of pulse: ");
+					price =scanner.nextDouble();
+					object2.put("name", name);
+					object2.put("weight", weight);
+					object2.put("price", price);
+					System.out.println("Enter ");
+					
+					
+					//input for wheats
+					JSONObject object3 = new JSONObject();
+					System.out.println("Enter the name of wheats: ");
+					name = scanner.next();
+					System.out.println("Enter the weight of wheats: ");
+					weight = scanner.nextDouble();
+					System.out.println("Enter the price of wheats: ");
+					price =scanner.nextDouble();
+					object3.put("name", name);
+					object3.put("weight", weight);
+					object3.put("price", price);
+					
+					JSONObject items = new JSONObject();
+					items.put("rice", object1);
+					items.put("pulse", object2);
+					items.put("wheat", object3);
+					
+					writer.write(JSONValue.toJSONString(items));
+					
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+
+			@SuppressWarnings("rawtypes")
+			public void readFile(File file) {
+				try {
+					
+					
+						FileReader reader = new FileReader(file);
+						JSONParser parser = new JSONParser();
+						JSONObject object =(JSONObject) parser.parse(reader);
+						Iterator iterator = object.keySet().iterator();
+						while(iterator.hasNext())
+						{
+							String key = (String)iterator.next();
+							JSONObject object1 = (JSONObject) object.get(key);
+							Iterator iterator1 = object.keySet().iterator();
+							while(iterator1.hasNext())
+							{
+								String key1 = (String)iterator1.next();
+							
+							}System.out.println();
+							System.out.println("Total cost of "+object1.get("name") + " is: "
+										+ Double.parseDouble(object1.get("weight").toString())
+										* Double.parseDouble(object1.get("price").toString()));
+						}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
 }

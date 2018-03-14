@@ -34,7 +34,8 @@ public class TicTacToe
 				Random r = new Random();
 				int num = r.nextInt(9);
 
-				if (num != 0 && tictactoe.checkDuplicate(num)) {
+				if (num != 0 && tictactoe.checkDuplicate(num)) 
+				{
 					tictactoe.computerTurn(str, num);
 					tictactoe.computerWinTest(str);
 				}

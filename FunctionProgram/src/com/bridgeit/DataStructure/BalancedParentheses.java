@@ -7,12 +7,8 @@ public class BalancedParentheses
 	public static void main(String[] args) 
 	{
 		Utility utility=new Utility();
-		System.out.println("Enter max size: ");
-		int n=utility.inputInteger();
-	
-
 		//Creating Stack 
-		StackStructure stack = new StackStructure(n);
+		StackStructure stack = new StackStructure();
 		
 
 		System.out.println("Enter expression: ");
