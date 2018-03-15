@@ -45,6 +45,6 @@ public class OrderedList
 		Utility.writeFileinteger(orderlist);
 		orderlist.printlist();
 	}
-	
+	scanner.close();
 	}
 }

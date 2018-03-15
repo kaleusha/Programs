@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Purpose: 
+ *  Purpose: Read Two String And Check Anagram or Not
  *  
  *  @author  Usha Kale
  *  @version 1.0
@@ -7,15 +7,18 @@
  ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
-import java.io.File;
 import com.bridgeit.utility.Utility;
 
-public class DataManagement {
+public class RegularExpression {
 	public static void main(String[] args) {
 		Utility utility=new Utility();
-	    File file = new File("/home/bridgeit/Programs/files/dataManagement.json");
-	    utility.writeFile(file);
-	    utility.readFile(file);
+        Utility.firstName();
+		Utility.fullName();
+		Utility.mobileNumber();
+		Utility.Date();
+		String msg=Utility.RegexReplace();
+		System.out.println(msg);	
+		
 	}
 
 }

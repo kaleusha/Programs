@@ -1,23 +1,27 @@
 package com.bridgeit.utility;
 
 import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
 import javax.xml.soap.Node;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
@@ -29,16 +33,22 @@ import com.bridgeit.DataStructure.QueueStructure;
 import com.bridgeit.DataStructure.StackCalender10;
 import com.bridgeit.DataStructure.StackStructure;
 
+import java.util.Date;
+import java.util.regex.Matcher;
+
+import java.text.SimpleDateFormat;
+import java.util.SimpleTimeZone;
+import java.util.regex.Pattern;
 public class Utility {
 
-	Scanner scanner;
+	static Scanner scanner;
 
 	public Utility() {
 		scanner = new Scanner(System.in);
 	}
 
 	// INPUT STRING
-	public String inputString() {
+	public static String inputString() {
 		try {
 			return scanner.next();
 		} catch (Exception e) {
@@ -48,7 +58,7 @@ public class Utility {
 	}
 
 	// INPUT Integer
-	public int inputInteger() {
+	public static int inputInteger() {
 		try {
 			return scanner.nextInt();
 		} catch (Exception e) {
@@ -68,16 +78,16 @@ public class Utility {
 
 	}
 	// INPUT Double
-		public long inputDouble() {
-			try {
-				return scanner.nextInt();
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			return 0;
-			
-
+	public long inputDouble() {
+		try {
+			return scanner.nextInt();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
+		return 0;
+
+
+	}
 
 	/**
 	 * Purpose:Print Leap Year or Not
@@ -124,7 +134,7 @@ public class Utility {
 	}
 
 	/**
-	 * Purpose:Print Leap Year or Not
+	 * Purpose:Print 
 	 * 
 	 * @param stake
 	 * @param goal
@@ -136,14 +146,14 @@ public class Utility {
 		for (int i = 0; i < trials; i++) {
 			int cash = stake;
 			while (cash > 0 && cash < goal) {
-				lbets++;
+				//lbets++;
 				if (Math.random() < 0.5) {
 					cash++;
 				} else {
 					cash--;/*
-							
-							
-							*/
+
+
+					 */
 				}
 				if (cash == goal) {
 					wins++;
@@ -153,7 +163,7 @@ public class Utility {
 		System.out.println(wins + " Wins off " + trials);
 		int won = 100 * wins / trials;
 		System.out.println("Percentage of won: " + won);
-		System.out.println("Avg bets = " + 1.0 * lbets / trials);
+		//System.out.println("Avg bets = " + 1.0 * lbets / trials);
 	}
 
 	/**
@@ -413,7 +423,7 @@ public class Utility {
 
 	public static double start() {
 		double START_TIMER = System.currentTimeMillis();
-		System.out.println("Start Time is: " + START_TIMER % 1200 + " Seconds");
+		System.out.println("Start Time is: " + START_TIMER );
 		return START_TIMER;
 	}
 
@@ -485,8 +495,8 @@ public class Utility {
 	 */
 	public static <E> boolean anagram(String string1, String string2) {
 		boolean status = true;
-		
-		
+
+
 		if ( string1.length()!= string2.length()) {
 			status = false;
 		} else {
@@ -693,9 +703,9 @@ public class Utility {
 				}
 			}
 		}
-		
-		
-		
+
+
+
 
 	}
 
@@ -752,9 +762,9 @@ public class Utility {
 	 * @return
 	 */
 	public static String[] readFile(String filePath) {
-		String[] words = {};
+		String[] words= {};
 		ArrayList<String> lines = new ArrayList<String>();
-		String line, temp[] = {};
+		String line, temp[];
 		BufferedReader bufferedReader;
 		FileReader file;
 
@@ -809,6 +819,7 @@ public class Utility {
 	}
 
 	/**
+	 * Purpose: Find out Permutation
 	 * @param str
 	 * @param l
 	 * @param r
@@ -830,6 +841,7 @@ public class Utility {
 	}
 
 	/**
+	 * Purpose: Swap Elements
 	 * @param str
 	 * @param i
 	 * @param j
@@ -845,6 +857,7 @@ public class Utility {
 	}
 
 	/**
+	 * Purpose: Banking 
 	 * @param amunt
 	 */
 	static double balance = 0;
@@ -979,402 +992,1013 @@ public class Utility {
 	 * @param cel
 	 */
 	public void celTofar(double cel) { double far=(cel*(9/5))+32;
-	        System.out.println("\nFahrenheit : "+far);
-	    }
-	    public void farTocel(double far) 
-	    {
-	        double cel=((far-32)*(5/9));
-	        System.out.println("\nCelsius Temperature : "+cel);
-	    }
+	System.out.println("\nFahrenheit : "+far);
+	}
+	public void farTocel(double far) 
+	{
+		double cel=((far-32)*(5/9));
+		System.out.println("\nCelsius Temperature : "+cel);
+	}
 
-		/**
-		 * Purpose: Hashing
-		 * 
-		 * @param words
-		 */
-		@SuppressWarnings("unchecked")
-		public static void hashing(String[] words) {
-			
-			HashMap<Integer, LinkedListStructure> hashmap = new HashMap<Integer, LinkedListStructure >();
-			int hash = 0;
-			int hasharray[]=new int[words.length];
-			for(int i=0;i<words.length;i++)
-			{
-				hasharray[i]=Integer.parseInt(words[i]);
-			}
-			for(int i=0;i<hasharray.length;i++)
-			{
-				hash=hasharray[i]%11;
-				if(hashmap.containsKey(hash))
-				{
-					@SuppressWarnings("rawtypes")
-					LinkedListStructure linkedlist=hashmap.get(hash);
-					linkedlist.add(hasharray[i]);
-				}
-				else
-				{
-					hashmap.put(hash, new LinkedListStructure());
-					LinkedListStructure linkedlist=hashmap.get(hash);
-					linkedlist.add(hasharray[i]);
-				}
-			}
-			Scanner scanner=new Scanner(System.in);
-			System.out.println("Enter the key to search");
-			int search = scanner.nextInt();
-			
-			hash= search % 11;
-		    //System.out.println("New Hash:"+hash);
+	/**
+	 * Purpose: Hashing
+	 * 
+	 * @param words
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void hashing(String[] words) {
 
+		HashMap<Integer, LinkedListStructure> hashmap = new HashMap<Integer, LinkedListStructure >();
+		int hash = 0;
+		int hasharray[]=new int[words.length];
+		for(int i=0;i<words.length;i++)
+		{
+			hasharray[i]=Integer.parseInt(words[i]);
+		}
+		for(int i=0;i<hasharray.length;i++)
+		{
+			hash=hasharray[i]%11;
 			if(hashmap.containsKey(hash))
 			{
-			    //System.out.println("fddffg"+hash);
 
 				LinkedListStructure linkedlist=hashmap.get(hash);
-				
-				if(linkedlist.search(search))
-				{
-					linkedlist.remove(search);
-					System.out.println(search+" Element found and removed from the list");
-					
-				}
-				else
-				{
-					linkedlist.add(search);
-					System.out.println(search+"element Not found and added to the list");
-					
-				}
+				linkedlist.add(hasharray[i]);
 			}
 			else
 			{
 				hashmap.put(hash, new LinkedListStructure());
 				LinkedListStructure linkedlist=hashmap.get(hash);
-				
-			    linkedlist.add(search);
+				linkedlist.add(hasharray[i]);
+			}
+		}
+		Scanner scanner=new Scanner(System.in);
+		System.out.println("Enter the key to search");
+		int search = scanner.nextInt();
+
+		hash= search % 11;
+		//System.out.println("New Hash:"+hash);
+
+		if(hashmap.containsKey(hash))
+		{
+			//System.out.println("fddffg"+hash);
+
+			LinkedListStructure linkedlist=hashmap.get(hash);
+
+			if(linkedlist.search(search))
+			{
+				linkedlist.remove(search);
+				System.out.println(search+" Element found and removed from the list");
 
 			}
-			Set<Integer> keys = hashmap.keySet(); 
-			for(Integer key1: keys)
-			{ 
-				LinkedListStructure value = hashmap.get(key1);
-			    System.out.print(key1+"->");
-			    value.printlist();
-			    System.out.println();
+			else
+			{
+				linkedlist.add(search);
+				System.out.println(search+"element Not found and added to the list");
+
 			}
-			
+		}
+		else
+		{
+			hashmap.put(hash, new LinkedListStructure());
+			LinkedListStructure linkedlist=hashmap.get(hash);
+
+			linkedlist.add(search);
+
+		}
+		Set<Integer> keys = hashmap.keySet(); 
+		for(Integer key1: keys)
+		{ 
+			LinkedListStructure value = hashmap.get(key1);
+			System.out.print(key1+"->");
+			value.printlist();
+			System.out.println();
+		}
+		scanner.close();
+	}
+
+	/**
+	 * Purpose: Write in file
+	 * 
+	 * @param list
+	 */
+	public static<T> void writeFileinteger(OrderedListStructure<T> list) { 
+		String string = list.toString();
+		try {
+			FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/hashing");
+			BufferedWriter write = new BufferedWriter(writer);
+			write.write(string);
+
+			write.close();
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		/**
-		 * Purpose: Write in file
-		 * 
-		 * @param list
-		 */
-		public static<T> void writeFileinteger(OrderedListStructure<T> list) { 
-			String string = list.toString();
-			try {
-				FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/hashing");
-				BufferedWriter write = new BufferedWriter(writer);
-				write.write(string);
-				
-				write.close();
-				writer.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+	}
+
+
+	/**
+	 * Purpose: Print Prime Numbers In 2D Array
+	 * 
+	 * @param array
+	 */
+	@SuppressWarnings("unchecked")
+	public <T>void prime2D(ArrayList<T> array) {
+
+		int array2D[][]=new int[10][30]; 
+		int result=0;
+		int i=0,j=0;
+		Iterator<Integer> iterator=(Iterator<Integer>) array.iterator();
+		while(iterator.hasNext())
+		{
+			int element=iterator.next();
+			int d=element/100;
+			if(d!=result)
+			{
+				result=d;
+				i++;
+				j=0;
 			}
-			
-			
+			array2D[i][j++]=element;
+		}
+		for(int r=0;r<array2D.length;r++)
+		{
+			for(int s=0;s<array2D[r].length;s++)
+			{
+				if(array2D[r][s]==0) {
+					System.out.print(" ");
+				}else
+				{
+					System.out.printf("%3d ",array2D[r][s]);
+				}
+			}
+			System.out.println();
 		}
 
-		
-		/**
-		 * Purpose: Print Prime Numbers In 2D Array
-		 * 
-		 * @param array
-		 */
-		public <T>void prime2D(ArrayList<T> array) {
+	}
 
-			int array2D[][]=new int[10][30]; 
-			int result=0;
-			int i=0,j=0;
-			Iterator<Integer> iterator=(Iterator<Integer>) array.iterator();
+	/**
+	 * Purpose: Print Pallindrom numbers
+	 * 
+	 * @param strArray
+	 */
+	public static void pallindrom(int[] strArray) {
+		// TODO Auto-generated method stub
+		System.out.println("Prime Numbers That Are pallindrom: ");
+		for (int i = 0; i < strArray.length; i++) 
+		{
+			String s=String.valueOf(strArray[i]);
+			StringBuffer sb = new StringBuffer(s);
+			sb=sb.reverse();
+			String str=sb.toString();
+			if (str.equals(s)) {
+				System.out.println(str+ " ");
+			}
+		}
+
+	}
+
+	/**
+	 * Purpose: Print Anagram from Stack
+	 * 
+	 * @param strArray
+	 */
+	public static void stackAnagram(int[] strArray) {
+		StackStructure stack=new StackStructure();
+		for (int i = 0; i < strArray.length; i++) {
+			for (int j = i + 1; j < strArray.length; j++) {
+
+				if (Utility.anagram(strArray[i]+ " ", strArray[j]+ " ")) {
+					stack.push(strArray[i]);
+					stack.push(strArray[j]);
+				}
+			}
+		}
+		stack.print();
+
+	}
+
+	/**
+	 * Purpose: Print Anagram from Queue
+	 * 
+	 * @param strArray
+	 */
+	public static void queueAnagram(int[] strArray) {
+		// TODO Auto-generated method stub
+		QueueStructure queue=new QueueStructure();
+		for (int i = 0; i < strArray.length; i++) {
+			for (int j = i + 1; j < strArray.length; j++) {
+
+				if (Utility.anagram(strArray[i]+ " ", strArray[j]+ " ")) {
+					queue.insert(strArray[i]);
+					queue.insert(strArray[j]);
+				}
+			}
+		}
+		queue.print();
+
+
+	}
+
+
+	public static int maxDay(int month,int year)
+	{
+		if(month==1 || month==3 || month==5 || month == 7 || month == 8 || month == 10 || month == 12)
+		{
+			return 31;
+		}
+		else if(month ==4 || month == 6|| month == 9|| month ==11)
+		{
+			return 30;
+		}
+		else
+		{
+			if(isLeapYear(year))
+			{
+				return 29;
+			}
+			else
+			{
+				return 28;
+			}
+		}
+
+	}
+
+	public static void calenderWithStack(int month, int year) {
+		// TODO Auto-generated method stub
+
+		StackCalender10 week = new StackCalender10();
+		int start = Utility.dayOfWeek(month,1, year);
+		int maxDay = Utility.maxDay(month, year);
+		int numberOfObject;
+		int date = 0;
+		if(maxDay + start>35)
+		{
+			numberOfObject = 6;
+		}
+		else
+		{
+			numberOfObject = 5; }
+		for(int i = 0; i < numberOfObject;i++)
+		{
+			week.add(new StackCalender10());
+		}
+		for(int i = 0; i < numberOfObject;i++)
+		{
+			StackCalender10 stack =week.dataAtPosition(i);
+			if(i==0)
+			{
+				for(int j = 0; j <start; j++)
+				{
+					stack.add(" ");
+				}
+				for(int j = start;j<7;j++)
+				{
+					stack.add(++date);
+				}
+			}
+			else
+			{
+				for(int j = 0; j <7;j++)
+				{
+					stack.add(++date);
+					if(date == maxDay)
+					{
+						break;
+					}
+				}	
+			}
+		}
+		System.out.println("Sun"+"\t"+"Mon"+"\t"+"Tue"+"\t"+"Wed"+"\t"+"Thu"+"\t"+"Fri"+"\t"+"Sat");
+		for(int i = 0; i < numberOfObject; i++)
+		{
+			StackCalender10 stack =  week.dataAtPosition(i);
+			int length = stack.size();
+			for(int j = 0; j <length; j++)
+			{
+
+				String s1 = stack.dataAtPosition(j).toString();
+				System.out.print(s1);
+				System.out.print("\t");
+			}
+			System.out.println();
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void writeFile(File file) {
+		try {
+			FileWriter writer = new FileWriter(file);
+			JSONObject object1 = new JSONObject();
+
+
+
+
+			//input for rice
+			System.out.println("Enter the name of rice: ");
+			String name = scanner.next();
+			System.out.println("Enter the weight of rice: ");
+			double weight = scanner.nextDouble();
+			System.out.println("Enter the price of rice: ");
+			double price = scanner.nextDouble();
+			object1.put("name", name);
+			object1.put("weight", weight);
+			object1.put("price", price);
+
+
+			//input for pulses
+			JSONObject object2 = new JSONObject();
+			System.out.println("Enter the name of pulse: ");
+			name = scanner.next();
+			System.out.println("Enter the weight of pulse: ");
+			weight =scanner.nextDouble();
+			System.out.println("Enter the price of pulse: ");
+			price =scanner.nextDouble();
+			object2.put("name", name);
+			object2.put("weight", weight);
+			object2.put("price", price);
+			System.out.println("Enter ");
+
+
+			//input for wheats
+			JSONObject object3 = new JSONObject();
+			System.out.println("Enter the name of wheats: ");
+			name = scanner.next();
+			System.out.println("Enter the weight of wheats: ");
+			weight = scanner.nextDouble();
+			System.out.println("Enter the price of wheats: ");
+			price =scanner.nextDouble();
+			object3.put("name", name);
+			object3.put("weight", weight);
+			object3.put("price", price);
+
+			JSONObject items = new JSONObject();
+			items.put("rice", object1);
+			items.put("pulse", object2);
+			items.put("wheat", object3);
+
+			writer.write(JSONValue.toJSONString(items));
+
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void readFile(File file) {
+		try {
+
+
+			FileReader reader = new FileReader(file);
+			JSONParser parser = new JSONParser();
+			JSONObject object =(JSONObject) parser.parse(reader);
+			Iterator iterator = object.keySet().iterator();
 			while(iterator.hasNext())
 			{
-				int element=iterator.next();
-				int d=element/100;
-				if(d!=result)
+				String key = (String)iterator.next();
+				JSONObject object1 = (JSONObject) object.get(key);
+				Iterator iterator1 = object.keySet().iterator();
+				while(iterator1.hasNext())
 				{
-					result=d;
-					i++;
-					j=0;
-				}
-				array2D[i][j++]=element;
+					String key1 = (String)iterator1.next();
+
+				}System.out.println();
+				System.out.println("Total cost of "+object1.get("name") + " is: "
+						+ Double.parseDouble(object1.get("weight").toString())
+						* Double.parseDouble(object1.get("price").toString()));
 			}
-			for(int r=0;r<array2D.length;r++)
-			{
-				for(int s=0;s<array2D[r].length;s++)
-				{
-					if(array2D[r][s]==0) {
-						System.out.print(" ");
-					}else
-					{
-						System.out.printf("%3d ",array2D[r][s]);
-					}
-				}
-				System.out.println();
-			}
-			
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		/**
-		 * Purpose: Print Pallindrom numbers
-		 * 
-		 * @param strArray
-		 */
-		public static void pallindrom(int[] strArray) {
-			// TODO Auto-generated method stub
-			System.out.println("Prime Numbers That Are pallindrom: ");
-			for (int i = 0; i < strArray.length; i++) 
-			{
-				String s=String.valueOf(strArray[i]);
-				StringBuffer sb = new StringBuffer(s);
-				sb=sb.reverse();
-				String str=sb.toString();
-				if (str.equals(s)) {
-					System.out.println(str+ " ");
-				}
-			}
-			
-		}
 
-		/**
-		 * Purpose: Print Anagram from Stack
-		 * 
-		 * @param strArray
-		 */
-		public static void stackAnagram(int[] strArray) {
-			StackStructure stack=new StackStructure();
-			for (int i = 0; i < strArray.length; i++) {
-				for (int j = i + 1; j < strArray.length; j++) {
+	}
 
-					if (Utility.anagram(strArray[i]+ " ", strArray[j]+ " ")) {
-						stack.push(strArray[i]);
-						stack.push(strArray[j]);
-					}
-				}
-		}
-              stack.print();
-	
-		}
 
-		/**
-		 * Purpose: Print Anagram from Queue
-		 * 
-		 * @param strArray
-		 */
-		public static void queueAnagram(int[] strArray) {
-			// TODO Auto-generated method stub
-			QueueStructure queue=new QueueStructure();
-			for (int i = 0; i < strArray.length; i++) {
-				for (int j = i + 1; j < strArray.length; j++) {
+	static String message="Hello <<Name>>, We have your full name as <<Full Name>> in our system. "
+			+ "your contact number is 91-xxxxxxxxxx. Please,let us know in case of any clarification "
+			+ "Thank you BridgeLabz 01/01/2016.";
+	static String fName;
+	static String lName;
+	static String mNumber="0";
+	static String date;
 
-					if (Utility.anagram(strArray[i]+ " ", strArray[j]+ " ")) {
-						queue.insert(strArray[i]);
-						queue.insert(strArray[j]);
-					}
-				}
-		}
-			queue.print();
-	
-			
-		}
+	public static void firstName() 
+	{
+		System.out.println("Enter The First Name :");
+		fName=scanner.next();
 
+
+	}
+
+	public static void fullName()
+	{
+		System.out.println("Enter The Last Name :");
+		lName=scanner.next();
+
+
+	}
+
+
+	public static void mobileNumber() 
+	{
+		System.out.println("Enter The Mobile Number :");
+		mNumber=scanner.next();
+		if (!isTenDigit(mNumber)) 
+		{
+			System.out.println("valid");
+
+
+		}else
+		{
+			System.out.println("Please enter 10 digit number again");
+		}
+	}
+
+
+	public static void Date() 
+	{
+
+		Date date = new Date();
+		String d = new SimpleDateFormat().format(date);
+		String d1[] = d.split(" ");
+
+		message = message.replace("01/01/2016", d1[0]);
+
+	}
+	//is ten digits validation System.out.println();
+	public static boolean isTenDigit(String number)
+	{
+		String matcher="[0-9]";
+		if((number.matches(matcher))){
+			return true;
+
+		}
+		return false;
+	}
+
+
+
+	public static String RegexReplace()
+	{
+		String firstName="<<Name>>";
+		String fullName="<<Full Name>>";
+		String mobileno="xxxxxxxxxx" ;
+		String Date="12/02/2018";
+
+		//Regex to replace first Name 
+		Pattern pattern = Pattern.compile(firstName);
+		Matcher matcher = pattern.matcher(message);
+		message=matcher.replaceAll(fName); 
+		System.out.println();
+		//Regex to replace full Name
+		pattern = Pattern.compile(fullName);
+		matcher = pattern.matcher(message);
+		message=matcher.replaceAll(fName+" "+lName);
+
+		//Regex to replace mobile number
+		pattern = Pattern.compile(mobileno);
+		matcher = pattern.matcher(message);
+		message=matcher.replaceAll(mNumber);	
+		System.out.println();
+		Date date = new Date(0);
+		String temp = date.toString();
+		//Regex to replace Date
+		pattern = Pattern.compile(Date);
+		matcher = pattern.matcher(message);
+		message=matcher.replaceAll(temp);
+		return message;
+	}
+
+	/**
+	 * Purpose: Print the Stock Report.
+	 * 
+	 * @param number
+	 */
+	@SuppressWarnings("unchecked")
+	public static void stockReport(int number) { JSONArray jsonArray = new JSONArray();
+	String[] array = new String[number];
+	int share[] = new int[number];
+	int amount[] = new int[number];
+	int total[] = new int[number];
+	System.out.println("Enter Company Names: ");
+	int totalStock=0;
+	for(int i=0; i<number; i++){
+
+		array[i] =scanner.next();
+	}
+
+
+	for(int k=0; k<number; k++){
+		System.out.println("Enter the number of shares for "+array[k]+" and share amount");
+		share[k] = scanner.nextInt();
+		amount[k] = scanner.nextInt();
+	}
+
+	for(int j=0; j<number; j++){
+		total[j] = share[j]*amount[j];
+	}
+	System.out.println();
+	System.out.println("*******************Stock Report**************************");
+	System.out.println();
+	System.out.println("  Company Name   Shares   Price   total of each");
+	System.out.println();
+	PrintWriter printWriter =null;
+	try {
+		printWriter = new PrintWriter("/home/bridgeit/Programs/files/stock.json");
+	} catch (FileNotFoundException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+	for(int l=0; l<number; l++)
+	{
+		System.out.println("  "+array[l]+"        "+share[l]+"       "+amount[l]+"     "+total[l]+"/-");	
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("Company Name",array[l]);
+		jsonObject.put("Shares",share[l]);
+		jsonObject.put("Price",amount[l]);
+		jsonObject.put("total",total[l]);
+		jsonArray.add(jsonObject);
+
+	}	
+
+	printWriter.write(jsonArray.toJSONString());
+	printWriter.flush();
+	printWriter.close();
+	System.out.println();
+	for(int m=0; m<number; m++){
+
+		totalStock+= share[m]*amount[m];
+	}
+	System.out.println("Total stock is: "+totalStock);
+
+	}
+	/**
+	 * 
+	 */
+	public static void createAccount()  
+	{
+		File file = new File("UserDetails.json");
+		if(file.exists())
+		{
+			@SuppressWarnings("unused")
+			JSONArray arr = new JSONArray();
 		
-			public static int maxDay(int month,int year)
-			{
-				if(month==1 || month==3 || month==5 || month == 7 || month == 8 || month == 10 || month == 12)
-				{
-					return 31;
-				}
-				else if(month ==4 || month == 6|| month == 9|| month ==11)
-				{
-					return 30;
+			boolean check= true;
+			while (check)
+			{	
+				System.out.println("Want to add user: y or n");
+				char ch = scanner.next().charAt(0); 
+				if(ch=='y')
+				{	
+					try
+					{
+					FileReader reader = new FileReader(file);
+					JSONParser parser = new JSONParser();
+					JSONArray array = (JSONArray) parser.parse(reader);
+					JSONObject json = new JSONObject();
+			        System.out.println("Enter name");
+			        String name =scanner.next();
+			        System.out.println("Enter balance");
+			        int bal = scanner.nextInt();
+			        json.put("Name",name);
+			        json.put("Balance",bal);
+			        json.put("ShareCount", 100);
+			    
+			        array.add(json);
+			      	FileWriter fw = new FileWriter(file);
+			        fw.write(JSONArray.toJSONString(array));
+			        fw.flush();
+			        fw.close();
+		
+				}catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException | ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
 				}
 				else
 				{
-					if(isLeapYear(year))
-					{
-						return 29;
-					}
-					else
-					{
-						return 28;
-					}
+					check=false;
 				}
+			}
 			
 		}
+		else
+		{
+			System.out.println("File does not exits");
+		}
+	}
+	
 
-			public static void calenderWithStack(int month, int year) {
-				// TODO Auto-generated method stub
 
-				StackCalender10 week = new StackCalender10();
-				int start = Utility.dayOfWeek(month,1, year);
-				int maxDay = Utility.maxDay(month, year);
-				int numberOfObject;
-				int date = 0;
-				if(maxDay + start>35)
-				{
-					numberOfObject = 6;
+
+	/**
+	 * Purpose:Create User 
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public void createUser() 
+	{ 
+		File file = new File("/home/bridgeit/Programs/files/stock.json");
+		if(file.exists())
+		{
+			@SuppressWarnings("unused")
+			JSONArray array = new JSONArray();
+
+			boolean check= true;
+			while (check==true)
+			{	
+				System.out.println("Want to add user: yes or no");
+				String choice = inputString();
+				if(choice.equals("yes"))
+				{	
+					try {
+						FileReader fr = new FileReader(file);
+
+						JSONParser parser = new JSONParser();
+						JSONArray array1 = (JSONArray) parser.parse(fr);
+						JSONObject jsonObject = new JSONObject();
+						System.out.println("Enter name: ");
+						String name = inputString();
+						System.out.println("Enter balance");
+						int bal = inputInteger();
+						jsonObject.put("Name",name);
+						jsonObject.put("Balance",bal);
+						jsonObject.put("ShareCount", 100);
+
+						array1.add(jsonObject);
+						FileWriter fw = new FileWriter(file);
+						fw.write(JSONArray.toJSONString(array1));
+						fw.flush();
+						fw.close();
+
+					}catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				else
 				{
-					numberOfObject = 5; }
-				for(int i = 0; i < numberOfObject;i++)
-				{
-					week.add(new StackCalender10());
+					check=false;
 				}
-				for(int i = 0; i < numberOfObject;i++)
+			}
+
+		}
+		else
+		{
+			System.out.println("File does not exits");
+		}
+
+	}
+	public static void buyShare() 
+	{
+		File file = new File("/home/bridgeit/Programs/files/stock.json");
+		File file1 = new File("/home/bridgeit/Programs/files/stock1.json");
+		if (file.exists() && file1.exists()) 
+		{
+			try 
+			{
+				FileReader reader1 = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray stock = (JSONArray) parser.parse(reader1);
+				// reading share file
+
+				FileReader reader = new FileReader(file1);
+				JSONParser parser1 = new JSONParser();
+				JSONArray share = (JSONArray) parser1.parse(reader);
+
+				System.out.println("Enter the user");
+				String name = scanner.next();
+				Iterator<?> iterator= stock.iterator();
+				Iterator<?> iterator2 = share.iterator();
+				boolean flag = false;
+				
+				while (iterator.hasNext()) {
+				JSONObject obj = (JSONObject) iterator.next();
+				
+				System.out.println(obj.get("Name"));
+				System.out.println("N2 : "+name);
+				if (obj.get("Name").equals(name)) 
 				{
-					StackCalender10 stack =week.dataAtPosition(i);
-					if(i==0)
+					System.out.println("Enter the share symbol to buy share:[@,!,#]");
+					String symbol =scanner.next();
+					
+					while (iterator2.hasNext()) 
 					{
-						for(int j = 0; j <start; j++)
+						JSONObject obj1 = (JSONObject) iterator2.next();
+						if (obj1.get("Symbol").equals(symbol)) 
 						{
-							stack.add(" ");
-						}
-						for(int j = start;j<7;j++)
-						{
-							stack.add(++date);
+							System.out.println("Enter the amount");
+							int amount = scanner.nextInt();
+							int balance = Integer.parseInt(obj.get("Balance").toString());
+							int price = Integer.parseInt(obj1.get("Price").toString());
+							int noShare = Integer.parseInt(obj.get("ShareCount").toString());
+							int stockShare = Integer.parseInt(obj1.get("Count").toString());
+							int numofshare = amount / price;
+							int newbal = balance - amount;
+							int sharecountcus = noShare + numofshare;
+							int sharecountstock = stockShare - numofshare;
+							obj.remove("Balance");
+							obj.remove("ShareCount");
+							obj1.remove("Count");
+
+							obj.put("Balance", newbal);
+							obj.put("ShareCount", sharecountcus);
+							obj1.put("Count", sharecountstock);
+							Date d = new Date();
+							String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(d);
+							System.out.println("Date " + date);
+							flag = true;
+							break;
 						}
 					}
-					else
+					
+				}
+				FileWriter fs = new FileWriter(file);
+				fs.write(JSONValue.toJSONString(stock));
+				fs.flush();
+				fs.close();
+			}
+			if (flag == false) {
+				System.out.println("User name not exits");
+			}
+			FileWriter fw = new FileWriter(file1);
+			fw.write(JSONValue.toJSONString(share));
+			fw.flush();
+			fw.close();
+		}
+		 catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		}else {
+			System.out.println("File does not exits");
+		}
+		
+	}
+	
+	public static void saleShare() 
+	{
+		
+		File file = new File("/home/bridgeit/Programs/files/stock.json");
+		File file1 = new File("/home/bridgeit/Programs/files/stock1.json");
+		if(file.exists() && file1.exists())
+		{
+			// reading stock file
+			try {
+				FileReader fr = new FileReader(file);
+			
+			JSONParser parser = new JSONParser();
+			JSONArray stock = (JSONArray) parser.parse(fr);
+			//reading share file
+			
+			FileReader reader2 = new FileReader(file1);
+			JSONParser parser1 = new JSONParser();
+			JSONArray share = (JSONArray) parser1.parse(reader2);
+			
+			System.out.println("Enter the user");
+			String name =scanner.next();
+			Iterator<?> itr = stock.iterator();
+			Iterator<?> itr1 = share.iterator();
+			boolean flag = false;
+			while (itr.hasNext())
+			{
+				JSONObject obj=(JSONObject) itr.next();
+				if(obj.get("Name").equals(name))
+				{
+					System.out.println("Enter the share sysmbol to sale share:[@,!,#]");
+					String symbol = scanner.next();
+					System.out.println("Enter the number of share to sale");
+					int count=scanner.nextInt();
+					//obj.put("Share Symbol", sym);
+					while(itr1.hasNext())
 					{
-						for(int j = 0; j <7;j++)
+						JSONObject obj1 = (JSONObject) itr1.next();
+						if(obj1.get("Symbol").equals(symbol))
+						{	
+							int bal =  Integer.parseInt(obj.get("Balance").toString());
+							int price = Integer.parseInt(obj1.get("Price").toString());
+							int noShare =  Integer.parseInt(obj.get("ShareCount").toString());
+							int stockShare = Integer.parseInt(obj1.get("Count").toString());
+							int saleprize = count*price;
+							int newbal = bal+saleprize;
+							int sharecountcus = noShare-count;
+							int sharecountstock = stockShare+count;
+							obj.remove("Balance");
+							obj.remove("ShareCount");
+							obj1.remove("Count");
+							
+							obj.put("Balance",newbal);
+							obj.put("ShareCount",sharecountcus);
+							obj1.put("Count", sharecountstock);
+							Date d = new Date();
+							String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(d);
+							System.out.println("Date "+date);
+							flag = true;
+							break;
+						}
+						
+					}
+				}
+
+				FileWriter fs = new FileWriter(file);
+				fs.write(JSONValue.toJSONString(stock));
+				
+				fs.flush();
+				fs.close();
+			}
+			if(flag == false)
+			{
+				System.out.println("User name not exits");
+			}
+			FileWriter fw = new FileWriter(file1);
+			fw.write(JSONValue.toJSONString(share));
+			fw.flush();
+			fw.close();
+		}
+		 catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		}
+		else
+		{
+			System.out.println("File Does not exits");
+		}
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public static void sale() {
+		File file = new File("/home/bridgeit/Programs/files/stock.json");
+		File file1 =new File("/home/bridgeit/Programs/files/stock1.json");
+		if(file.exists() && file1.exists())
+		{
+			try {
+				FileReader reader = new FileReader(file);
+
+				JSONParser parser = new JSONParser();
+				JSONArray stock = (JSONArray) parser.parse(reader);
+
+				FileReader reader1 = new FileReader(file1);
+				JSONParser parser1 = new JSONParser();
+				JSONArray share = (JSONArray) parser1.parse(reader1);
+
+				System.out.println("Enter the user");
+				String name = inputString();
+				Iterator<?> itrator = stock.iterator();
+				Iterator<?> itrator1 = share.iterator();
+				boolean flag = false;
+				while (itrator.hasNext())
+				{
+					JSONObject obj=(JSONObject) itrator.next();
+					if(obj.get("Name").equals(name))
+					{
+						System.out.println("Enter the share sysmbol to sale share:[@,!,#]");
+						String sym = inputString();
+						System.out.println("Enter the number of share to sale");
+						int count= inputInteger();
+
+						while(itrator1.hasNext())
 						{
-							stack.add(++date);
-							if(date == maxDay)
-							{
+							JSONObject obj1 = (JSONObject) itrator1.next();
+							if(obj1.get("Symbol").equals(sym))
+							{	
+								int bal =  Integer.parseInt(obj.get("Balance").toString());
+								int price = Integer.parseInt(obj1.get("Price").toString());
+								int noShare =  Integer.parseInt(obj.get("ShareCount").toString());
+								int stockShare = Integer.parseInt(obj1.get("Count").toString());
+								int saleprize = count*price;
+								int newbal = bal+saleprize;
+								int sharecountcus = noShare-count;
+								int sharecountstock = stockShare+count;
+								obj.remove("Balance");
+								obj.remove("ShareCount");
+								obj1.remove("Count");
+
+								obj.put("Balance",newbal);
+								obj.put("ShareCount",sharecountcus);
+								obj1.put("Count", sharecountstock);
+								Date d = new Date();
+								String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(d);
+								System.out.println("Date "+date);
+								flag = true;
 								break;
 							}
-						}	
-					}
-				}
-				System.out.println("SUN"+"\t"+"M"+"\t"+"TU"+"\t"+"WED"+"\t"+"TH"+"\t"+"FRI"+"\t"+"SAT");
-				for(int i = 0; i < numberOfObject; i++)
-				{
-					StackCalender10 stack =  week.dataAtPosition(i);
-					int length = stack.size();
-					for(int j = 0; j <length; j++)
-					{
-						
-						String s1 = stack.dataAtPosition(j).toString();
-						System.out.print(s1);
-						System.out.print("\t");
-					}
-					System.out.println();
-				}
-				
-			}
 
-			@SuppressWarnings("unchecked")
-			public void writeFile(File file) {
-				try {
-					FileWriter writer = new FileWriter(file);
-					JSONObject object1 = new JSONObject();
-					
-					
-					
-					
-					//input for rice
-					System.out.println("Enter the name of rice: ");
-					String name = scanner.next();
-					System.out.println("Enter the weight of rice: ");
-					double weight = scanner.nextDouble();
-					System.out.println("Enter the price of rice: ");
-					double price = scanner.nextDouble();
-					object1.put("name", name);
-					object1.put("weight", weight);
-					object1.put("price", price);
-					
-					
-					//input for pulses
-					JSONObject object2 = new JSONObject();
-					System.out.println("Enter the name of pulse: ");
-					name = scanner.next();
-					System.out.println("Enter the weight of pulse: ");
-					weight =scanner.nextDouble();
-					System.out.println("Enter the price of pulse: ");
-					price =scanner.nextDouble();
-					object2.put("name", name);
-					object2.put("weight", weight);
-					object2.put("price", price);
-					System.out.println("Enter ");
-					
-					
-					//input for wheats
-					JSONObject object3 = new JSONObject();
-					System.out.println("Enter the name of wheats: ");
-					name = scanner.next();
-					System.out.println("Enter the weight of wheats: ");
-					weight = scanner.nextDouble();
-					System.out.println("Enter the price of wheats: ");
-					price =scanner.nextDouble();
-					object3.put("name", name);
-					object3.put("weight", weight);
-					object3.put("price", price);
-					
-					JSONObject items = new JSONObject();
-					items.put("rice", object1);
-					items.put("pulse", object2);
-					items.put("wheat", object3);
-					
-					writer.write(JSONValue.toJSONString(items));
-					
-					writer.flush();
-					writer.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-
-			@SuppressWarnings("rawtypes")
-			public void readFile(File file) {
-				try {
-					
-					
-						FileReader reader = new FileReader(file);
-						JSONParser parser = new JSONParser();
-						JSONObject object =(JSONObject) parser.parse(reader);
-						Iterator iterator = object.keySet().iterator();
-						while(iterator.hasNext())
-						{
-							String key = (String)iterator.next();
-							JSONObject object1 = (JSONObject) object.get(key);
-							Iterator iterator1 = object.keySet().iterator();
-							while(iterator1.hasNext())
-							{
-								String key1 = (String)iterator1.next();
-							
-							}System.out.println();
-							System.out.println("Total cost of "+object1.get("name") + " is: "
-										+ Double.parseDouble(object1.get("weight").toString())
-										* Double.parseDouble(object1.get("price").toString()));
 						}
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					}
+
+					FileWriter fs = new FileWriter(file);
+					try {
+						fs.write(JSONValue.toJSONString(stock));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					fs.flush();
+					fs.close();
 				}
-				
-				
+				if(flag == false)
+				{
+					System.out.println("User name not exits");
+				}
+				FileWriter fw = new FileWriter(file1);
+				fw.write(JSONValue.toJSONString(share));
+				fw.flush();
+				fw.close();
 			}
+			catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		else
+		{
+			System.out.println("File Does not exits");
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	public static <E> void display() {
+		File file = new File("/home/bridgeit/Programs/files/stock.json");
+
+		try {
+			FileReader fr = new FileReader(file);
+
+			JSONParser parser = new JSONParser();
+			JSONArray arr1 = (JSONArray) parser.parse(fr);
+			@SuppressWarnings("unchecked")
+			Iterator <E>itr = arr1.iterator();
+			while (itr.hasNext())
+			{
+				JSONObject obj = (JSONObject) itr.next();
+				System.out.println(obj);
+			}
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+
+
+
+
+
+
 }

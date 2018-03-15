@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Purpose: 
+ *  Purpose:Print the Stock Report.
  *  
  *  @author  Usha Kale
  *  @version 1.0
@@ -7,15 +7,14 @@
  ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
-import java.io.File;
 import com.bridgeit.utility.Utility;
 
-public class DataManagement {
+public class StockReport3 {
 	public static void main(String[] args) {
-		Utility utility=new Utility();
-	    File file = new File("/home/bridgeit/Programs/files/dataManagement.json");
-	    utility.writeFile(file);
-	    utility.readFile(file);
-	}
+	Utility utility=new Utility();
+	System.out.println("Enter Number of company");
+	int number = utility.inputInteger();
+	Utility.stockReport(number);
+}
 
 }
