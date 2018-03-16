@@ -1,20 +1,20 @@
 package com.bridgeit.DataStructure;
 
-class Node<T>
+class Node1<T>
 {
-	Node next;
+	Node1 next;
 	T data;
-	Node(T data1)
+	Node1(T data1)
 	{
 		this.data = (T) data1;
 	}
 }
 public class StackCalender10 {
-	Node firstNode;
-	Node lastNode;
+	Node1 firstNode;
+	Node1 lastNode;
 	public <T> void add(T data)
 	{
-		Node newNode = new Node(data);
+		Node1 newNode = new Node1(data);
 		if(firstNode==null)
 		{
 			firstNode = newNode;
@@ -27,7 +27,7 @@ public class StackCalender10 {
 	}
 	public <T> boolean search(T dataToBeSearched)
 	{
-			Node current = firstNode;
+		Node1 current = firstNode;
 			while(current != null)
 			{
 				if(current.data.equals(dataToBeSearched))
@@ -47,8 +47,8 @@ public class StackCalender10 {
 		}
 		else if(lastNode.data.equals(dataToBedeleted))
 		{
-			Node currentNode = firstNode;
-			Node prevNode = null;
+			Node1 currentNode = firstNode;
+			Node1 prevNode = null;
 			while(currentNode != lastNode)
 			{
 				prevNode = currentNode;
@@ -59,9 +59,9 @@ public class StackCalender10 {
 		}
 		else
 		{
-			Node prevrefrence = null;
+			Node1 prevrefrence = null;
 			boolean status  = false;
-			Node current = firstNode;
+			Node1 current = firstNode;
 			
 			while(current != lastNode && !(status=(current.data.equals(dataToBedeleted))))
 			{
@@ -79,7 +79,7 @@ public class StackCalender10 {
 	}
 	public void itirate()
 	{
-		Node currentNode = firstNode;
+		Node1 currentNode = firstNode;
 		while(currentNode != null)
 		{
 			System.out.println(currentNode.data);
@@ -89,7 +89,7 @@ public class StackCalender10 {
 	public int size()
 	{
 		int size = 0;
-		Node currentNode = firstNode;
+		Node1 currentNode = firstNode;
 		while(currentNode != null)
 		{
 			size++;
@@ -106,7 +106,7 @@ public class StackCalender10 {
 		}
 		else
 		{
-			Node currentNode = firstNode;
+			Node1 currentNode = firstNode;
 			while(location != position)
 			{
 				currentNode = currentNode.next;
@@ -124,8 +124,8 @@ public class StackCalender10 {
 		}
 		else
 		{
-		Node prevNode=null;
-		Node currentNode = firstNode;
+			Node1 prevNode=null;
+			Node1 currentNode = firstNode;
 		while(currentNode.next !=null)
 		{
 			prevNode = currentNode;

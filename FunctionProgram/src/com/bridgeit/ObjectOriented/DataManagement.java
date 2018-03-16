@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Purpose: 
+ *  Purpose: Inventory Data Management 
  *  
  *  @author  Usha Kale
  *  @version 1.0

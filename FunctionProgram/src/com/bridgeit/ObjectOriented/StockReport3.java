@@ -12,7 +12,7 @@ import com.bridgeit.utility.Utility;
 public class StockReport3 {
 	public static void main(String[] args) {
 	Utility utility=new Utility();
-	System.out.println("Enter Number of company");
+	System.out.println("Enter Number of companys");
 	int number = utility.inputInteger();
 	Utility.stockReport(number);
 }

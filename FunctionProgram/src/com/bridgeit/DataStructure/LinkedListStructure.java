@@ -1,10 +1,11 @@
-package com.bridgeit.DataStructure;
 /******************************************************************************  
  *  Purpose: Linked list 
- * @author  
+ *  @author  
  *  @version 1.0
  *  @since   07-03-2018
  ******************************************************************************/
+package com.bridgeit.DataStructure;
+
 class Node<T>
 {
 	T data;
@@ -211,7 +212,7 @@ public class LinkedListStructure<T>
 			//System.out.println("YOUR FILE DATA IS:==>>");
 			while(temp != null)
 			{
-				System.out.print(temp.data+" ");
+				System.out.println(temp.data+" ");
 				temp = temp.next;
 			}
 		}

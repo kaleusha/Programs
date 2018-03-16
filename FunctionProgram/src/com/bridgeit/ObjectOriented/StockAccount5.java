@@ -1,8 +1,15 @@
+/******************************************************************************
+ *  Purpose: 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   14-03-2018
+ ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
 import com.bridgeit.utility.Utility;
 
-public class StockAccount {
+public class StockAccount5 {
 	public static void main(String[] args) {
 		
 			Utility utility = new Utility();
@@ -19,7 +26,7 @@ public class StockAccount {
 				switch(choice)
 				{
 				case 1:	 	
-					utility.createAccount();
+					Utility.createAcc();
 				    break;
 				case 2 :	
 					Utility.buyShare();

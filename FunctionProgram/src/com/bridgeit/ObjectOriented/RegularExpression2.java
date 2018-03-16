@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Purpose: Read Two String And Check Anagram or Not
+ *  Purpose: Print the Modified Message.
  *  
  *  @author  Usha Kale
  *  @version 1.0
@@ -9,9 +9,9 @@ package com.bridgeit.ObjectOriented;
 
 import com.bridgeit.utility.Utility;
 
-public class RegularExpression {
+public class RegularExpression2 {
 	public static void main(String[] args) {
-		Utility utility=new Utility();
+		//Utility utility=new Utility();
         Utility.firstName();
 		Utility.fullName();
 		Utility.mobileNumber();

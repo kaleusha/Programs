@@ -1,20 +1,30 @@
+/******************************************************************************
+ *  Purpose: Queue Structure
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   15-03-2018
+ ******************************************************************************/
 package com.bridgeit.DataStructure;
 
 import java.util.NoSuchElementException;
+class ListNode1<T> {
 
-class ListNode1 {
-
-	public int data;
+	public ListNode1() {
+		
+	}
+	public T data;
+	@SuppressWarnings("rawtypes")
 	public ListNode1 next;
 	
-	public ListNode1(int data2){
+	/*public ListNode1(T data2){
 		
 		this.data = data2;
 		this.next = null;
-	}
+	}*/
 
 }
-public class QueueStructure {
+public class QueueStructure<T> {
 	private ListNode1 front;
 	private ListNode1 rear;
 	private int length;
@@ -32,7 +42,9 @@ public class QueueStructure {
 	}
 	public void insert(int data)
 	{
-		ListNode1 temp = new ListNode1(data);
+		ListNode1 temp = new ListNode1();
+		temp.data=data;
+		temp.next=null;
 		if(isEmpty())
 		{
 			front = temp;
@@ -43,14 +55,15 @@ public class QueueStructure {
 		}
 		rear = temp;
 		length++;
+		//System.out.println(data);
 	}
-	public int delete()
+	public T delete()
 	{
 		if(isEmpty())
 		{
 			throw new NoSuchElementException();
 		}	
-		int result = front.data;
+		T result = (T) front.data;
 		front = front.next;
 		if(front == null)
 		{
@@ -73,4 +86,23 @@ public class QueueStructure {
 		
 	
 	}
+
+@SuppressWarnings("rawtypes")
+public void push(String data)
+{
+	ListNode1 temp = new ListNode1();
+	temp.data=data;
+	temp.next=null;
+	if(isEmpty())
+	{
+		front = temp;
+	}
+	else
+	{
+		rear.next =temp;
+	}
+	rear = temp;
+	length++;
+	System.out.println(data);
+}
 }

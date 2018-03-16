@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -32,6 +33,7 @@ import com.bridgeit.DataStructure.OrderedListStructure;
 import com.bridgeit.DataStructure.QueueStructure;
 import com.bridgeit.DataStructure.StackCalender10;
 import com.bridgeit.DataStructure.StackStructure;
+
 
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -77,6 +79,8 @@ public class Utility {
 		return 0;
 
 	}
+	
+	
 	// INPUT Double
 	public long inputDouble() {
 		try {
@@ -1294,10 +1298,6 @@ public class Utility {
 		try {
 			FileWriter writer = new FileWriter(file);
 			JSONObject object1 = new JSONObject();
-
-
-
-
 			//input for rice
 			System.out.println("Enter the name of rice: ");
 			String name = scanner.next();
@@ -1555,48 +1555,57 @@ public class Utility {
 	/**
 	 * 
 	 */
-	public static void createAccount()  
+	/**
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public static void createAcc()  
 	{
-		File file = new File("UserDetails.json");
+		File file = new File("/home/bridgeit/Programs/files/stock.json");
 		if(file.exists())
 		{
 			@SuppressWarnings("unused")
 			JSONArray arr = new JSONArray();
-		
+			Scanner scan1 = new Scanner(System.in);
 			boolean check= true;
-			while (check)
+			while (check==true)
 			{	
 				System.out.println("Want to add user: y or n");
-				char ch = scanner.next().charAt(0); 
+				char ch = scan1.next().charAt(0); 
 				if(ch=='y')
 				{	
-					try
-					{
-					FileReader reader = new FileReader(file);
+					Scanner scan = new Scanner(System.in);
+					 
+					try {
+						FileReader fr = new FileReader(file);
+					
 					JSONParser parser = new JSONParser();
-					JSONArray array = (JSONArray) parser.parse(reader);
+					JSONArray arr1 = (JSONArray) parser.parse(fr);
 					JSONObject json = new JSONObject();
 			        System.out.println("Enter name");
-			        String name =scanner.next();
+			        String name = scan.nextLine();
 			        System.out.println("Enter balance");
-			        int bal = scanner.nextInt();
+			        int bal = scan.nextInt();
 			        json.put("Name",name);
 			        json.put("Balance",bal);
 			        json.put("ShareCount", 100);
 			    
-			        array.add(json);
+			        arr1.add(json);
 			      	FileWriter fw = new FileWriter(file);
-			        fw.write(JSONArray.toJSONString(array));
+			        fw.write(JSONArray.toJSONString(arr1));
 			        fw.flush();
 			        fw.close();
 		
 				}catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (IOException | ParseException e) {
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} 
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				}
 				else
 				{
@@ -1612,118 +1621,51 @@ public class Utility {
 	}
 	
 
-
-
 	/**
-	 * Purpose:Create User 
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public void createUser() 
-	{ 
-		File file = new File("/home/bridgeit/Programs/files/stock.json");
-		if(file.exists())
-		{
-			@SuppressWarnings("unused")
-			JSONArray array = new JSONArray();
-
-			boolean check= true;
-			while (check==true)
-			{	
-				System.out.println("Want to add user: yes or no");
-				String choice = inputString();
-				if(choice.equals("yes"))
-				{	
-					try {
-						FileReader fr = new FileReader(file);
-
-						JSONParser parser = new JSONParser();
-						JSONArray array1 = (JSONArray) parser.parse(fr);
-						JSONObject jsonObject = new JSONObject();
-						System.out.println("Enter name: ");
-						String name = inputString();
-						System.out.println("Enter balance");
-						int bal = inputInteger();
-						jsonObject.put("Name",name);
-						jsonObject.put("Balance",bal);
-						jsonObject.put("ShareCount", 100);
-
-						array1.add(jsonObject);
-						FileWriter fw = new FileWriter(file);
-						fw.write(JSONArray.toJSONString(array1));
-						fw.flush();
-						fw.close();
-
-					}catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				else
-				{
-					check=false;
-				}
-			}
-
-		}
-		else
-		{
-			System.out.println("File does not exits");
-		}
-
-	}
-	public static void buyShare() 
-	{
+	public static void buyShare()  {
 		File file = new File("/home/bridgeit/Programs/files/stock.json");
 		File file1 = new File("/home/bridgeit/Programs/files/stock1.json");
-		if (file.exists() && file1.exists()) 
-		{
-			try 
-			{
-				FileReader reader1 = new FileReader(file);
-				JSONParser parser = new JSONParser();
-				JSONArray stock = (JSONArray) parser.parse(reader1);
-				// reading share file
+		if (file.exists() && file1.exists()) {
+			Scanner scan = new Scanner(System.in);
+			// reading stock file
+			
+			try {
+				FileReader fr = new FileReader(file);
+			JSONParser parser = new JSONParser();
+			JSONArray stock = (JSONArray) parser.parse(fr);
+			// reading stock1 file
 
-				FileReader reader = new FileReader(file1);
-				JSONParser parser1 = new JSONParser();
-				JSONArray share = (JSONArray) parser1.parse(reader);
+			FileReader sf = new FileReader(file1);
+			JSONParser parser1 = new JSONParser();
+			JSONArray share = (JSONArray) parser1.parse(sf);
 
-				System.out.println("Enter the user");
-				String name = scanner.next();
-				Iterator<?> iterator= stock.iterator();
-				Iterator<?> iterator2 = share.iterator();
-				boolean flag = false;
-				
-				while (iterator.hasNext()) {
-				JSONObject obj = (JSONObject) iterator.next();
-				
-				System.out.println(obj.get("Name"));
-				System.out.println("N2 : "+name);
-				if (obj.get("Name").equals(name)) 
-				{
-					System.out.println("Enter the share symbol to buy share:[@,!,#]");
-					String symbol =scanner.next();
-					
-					while (iterator2.hasNext()) 
-					{
-						JSONObject obj1 = (JSONObject) iterator2.next();
-						if (obj1.get("Symbol").equals(symbol)) 
-						{
+			System.out.println("Enter the user");
+			String name = scan.nextLine();
+			Iterator<?> itr = stock.iterator();
+			Iterator<?> itr1 = share.iterator();
+			boolean flag = false;
+			while (itr.hasNext()) {
+				JSONObject obj = (JSONObject) itr.next();
+				if (obj.get("Name").equals(name)) {
+					System.out.println("Enter the share sysmbol to buy share:[@,!,#]");
+					String sym = scan.nextLine();
+					/*
+					 * obj.put("Share symbol", sym); if(obj.get("Share Symbol").equals(sym)) {
+					 */
+					while (itr1.hasNext()) {
+						JSONObject obj1 = (JSONObject) itr1.next();
+						if (obj1.get("Symbol").equals(sym)) {
 							System.out.println("Enter the amount");
-							int amount = scanner.nextInt();
-							int balance = Integer.parseInt(obj.get("Balance").toString());
+							int amt = scan.nextInt();
+							int bal = Integer.parseInt(obj.get("Balance").toString());
 							int price = Integer.parseInt(obj1.get("Price").toString());
 							int noShare = Integer.parseInt(obj.get("ShareCount").toString());
 							int stockShare = Integer.parseInt(obj1.get("Count").toString());
-							int numofshare = amount / price;
-							int newbal = balance - amount;
+							int numofshare = amt / price;
+							int newbal = bal - amt;
 							int sharecountcus = noShare + numofshare;
 							int sharecountstock = stockShare - numofshare;
 							obj.remove("Balance");
@@ -1758,37 +1700,47 @@ public class Utility {
 		 catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException | ParseException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		}else {
 			System.out.println("File does not exits");
 		}
 		
 	}
 	
+	
+	/**
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
 	public static void saleShare() 
 	{
 		
 		File file = new File("/home/bridgeit/Programs/files/stock.json");
-		File file1 = new File("/home/bridgeit/Programs/files/stock1.json");
+		File file1 =new File("/home/bridgeit/Programs/files/stock1.json");
 		if(file.exists() && file1.exists())
 		{
+			Scanner scan = new Scanner(System.in);
 			// reading stock file
+			FileReader fr;
 			try {
-				FileReader fr = new FileReader(file);
+				fr = new FileReader(file);
 			
 			JSONParser parser = new JSONParser();
 			JSONArray stock = (JSONArray) parser.parse(fr);
 			//reading share file
 			
-			FileReader reader2 = new FileReader(file1);
+			FileReader sf = new FileReader(file1);
 			JSONParser parser1 = new JSONParser();
-			JSONArray share = (JSONArray) parser1.parse(reader2);
+			JSONArray share = (JSONArray) parser1.parse(sf);
 			
 			System.out.println("Enter the user");
-			String name =scanner.next();
+			String name = scan.nextLine();
 			Iterator<?> itr = stock.iterator();
 			Iterator<?> itr1 = share.iterator();
 			boolean flag = false;
@@ -1798,14 +1750,14 @@ public class Utility {
 				if(obj.get("Name").equals(name))
 				{
 					System.out.println("Enter the share sysmbol to sale share:[@,!,#]");
-					String symbol = scanner.next();
+					String sym = scan.nextLine();
 					System.out.println("Enter the number of share to sale");
-					int count=scanner.nextInt();
+					int count= scan.nextInt();
 					//obj.put("Share Symbol", sym);
 					while(itr1.hasNext())
 					{
 						JSONObject obj1 = (JSONObject) itr1.next();
-						if(obj1.get("Symbol").equals(symbol))
+						if(obj1.get("Symbol").equals(sym))
 						{	
 							int bal =  Integer.parseInt(obj.get("Balance").toString());
 							int price = Integer.parseInt(obj1.get("Price").toString());
@@ -1833,8 +1785,12 @@ public class Utility {
 				}
 
 				FileWriter fs = new FileWriter(file);
-				fs.write(JSONValue.toJSONString(stock));
-				
+				try {
+					fs.write(JSONValue.toJSONString(stock));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				fs.flush();
 				fs.close();
 			}
@@ -1850,119 +1806,21 @@ public class Utility {
 		 catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException | ParseException e) {
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+			e1.printStackTrace();
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		}
 		else
 		{
 			System.out.println("File Does not exits");
 		}
 	}
+		
 	
-	
-	/**
-	 * 
-	 */
-	@SuppressWarnings("unchecked")
-	public static void sale() {
-		File file = new File("/home/bridgeit/Programs/files/stock.json");
-		File file1 =new File("/home/bridgeit/Programs/files/stock1.json");
-		if(file.exists() && file1.exists())
-		{
-			try {
-				FileReader reader = new FileReader(file);
-
-				JSONParser parser = new JSONParser();
-				JSONArray stock = (JSONArray) parser.parse(reader);
-
-				FileReader reader1 = new FileReader(file1);
-				JSONParser parser1 = new JSONParser();
-				JSONArray share = (JSONArray) parser1.parse(reader1);
-
-				System.out.println("Enter the user");
-				String name = inputString();
-				Iterator<?> itrator = stock.iterator();
-				Iterator<?> itrator1 = share.iterator();
-				boolean flag = false;
-				while (itrator.hasNext())
-				{
-					JSONObject obj=(JSONObject) itrator.next();
-					if(obj.get("Name").equals(name))
-					{
-						System.out.println("Enter the share sysmbol to sale share:[@,!,#]");
-						String sym = inputString();
-						System.out.println("Enter the number of share to sale");
-						int count= inputInteger();
-
-						while(itrator1.hasNext())
-						{
-							JSONObject obj1 = (JSONObject) itrator1.next();
-							if(obj1.get("Symbol").equals(sym))
-							{	
-								int bal =  Integer.parseInt(obj.get("Balance").toString());
-								int price = Integer.parseInt(obj1.get("Price").toString());
-								int noShare =  Integer.parseInt(obj.get("ShareCount").toString());
-								int stockShare = Integer.parseInt(obj1.get("Count").toString());
-								int saleprize = count*price;
-								int newbal = bal+saleprize;
-								int sharecountcus = noShare-count;
-								int sharecountstock = stockShare+count;
-								obj.remove("Balance");
-								obj.remove("ShareCount");
-								obj1.remove("Count");
-
-								obj.put("Balance",newbal);
-								obj.put("ShareCount",sharecountcus);
-								obj1.put("Count", sharecountstock);
-								Date d = new Date();
-								String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(d);
-								System.out.println("Date "+date);
-								flag = true;
-								break;
-							}
-
-						}
-					}
-
-					FileWriter fs = new FileWriter(file);
-					try {
-						fs.write(JSONValue.toJSONString(stock));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					fs.flush();
-					fs.close();
-				}
-				if(flag == false)
-				{
-					System.out.println("User name not exits");
-				}
-				FileWriter fw = new FileWriter(file1);
-				fw.write(JSONValue.toJSONString(share));
-				fw.flush();
-				fw.close();
-			}
-			catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		else
-		{
-			System.out.println("File Does not exits");
-		}
-
-	}
-
 	/**
 	 * 
 	 */
@@ -1995,10 +1853,641 @@ public class Utility {
 
 	}
 
+ /**
+ * @param suits
+ * @param ranks
+ */
+   public void deckOfCards(String[] suits, String[] ranks) {
+		int lengthOfCards = suits.length * ranks.length;
+		String deck[] = new String[lengthOfCards];
+		for (int i = 0; i < ranks.length; i++) 
+		{
+			for (int j = 0; j < suits.length; j++) 
+			{
+				deck[suits.length * i + j] = ranks[i] + " of " + suits[j];
+			}
+		}
+
+		for (int i = 0; i < lengthOfCards; i++)
+		{
+			int r = i + (int) (Math.random() * (lengthOfCards - i));
+			String temp = deck[r];
+			deck[r] = deck[i];
+			deck[i] = temp;
+		}
+		String arr[][] = new String[suits.length][9];
+		for (int i = 0; i < suits.length ; i++)
+		{
+			System.out.println("**********Player " + (i + 1)+"**********");
+			System.out.println();
+			for (int j = 0; j < 9; j++)
+			{
+				arr[i][j] = deck[i + j];
+				System.out.println("    "+arr[i][j] + ", ");
+			}
+			System.out.println();
+		}
+		
+	}
+
+public void deckOfCardsInQueue(String[] suits, String[] ranks) {
+	QueueStructure cardQueue = new QueueStructure();
+	int lengthOfCards = suits.length * ranks.length;
+	String[] deck = new String[lengthOfCards];
+	for (int i = 0; i < ranks.length; i++) {
+		for (int j = 0; j < suits.length; j++) {
+			deck[suits.length*i + j] = ranks[i] + " of " + suits[j];
+		}
+	}
+	for (int i = 0; i < lengthOfCards; i++) {
+		int r = i + (int) (Math.random() * (lengthOfCards-i));
+		String temp = deck[r];
+		deck[r] = deck[i];
+		deck[i] = temp;
+	}
+	String arr[][]=new String[suits.length][9];
+	for(int i=0; i<suits.length; i++)
+	{
+		//  System.out.println("Player "+(i+1));
+		for(int j=0; j<9; j++)
+		{
+			arr[i][j]=deck[i+j];
+			cardQueue.push(arr[i][j]);
+		}
+		
+		System.out.println();
+	}	
+	
+}
+
+public void editDetails() {
+	try {
+		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
+		if (file.exists()) {
+			if (file.canRead() && file.canWrite()) {
+				Scanner scan = new Scanner(System.in);
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				Iterator<?> itr = array.iterator();
+				System.out.println("Enter the person name to edit details");
+				String name = scan.nextLine();
+				boolean flag = false;
+				while (itr.hasNext()) {
+					JSONObject obj = (JSONObject) itr.next();
+					if (obj.get("firstname").equals(name)) {
+						System.out.println("What you want to edit");
+						String edit = scan.nextLine();
+						System.out.println("Enter the new " + edit + " to update.");
+						String change = scan.nextLine();
+						obj.remove(edit);
+						obj.put(edit, change);
+						System.out.println("Edited Successfully.");
+						flag = true;
+						break;
+					}
+				}
+				if (flag == false) {
+					System.out.println("Person not found");
+				}
+				FileWriter fw = new FileWriter(file);
+
+				fw.write(JSONArray.toJSONString(array));
+
+				fw.flush();
+				fw.close();
+
+			} else {
+				System.out.println("File can not edit");
+			}
+		} else {
+			System.out.println("File Does not exits");
+		}
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+}
+
+public void sort() {
+	try {
+		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
+		if (file.exists()) {
+			if (file.canRead() && file.canWrite()) {
+				Scanner scan = new Scanner(System.in);
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				System.out.println("Enter column name to sort book");
+				String str = scan.nextLine();
+				//Sort sort=new Sort();
+				Collections.sort(array, new Sort(str));
+				Iterator<?> itr = array.iterator();
+				while (itr.hasNext()) {
+					JSONObject obj1 = (JSONObject) itr.next();
+					System.out.println("firstname : " + obj1.get("firstname") + " " + "lastname : "
+							+ obj1.get("lastname") + " " + "address: " + obj1.get("address") + " " + "city : "
+							+ obj1.get("city") + " " + "state : " + obj1.get("state") + " " + "zip: "
+							+ obj1.get("zip") + " " + "mobile: " + obj1.get("mobile"));
+				}
+				FileWriter fw = new FileWriter(file);
+				fw.write(JSONArray.toJSONString(array));
+				fw.flush();
+				fw.close();
+
+			} else {
+				System.out.println("File can not edit");
+			}
+		} else {
+			System.out.println("File Does not exits");
+		}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void deletePerson() throws IOException, ParseException {
+	try {
+		Scanner scan = new Scanner(System.in);
+		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
+		if (file.exists()) {
+			if (file.canRead()) {
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				System.out.println("Enter the user");
+				String name = scan.nextLine();
+				Iterator<?> iterator = array.iterator();
+				boolean flag = false;
+				while (iterator.hasNext()) {
+					JSONObject jsonObject = (JSONObject) iterator.next();
+
+					if (jsonObject.get("firstname").equals(name)) {
+						array.remove(jsonObject);
+						System.out.println("Deleted Successfully.");
+						flag = true;
+						break;
+					}
+				}
+				if (flag == false) {
+					System.out.println("User not found.");
+				}
+				if (file.canWrite()) {
+					FileWriter fw = new FileWriter(file);
+					fw.write(JSONArray.toJSONString(array));
+					fw.flush();
+					fw.close();
+				} else {
+					System.out.println("File does not haveedit permission");
+				}
+
+			} else {
+				System.out.println("File can't read");
+			}
+		} else {
+			System.out.println("File does not exits in disk.");
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+@SuppressWarnings("unchecked")
+public void addPerson() throws IOException, ParseException {
+	try {
+		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
+		if (file.exists()) {
+
+			if (file.canRead() && file.canWrite()) {
+				Scanner scan = new Scanner(System.in);
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				JSONObject json = new JSONObject();
+				System.out.println("Enter First Name:");
+				String firstname = scan.nextLine();
+				System.out.println("Enter Last Name:");
+				String lastname = scan.nextLine();
+				System.out.println("Enter Address:");
+				String address = scan.nextLine();
+				System.out.println("Enter City:");
+				String city = scan.nextLine();
+				System.out.println("Enter State:");
+				String state = scan.nextLine();
+				System.out.println("Enter ZIP:");
+				String zip = scan.nextLine();
+				System.out.println("Enter Mobile Number:");
+				String mobile = scan.nextLine();
+
+				json.put("firstname", firstname);
+				json.put("lastname", lastname);
+				json.put("address", address);
+				json.put("city", city);
+				json.put("state", state);
+				json.put("zip", zip);
+				json.put("mobile", mobile);
+				array.add(json);
+				System.out.println("Added Successfully.");
+				FileWriter fw = new FileWriter(file);
+				fw.write(JSONArray.toJSONString(array));
+				fw.flush();
+				fw.close();
+
+			}
+
+			else {
+				System.out.println("File can't read and write");
+			}
+		} else {
+			System.out.println("File not exits on disk.");
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void displayDetails() throws IOException, ParseException {
+	try {
+		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
+		if (file.exists()) {
+			if (file.canRead() && file.canWrite()) {
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				Iterator itr = array.iterator();
+				while (itr.hasNext()) {
+					JSONObject obj = (JSONObject) itr.next();
+					System.out.println("firstname : " + obj.get("firstname") + " " + "lastname : "
+							+ obj.get("lastname") + " " + "address: " + obj.get("address") + " " + "city : "
+							+ obj.get("city") + " " + "state : " + obj.get("state") + " " + "zip: " + obj.get("zip")
+							+ " " + "mobile: " + obj.get("mobile"));
+
+				}
+			} else {
+				System.out.println("File can't have read permissions.");
+			}
+		} else {
+			System.out.println("File does not exits on disk.");
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void fixAppointment()
+{
+	try
+	{
+	
+		Scanner scan = new Scanner(System.in);
+		File file = new File ("/home/bridgeit/Programs/files/doctor.json");
+		File file1 = new File ("/home/bridgeit/Programs/files/patient.json");
+		if(file.exists() && file.exists())
+		{
+			if(file.canWrite() && file.canRead() && file1.canWrite() && file1.canRead())
+			{
+				JSONParser parser = new JSONParser();
+				FileReader doctor = new FileReader(file);
+				JSONArray docArray = (JSONArray) parser.parse(doctor);
+
+				FileReader patient = new FileReader(file1);
+				JSONArray patArray = (JSONArray) parser.parse(patient);
+
+				Iterator<?> iterator = patArray.iterator();
+				System.out.println("Enter the Patient id to get appointment");
+				String pid = scan.nextLine();
+				boolean flag=false;
+				while (iterator.hasNext())
+				{
+					JSONObject object = (JSONObject) iterator.next();
+					String key = object.get("Id").toString();
+					if (pid.equals(key))
+					{
+						System.out.println("Enter the doctor id to assign patient");
+						String did = scan.nextLine();
+						Iterator<?> iterator1 = docArray.iterator();
+
+						while (iterator1.hasNext())
+						{
+							JSONObject object1 = (JSONObject) iterator1.next();
+							String key1 = object1.get("Id").toString();
+							if (key1.equals(did))
+							{
+								JSONArray arr = (JSONArray) object1.get("Patient");
+
+								if (arr.size()==2)
+								{
+									System.out.println("Doctor appointment is full ... Take appointment next day.");
+									break;
+								}
+								else
+								{
+									arr.add(object);
+									FileWriter write = new FileWriter(file);
+									write.write(JSONValue.toJSONString(docArray));
+									write.flush();
+									write.close();
+									flag = true;
+									break;
+								}
+							}
+						}
+						break;
+					}
+				}
+				if(flag==false)
+				{
+					System.out.println("Wrong user id");
+				}
+			}
+			else
+			{
+				System.out.println("File can not read or write");
+			}
+		}
+		else
+		{
+			System.out.println("File Not exits in disk.");
+		}
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+}
+
+public static void patientDetails() 
+{
+	try
+	{
+		File file = new File("/home/bridgeit/Programs/files/patient.json");
+		if(file.exists())
+		{
+			if(file.canRead() && file.canWrite())
+			{
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				Iterator<?> itr = array.iterator();
+				
+				while (itr.hasNext())
+				{
+					JSONObject obj = (JSONObject) itr.next();
+					
+						System.out.println("Name : "+obj.get("Name")+"\tID : "+obj.get("Id")+"\tAge : "+obj.get("Age")+"\tMob: "+obj.get("Mob"));
+					
+				}
+			}
+			else
+			{
+				System.out.println("File can't have read permissions.");
+			}
+		}
+		else
+		{
+			System.out.println("File does not exits on disk.");
+		}
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+	
+}
 
 
+@SuppressWarnings("unchecked")
+public static void addPatient() 
+{
+	try
+	{
+		Scanner scan = new Scanner(System.in);
+		File file = new File("/home/bridgeit/Programs/files/patient.json");
+		if(file.exists())
+		{
+			if(file.canRead() && file.canWrite())
+			{
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				JSONObject json = new JSONObject();
+		        System.out.println("Enter Patient Name:");
+		        String name = scan.nextLine();
+		        System.out.println("Enter Id No:");
+		        String id = scan.nextLine();
+		        System.out.println("Enter Mobile number:");
+		        String mob = scan.nextLine();
+		        System.out.println("Enter age:");
+		        String age = scan.nextLine();
+		        Iterator<?> itr = array.iterator();
+				
+				while (itr.hasNext())
+				{
+					JSONObject obj = (JSONObject) itr.next();
+					String key = obj.get("Id").toString();
+					if(key.equals(id))
+					{
+						System.out.println("The id Number "+id+" is already assingn to other patient plz enter different id number");
+						System.out.println("Enter Id No:");
+						id = scan.nextLine();
+					}
+					
+				}
+		        json.put("Name",name);
+		        json.put("Id", id);
+		        json.put("Mob", mob);
+		        json.put("Age", age);
+		        
+		        array.add(json);
+		        System.out.println("Added Successfully.");
+		        FileWriter fw = new FileWriter(file);
+		        fw.write(JSONArray.toJSONString(array));
+		        fw.flush();
+		        fw.close();
+				
+			}
+			else
+			{
+				System.out.println("File can't have read permissions.");
+			}
+		}
+		else
+		{
+			System.out.println("File does not exits on disk.");
+		}
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+	
+}
 
 
+public static void doctorsDetails() 
+{
+	try
+	{
+		Scanner scan = new Scanner(System.in);
+		File file = new File("/home/bridgeit/Programs/files/doctor.json");
+		if(file.exists())
+		{
+			if(file.canRead() && file.canWrite())
+			{
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				Iterator <?>itr = array.iterator();
+				
+				while (itr.hasNext())
+				{
+					JSONObject obj = (JSONObject) itr.next();
+					System.out.println("Name : "+obj.get("Name")+"\tID : "+obj.get("Id")+"\tSpecialization : "+obj.get("Specialization")+"\t\tAvailability : "+obj.get("Availability"));
+		
+				}
+			}
+			else
+			{
+				System.out.println("File can't have read permissions.");
+			}
+		}
+		else
+		{
+			System.out.println("File does not exits on disk.");
+		}
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+	
+}
 
 
+@SuppressWarnings("unchecked")
+public static void addDoctor() 
+{
+	try
+	{
+		File file = new File("/home/bridgeit/Programs/files/doctor.json");
+		if(file.exists())
+		{
+			
+			if(file.canRead() && file.canWrite())
+			{
+				Scanner scan = new Scanner(System.in);
+				FileReader fr = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray array = (JSONArray) parser.parse(fr);
+				JSONObject json = new JSONObject();
+		        System.out.println("Enter Doctor Name:");
+		        String name = scan.nextLine();
+		        System.out.println("Enter Id No:");
+		        String id = scan.nextLine();
+		        System.out.println("Enter Specialization:");
+		        String specialization = scan.nextLine();
+		        System.out.println("Enter Availability:");
+		        String availability = scan.nextLine();
+		        Iterator<?> itr = array.iterator();
+		    	while (itr.hasNext())
+				{
+					JSONObject obj = (JSONObject) itr.next();
+					String key = obj.get("Id").toString();
+					if(key.equals(id))
+					{
+						System.out.println("The id Number "+id+" is already assingn to other Dcotor plz enter different id number");
+						System.out.println("Enter Id No:");
+						id = scan.nextLine();
+					}
+					
+				}
+		        json.put("Name",name);
+		        json.put("Id", id);
+		        json.put("Specialization", specialization);
+		        json.put("Availability", availability);
+		        
+		        array.add(json);
+		        System.out.println("Added Successfully.");
+		        FileWriter fw = new FileWriter(file);
+		        fw.write(JSONArray.toJSONString(array));
+		        fw.flush();
+		        fw.close();
+			}
+		
+			else
+			{
+				System.out.println("File can't read and write");
+			}
+		}
+		else
+		{
+			System.out.println("File not exits on disk.");
+		}
+		
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+	
+}
+
+public void appointmentDetails() 
+{
+	try
+	{
+		Scanner scan = new Scanner(System.in);
+		File file = new File ("/home/bridgeit/Programs/files/doctor.json");
+		if(file.exists() && file.exists())
+		{
+			if(file.canWrite() && file.canRead())
+			{
+				JSONParser parser = new JSONParser();
+				FileReader doctor = new FileReader(file);
+				JSONArray docArray = (JSONArray) parser.parse(doctor);
+				Iterator<?> iterator = docArray.iterator();
+				System.out.println("Enter Doctor id to view appintment");
+				String id = scan.next();
+				boolean flag = false;
+				while (iterator.hasNext())
+				{
+					JSONObject obj = (JSONObject) iterator.next();
+					String id1 = obj.get("Id").toString();
+					if(id1.equals(id))
+					{
+						JSONArray patient1 =(JSONArray) obj.get("Patient");
+						Iterator<?> itr = patient1.iterator();
+						while(itr.hasNext())
+						{
+							JSONObject patient = (JSONObject) itr.next();
+							System.out.println("Name : "+patient.get("Name")+"\tID : "+patient.get("Id")+ "\tAge : "+patient.get("Age")+"\tMob : "+patient.get("Mob"));
+							flag=true;
+						}
+					}
+				}
+				if(flag==false)
+				{
+					System.out.println("Wrong Doctor id...Plz Try again");
+				}
+			}
+			else
+			{
+				System.out.println("File can not read or write");
+			}
+		}
+		else
+		{
+			System.out.println("File Not exits in disk.");
+		}
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+}
 }
