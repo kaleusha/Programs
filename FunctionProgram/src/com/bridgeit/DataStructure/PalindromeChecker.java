@@ -1,16 +1,20 @@
+/******************************************************************************
+ *  Purpose: Check String is Palindrome or not.
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   14-03-2018
+ ******************************************************************************/
 package com.bridgeit.DataStructure;
 
-import java.util.Scanner;
+import com.bridgeit.utility.Utility;
 
 public class PalindromeChecker 
 {
 	public static void  main(String[]args)
 	{	
-		
-		Scanner sc=new Scanner(System.in);
-		
 		System.out.println("Enter to check palindrome or not");
-		String st=sc.next();
+		String st=Utility.inputString();
 		char[]ch=st.toCharArray();
 		int n=ch.length-1;
 		palindromeDequeueStructure m=new palindromeDequeueStructure(20);
@@ -38,7 +42,6 @@ public class PalindromeChecker
 		}
 		
 		
-sc.close();
-	}
+ }
 
 }

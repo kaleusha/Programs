@@ -14,13 +14,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
-
-import javax.xml.soap.Node;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -39,11 +35,11 @@ import java.util.Date;
 import java.util.regex.Matcher;
 
 import java.text.SimpleDateFormat;
-import java.util.SimpleTimeZone;
 import java.util.regex.Pattern;
 public class Utility {
 
-	static Scanner scanner;
+	static Scanner scanner = new Scanner(System.in);
+
 
 	public Utility() {
 		scanner = new Scanner(System.in);
@@ -138,14 +134,14 @@ public class Utility {
 	}
 
 	/**
-	 * Purpose:Print 
+	 * Purpose:Print Win Percentage
 	 * 
 	 * @param stake
 	 * @param goal
 	 * @param trials
 	 */
 	public static void grambler(int stake, int goal, int trials) {
-		int lbets = 0;
+		//int lbets = 0;
 		int wins = 0;
 		for (int i = 0; i < trials; i++) {
 			int cash = stake;
@@ -400,9 +396,9 @@ public class Utility {
 	/**
 	 * Purpose:prints the wind chill
 	 * 
-	 * @param t
-	 * @param v
-	 * @param w
+	 * @param temprature
+	 * @param speed
+	 * @param windChill
 	 */
 	public static void windChill(double temprature, double speed) {
 		// TODO Auto-generated method stub
@@ -451,7 +447,7 @@ public class Utility {
 	public static ArrayList<Integer> primeNumber() {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int i = 2; i <= 1000; i++) {
+		for (int i = 0; i <= 1000; i++) {
 			int flag = 0;
 			for (int j = 2; j <= i / 2; j++) {
 				if (i % j == 0) {
@@ -581,13 +577,10 @@ public class Utility {
 	 * @param num
 	 */
 	public static void binarySearch(int low, int high, int middle, int count, int num) {
-		Utility utility = new Utility();
 		String input = null;
-		;
 		System.out.println("Is your number:" + middle);
-
-		System.out.println("Enter your answer in 'yes' or 'high' or 'low'");
-		input = utility.inputString();
+        System.out.println("Enter your answer in 'yes' or 'high' or 'low'");
+		input = inputString();
 		do {
 			if (input.equals("high")) {
 				low = middle;
@@ -604,7 +597,7 @@ public class Utility {
 			if (count < num) {
 				middle = (low + high + 1) / 2;
 				System.out.println("Is your number " + middle + ":");
-				input = utility.inputString();
+				input = inputString();
 			}
 		} while (low <= high);
 		if (count > num) {
@@ -682,6 +675,7 @@ public class Utility {
 	 * @param rate
 	 * @param year
 	 */
+	@SuppressWarnings("unused")
 	public static void monthlyPayment(int principal, double rate, int year) {
 		// TODO Auto-generated method stub
 		int n = 12 * year;
@@ -829,7 +823,7 @@ public class Utility {
 	 * @param r
 	 */
 	public static void permute(String str, int l, int r) {
-		int count = 0;
+		//int count = 0;
 		if (l == r) {
 
 			System.out.println(str);
@@ -1035,19 +1029,12 @@ public class Utility {
 				linkedlist.add(hasharray[i]);
 			}
 		}
-		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter the key to search");
-		int search = scanner.nextInt();
-
-		hash= search % 11;
-		//System.out.println("New Hash:"+hash);
-
+		int search = inputInteger();
+        hash= search % 11;
 		if(hashmap.containsKey(hash))
 		{
-			//System.out.println("fddffg"+hash);
-
 			LinkedListStructure linkedlist=hashmap.get(hash);
-
 			if(linkedlist.search(search))
 			{
 				linkedlist.remove(search);
@@ -1065,8 +1052,8 @@ public class Utility {
 		{
 			hashmap.put(hash, new LinkedListStructure());
 			LinkedListStructure linkedlist=hashmap.get(hash);
-
 			linkedlist.add(search);
+			//Utility.writeFileinteger(search);
 
 		}
 		Set<Integer> keys = hashmap.keySet(); 
@@ -1077,7 +1064,7 @@ public class Utility {
 			value.printlist();
 			System.out.println();
 		}
-		scanner.close();
+		
 	}
 
 	/**
@@ -1189,6 +1176,7 @@ public class Utility {
 	 * 
 	 * @param strArray
 	 */
+	@SuppressWarnings("rawtypes")
 	public static void queueAnagram(int[] strArray) {
 		// TODO Auto-generated method stub
 		QueueStructure queue=new QueueStructure();
@@ -1207,8 +1195,14 @@ public class Utility {
 	}
 
 
-	public static int maxDay(int month,int year)
-	{
+	/**
+	 * Purpose:Print Max Days
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public static int maxDay(int month,int year) {
 		if(month==1 || month==3 || month==5 || month == 7 || month == 8 || month == 10 || month == 12)
 		{
 			return 31;
@@ -1231,9 +1225,13 @@ public class Utility {
 
 	}
 
+	/**
+	 * Purpose:Print Calendar Using Stack
+	 * 
+	 * @param month
+	 * @param year
+	 */
 	public static void calenderWithStack(int month, int year) {
-		// TODO Auto-generated method stub
-
 		StackCalender10 week = new StackCalender10();
 		int start = Utility.dayOfWeek(month,1, year);
 		int maxDay = Utility.maxDay(month, year);
@@ -1404,15 +1402,14 @@ public class Utility {
 	public static void firstName() 
 	{
 		System.out.println("Enter The First Name :");
-		fName=scanner.next();
-
+		fName=inputString();
 
 	}
 
 	public static void fullName()
 	{
 		System.out.println("Enter The Last Name :");
-		lName=scanner.next();
+		lName=inputString();
 
 
 	}
@@ -1421,7 +1418,7 @@ public class Utility {
 	public static void mobileNumber() 
 	{
 		System.out.println("Enter The Mobile Number :");
-		mNumber=scanner.next();
+		mNumber=inputString();
 		if (!isTenDigit(mNumber)) 
 		{
 			System.out.println("valid");
@@ -1454,16 +1451,21 @@ public class Utility {
 		}
 		return false;
 	}
-
-
-
+	/**
+	 * @return
+	 */
 	public static String RegexReplace()
 	{
 		String firstName="<<Name>>";
 		String fullName="<<Full Name>>";
 		String mobileno="xxxxxxxxxx" ;
 		String Date="12/02/2018";
-
+		
+		/*message.replaceAll("<<Name>>", fName);
+		message.replaceAll("<<Full Name>>", lName);
+		message.replaceAll("xxxxxxxxxx", mNumber);
+		message.replaceAll("12/02/2018", date);
+		return message;*/
 		//Regex to replace first Name 
 		Pattern pattern = Pattern.compile(firstName);
 		Matcher matcher = pattern.matcher(message);
@@ -1486,8 +1488,8 @@ public class Utility {
 		matcher = pattern.matcher(message);
 		message=matcher.replaceAll(temp);
 		return message;
-	}
 
+}
 	/**
 	 * Purpose: Print the Stock Report.
 	 * 
@@ -2563,4 +2565,21 @@ public static <T> void print(T[] array, int number) {
 		System.out.print(array[j] + " ");
 	}
 }
+
+public static void writeFileinteger1(LinkedListStructure<String> linkedlist) {
+		String string = linkedlist.toString();
+		System.out.println("String : "+string);
+		try {
+			FileWriter fw = new FileWriter("/home/bridgeit/Programs/files/FileForBinarySearch");
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(string);
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+
 }

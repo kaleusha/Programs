@@ -266,5 +266,19 @@ public class LinkedListStructure<T>
 			
 			return tempCurrent.data;
 		}
+		
+		public String toString()
+		{
+	     Node forword=root;
+	     String str="";
+	     while(forword!=null)
+	     {
+	      str=str+forword.data+" ";
+	      forword=forword.next;
+	      System.out.println("r1");
+	     }
+	     return str; 		
+		}
+		
 	}
 

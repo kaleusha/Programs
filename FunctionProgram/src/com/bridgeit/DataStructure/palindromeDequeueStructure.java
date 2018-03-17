@@ -1,10 +1,6 @@
-	package com.bridgeit.DataStructure;
+package com.bridgeit.DataStructure;
 	
-	
-	
-	public class palindromeDequeueStructure 
-	{
-		
+	public class palindromeDequeueStructure { 
 		private int front;
 		private int rare;
 		private int maxSize;

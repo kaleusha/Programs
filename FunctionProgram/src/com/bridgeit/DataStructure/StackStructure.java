@@ -32,7 +32,7 @@ public class StackStructure
 		if(isEmpty()) {
 			throw new EmptyStackException();
 		}
-		int result = top.data;
+		int result = (int) top.data;
 		top = top.next;
 		length--;
 		return result;	
@@ -42,7 +42,7 @@ public class StackStructure
 		if(isEmpty()){
 			throw new EmptyStackException();	
 		}
-		return top.data;		
+		return (int) top.data;		
 	}
 	
 	public void reverse()

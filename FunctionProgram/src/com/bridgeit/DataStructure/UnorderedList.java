@@ -8,8 +8,7 @@ public class UnorderedList{
 	
 	public static void main(String[] args)
 	{
-		//String words[]={};
-		Utility utility=new Utility();
+		
 		Scanner scanner=new Scanner(System.in);
 		String ReadPath ="/home/bridgeit/Programs/files/FileForBinarySearch";
 		String words[] = Utility.readFile(ReadPath);
@@ -34,10 +33,13 @@ public class UnorderedList{
 		{
 			System.out.println("Word is present in the linked list");
 			linkedlist.remove(search);
+			Utility.writeFileinteger1(linkedlist);
+			System.out.println("remove successfully");
 		}
 		else
 		{
 			linkedlist.append(search);
+			Utility.writeFileinteger1(linkedlist);
 			System.out.println("Word added");
 			
 		}
