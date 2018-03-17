@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Purpose: Read a set of numbers from a file and take user input to search
+ *           a number
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   14-03-2018
+ ******************************************************************************/
 package com.bridgeit.DataStructure;
 
 import java.io.FileNotFoundException;

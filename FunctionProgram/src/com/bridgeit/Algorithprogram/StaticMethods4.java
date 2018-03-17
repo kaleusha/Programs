@@ -8,14 +8,14 @@ public class StaticMethods4 {
 		Utility utility = new Utility();
 
 		System.out.println("enter size of array ");
-		int n = utility.inputInteger();
+		int n = Utility.inputInteger();
 
-		System.out.println("if you want sort the integer array using insertion sort then press 1");
-		System.out.println("if you want sort the string array using insertion sort then press 2");
-		System.out.println("if you want sort the integer array using bubbol sort then press 3");
-	    System.out.println("if you want sort the string array using bubbol sort then press 4");
-	    System.out.println("if you want search any integer key using binary search then press 5");
-		System.out.println("if you want searh any string key then press  6");
+		System.out.println("integer array using insertion sort then press 1");
+		System.out.println("string array using insertion sort then press 2");
+		System.out.println("integer array using bubbol sort then press 3");
+	    System.out.println("string array using bubbol sort then press 4");
+	    System.out.println("search any integer key using binary search then press 5");
+		System.out.println("searh any string key then press  6");
 		
 
 		Integer array[];
@@ -24,7 +24,7 @@ public class StaticMethods4 {
 		String string[];
 
 		System.out.println("enter choice ");
-		int choice = utility.inputInteger();
+		int choice = Utility.inputInteger();
 
 		switch (choice) {
 		case 1:
@@ -32,20 +32,20 @@ public class StaticMethods4 {
 
 			array = new Integer[n];
 			for (int i = 0; i < n; i++) {
-				array[i] = utility.inputInteger();
+				array[i] = Utility.inputInteger();
 			}
 			array = utility.insertionSortString(array);
-			utility.print(array, array.length);
+			Utility.print(array, array.length);
 			break;
 
 		case 2:
 			System.out.println("enter String ");
 			stringArray = new String[n];
 			for (int i = 0; i < n; i++) {
-				stringArray[i] = utility.inputString();
+				stringArray[i] = Utility.inputString();
 			}
 			string = utility.insertionSortString(stringArray);
-			utility.print(string, stringArray.length);
+			Utility.print(string, stringArray.length);
 
 			break;
 
@@ -54,20 +54,20 @@ public class StaticMethods4 {
 
 			array = new Integer[n];
 			for (int i = 0; i < n; i++) {
-				array[i] = utility.inputInteger();
+				array[i] = Utility.inputInteger();
 			}
-			array = utility.bubbleSortInt(array);
-			utility.print(array, array.length);
+			array = Utility.bubbleSortInt(array);
+			Utility.print(array, array.length);
 			break;
 
 		case 4:
 			System.out.println("enter String ");
 			stringArray = new String[n];
 			for (int i = 0; i < n; i++) {
-				stringArray[i] = utility.inputString();
+				stringArray[i] = Utility.inputString();
 			}
-			string = utility.bubbleSortInt(stringArray);
-			utility.print(string, stringArray.length);
+			string = Utility.bubbleSortInt(stringArray);
+			Utility.print(string, stringArray.length);
 
 			break;
 
@@ -76,28 +76,28 @@ public class StaticMethods4 {
 
 			array = new Integer[n];
 			for (int i = 0; i < n; i++) {
-				array[i] = utility.inputInteger();
+				array[i] = Utility.inputInteger();
 			}
 			utility.insertionSortString(array);
 			System.out.println("enter key ");
-			Integer key = utility.inputInteger();
+			Integer key = Utility.inputInteger();
 			array = utility.binarySearchInt(array, key);
-			utility.print(array, array.length);
+			Utility.print(array, array.length);
 			break;
 
 		case 6:
 			System.out.println("enter String ");
 			stringArray = new String[n];
 			for (int i = 0; i < n; i++) {
-				stringArray[i] = utility.inputString();
+				stringArray[i] = Utility.inputString();
 			}
 
 			utility.insertionSortString(stringArray);
 			System.out.println("enter Stringkey ");
-			String stringKey = utility.inputString();
+			String stringKey = Utility.inputString();
 			System.out.println();
 			string = utility.binarySearchInt(stringArray, stringKey);
-			utility.print(stringArray, stringArray.length);
+			Utility.print(stringArray, stringArray.length);
 
 			break;
 		default:

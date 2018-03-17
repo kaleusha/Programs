@@ -2490,4 +2490,77 @@ public void appointmentDetails()
 		e.printStackTrace();
 	}
 }
+
+/**
+ * @param array
+ * @return its a generic method for insertion sorting and it give the sorted
+ *         array and sorted string
+ */
+public <T extends Comparable<T>> T[] insertionSortString(T[] array) {
+	for (int i = 1; i < array.length; i++) {
+		for (int j = i; j > 0; j--) {
+			if ((array[j - 1]).compareTo(array[j]) > 0) {
+				T temp = array[j];
+				array[j] = array[j - 1];
+				array[j - 1] = temp;
+			}
+		}
+	}
+	return array;
+}
+/**
+ * @param array
+ * @return its a generic method for bubble sorting and it give the sorted array
+ *         and sorted string
+ */
+public static <T extends Comparable<T>> T[] bubbleSortInt(T[] array) {
+	for (int i = 1; i < array.length; i++) {
+		for (int j = 0; j < array.length - i; j++) {
+			if (array[j].compareTo(array[j + 1]) > 0) {
+				T temp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
+			}
+		}
+	}
+	return array;
+
+}
+
+/**
+ * @param array
+ * @param num
+ * @return generic binary search
+ */
+public <T extends Comparable<T>> T[] binarySearchInt(T[] array, T num) {
+	int size = array.length;
+
+	int start, end, mid, count = 0;
+
+	start = 0;
+	end = size - 1;
+
+	while (start <= end) {
+		mid = (start + end) / 2;
+		if (num.compareTo(array[mid]) == 0) {
+			System.out.println("Search found at position :" + (mid + 1));
+			count++;
+			break;
+		}
+		if (num.compareTo(array[mid]) < 0)
+			end = mid - 1;
+		else
+			start = mid + 1;
+	}
+	if (count == 0)
+		System.out.println("Search not found");
+	return array;
+
+}
+
+public static <T> void print(T[] array, int number) {
+	for (int j = 0; j < number; j++) {
+		System.out.print(array[j] + " ");
+	}
+}
 }

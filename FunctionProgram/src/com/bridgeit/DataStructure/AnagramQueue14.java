@@ -31,5 +31,4 @@ public class AnagramQueue14 {
         Utility.queueAnagram(strArray);
 		
 	}
-
-}
+ }

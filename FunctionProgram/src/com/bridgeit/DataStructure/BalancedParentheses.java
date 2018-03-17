@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Show Arithmetic Expression is balanced or not.
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-03-2018
+ ******************************************************************************/
 package com.bridgeit.DataStructure;
 
 import com.bridgeit.utility.Utility;
@@ -6,13 +13,10 @@ public class BalancedParentheses
 {
 	public static void main(String[] args) 
 	{
-		Utility utility=new Utility();
-		//Creating Stack 
+		Utility utility=new Utility(); 
 		StackStructure stack = new StackStructure();
-		
-
 		System.out.println("Enter expression: ");
-		String exp = utility.inputString();        
+		String exp = Utility.inputString();        
 		int len = exp.length();
 
 		for (int i = 0; i < len; i++)

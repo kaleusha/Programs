@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Purpose: Print Calendar Using Stack
+ *  Purpose: Stack Structure
  *  
  *  @author  Usha Kale
  *  @version 1.0
@@ -11,7 +11,7 @@ import java.util.EmptyStackException;
 
 public class StackStructure 
 {
-	public ListNode1 top;
+	public Node top;
 	int length;
 	
 	public int length(){
@@ -22,7 +22,7 @@ public class StackStructure
 	}
 	public void push(int data)
 	{
-		ListNode1 temp = new ListNode1(data);
+		Node temp = new Node(data);
 		temp.next = top;
 		top = temp;
 		length++;
@@ -56,7 +56,7 @@ public class StackStructure
 			if(isEmpty()){
 				return;
 			}
-			ListNode1 current = top;
+			Node current = top;
 			while(current != null)
 			{
 				System.out.print(current.data+"   ");

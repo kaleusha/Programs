@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Queue Structure.
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   14-03-2018
+ ******************************************************************************/
 package com.bridgeit.DataStructure;
 
 public class BankingQueueStructure 

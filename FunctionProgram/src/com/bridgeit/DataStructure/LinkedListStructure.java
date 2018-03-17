@@ -1,5 +1,5 @@
 /******************************************************************************  
- *  Purpose: Linked list 
+ *  Purpose: Linked list Structure And Implementation
  *  @author  
  *  @version 1.0
  *  @since   07-03-2018

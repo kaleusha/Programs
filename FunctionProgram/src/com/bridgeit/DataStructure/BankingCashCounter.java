@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Deposit or Withdraw Money from Bank Using Dequeue 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   13-03-2018
+ ******************************************************************************/
 package com.bridgeit.DataStructure;
 
 import com.bridgeit.utility.Utility;
@@ -13,7 +20,7 @@ public class BankingCashCounter
 		do {
 			System.out.println("\n1.For enter to Queue\n2.Procede with Transaction");
 			System.out.println("Enter choice");
-			 ch=utility.inputInteger();
+			 ch=Utility.inputInteger();
 			if(ch==1)
 		    qs.add();
 			if(ch==2&&qs.empty())
@@ -27,7 +34,7 @@ public class BankingCashCounter
 			{
 		     System.out.println("Select your operation in Bank \n1.Deposite \n.2 WithDraw \n3.Check Balance \n4.Exit ");
 		     System.out.println("Enter option");
-		      option =utility.inputInteger();
+		      option =Utility.inputInteger();
 		
 		switch (option)
 		{
