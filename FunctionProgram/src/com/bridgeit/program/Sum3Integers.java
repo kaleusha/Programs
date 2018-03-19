@@ -12,14 +12,12 @@ import com.bridgeit.utility.Utility;
 public class Sum3Integers {
 
 	public static void main(String[] args) {
-
-		Utility utility = new Utility();
 		System.out.println("Enter number of Elements in array");
-		int number = utility.inputInteger();
+		int number = Utility.inputInteger();
 		int array[] = new int[number];
 		System.out.println("Enter Array Elements:");
 		for (int i = 0; i < number; i++) {
-			array[i] = utility.inputInteger();
+			array[i] = Utility.inputInteger();
 		}
 		Utility.sumOf3Int(array, number);
 

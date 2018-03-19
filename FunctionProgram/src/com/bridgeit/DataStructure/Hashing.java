@@ -16,7 +16,7 @@ public class Hashing
 {
 	public static void main(String[] args) throws FileNotFoundException 
 	{
-		String filepath="/home/bridgeit/Programs/files/hashing";
+		String filepath="/home/bridgeit/Programs/files/readhashing";
 		String words[] = Utility.readFile(filepath);
 		for(int i=0;i<words.length;i++)
 		{

@@ -13,10 +13,9 @@ public class FindYourNumber {
 	
 	public static void main(String[] args) 
 	{
-		Utility utility=new Utility();
 		int range,count,low,high,middle;
 		System.out.println("Enter any number: ");
-		int num = utility.inputInteger();
+		int num = Utility.inputInteger();
 		range = (int) Math.pow(2, num-1);
 		System.out.println("Take number between '0' to "+range);
 		count=0;
@@ -24,13 +23,7 @@ public class FindYourNumber {
 		low=0;
 		high=range;
 		middle=(low+high/2);
-		Utility.binarySearch(low,high,middle,count,num);
+		Utility.binarySearch(low,high,middle,count,num);	
 		
-		
-		
-	}
-	
-		
-
-	
+	}	
 }

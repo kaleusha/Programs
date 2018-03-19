@@ -7,15 +7,12 @@
  ******************************************************************************/
 package com.bridgeit.DataStructure;
 
-import java.util.Scanner;
-
 import com.bridgeit.utility.Utility;
 
 public class OrderedList 
 {
 	public static void main(String[] args) {
-	Scanner scanner = new Scanner(System.in);
-	String filepath="/home/bridgeit/Programs/files/hashing";
+	String filepath="/home/bridgeit/Programs/files/orderList";
 	String words[] = Utility.readFile(filepath);
 	for(int i=0;i<words.length;i++)
 	{
@@ -30,26 +27,27 @@ public class OrderedList
 	
 	
 	orderlist.sortList(orderlist);  
+	Utility.writeFileinteger2(orderlist);
+	
 	
 	System.out.println("\nEnter the value to search: ");
-	int search = scanner.nextInt();
+	int search = Utility.inputInteger();
 	if(orderlist.search(search))
 	{
 		System.out.println("Integer is present");
 		orderlist.remove(search);
 		System.out.println("Your list size:==>>" +orderlist.size());
-		Utility.writeFileinteger(orderlist);
+		Utility.writeFileinteger2(orderlist);
 	}
 	else
 	{
-		System.out.println("Enter the position: ");
-		int pos = scanner.nextInt();
-		orderlist.insert( search,pos);
+		//System.out.println("Enter the position: ");
+		//int pos = scanner.nextInt();
+		orderlist.add( search);
 		System.out.println("Integer added");
 		System.out.println("Your list size:==>>" +orderlist.size());
-		Utility.writeFileinteger(orderlist);
+		Utility.writeFileinteger2(orderlist);
 		orderlist.printlist();
 	}
-	scanner.close();
 	}
 }

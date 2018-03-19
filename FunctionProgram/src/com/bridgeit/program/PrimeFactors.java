@@ -12,9 +12,8 @@ import com.bridgeit.utility.Utility;
 public class PrimeFactors {
 
 	public static void main(String[] args) {
-		Utility utility = new Utility();
 		System.out.println("Enter any Number to find Prime Factors ");
-		int number = utility.inputInteger();
+		int number = Utility.inputInteger();
         Utility.primeFactor(number);
 
 	}

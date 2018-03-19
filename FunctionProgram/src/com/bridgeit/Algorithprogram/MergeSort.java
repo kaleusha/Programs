@@ -10,22 +10,18 @@ package com.bridgeit.Algorithprogram;
 import com.bridgeit.utility.Utility;
 
 public class MergeSort {
-	
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Utility utility=new Utility();
-		
+   public static void main(String[] args) {
 		System.out.println("Enter size of array: ");
-		int size = utility.inputInteger();
+		int size = Utility.inputInteger();
 		int array[] = new int[size];
 		System.out.println("Enter the array element: ");
 		for(int i=0; i<array.length;i++)
 		{
-			array[i] = utility.inputInteger();
+			array[i] = Utility.inputInteger();
 		}
 		int low=0;
-		Utility.mergesort(array, low, size);
+		int high=size-1;
+		Utility.sort(array, low, high);
 		System.out.println("Array after merge sort");
 		for(int k=0;k<array.length;k++)
 		{

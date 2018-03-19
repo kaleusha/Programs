@@ -11,14 +11,12 @@ import com.bridgeit.utility.Utility;
 
 public class Gambler {
 	public static void main(String[] args) {
-
-		Utility utility = new Utility();
 		System.out.println("Enter stake ");/* starting bankamt */
-		int stake = utility.inputInteger();
+		int stake = Utility.inputInteger();
 		System.out.println("Enter goal ");/* desired bankamt */
-		int goal = utility.inputInteger();
+		int goal = Utility.inputInteger();
 		System.out.println("Enter trials ");/* no.of time try */
-		int trials = utility.inputInteger();
+		int trials = Utility.inputInteger();
 		Utility.grambler(stake, goal, trials);
 
 	}

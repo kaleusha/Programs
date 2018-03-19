@@ -13,11 +13,10 @@ import com.bridgeit.utility.Utility;
 
 public class Distance {
 	public static void main(String[] args) {
-		Utility utility = new Utility();
 		System.out.println("Enter Value of x ");
-		int x = utility.inputInteger();
+		int x = Utility.inputInteger();
 		System.out.println("Enter Value of y ");
-		int y = utility.inputInteger();
+		int y = Utility.inputInteger();
 		double distance;
 		distance = Math.sqrt((x * x) + (y * y));
 		System.out.println(distance);

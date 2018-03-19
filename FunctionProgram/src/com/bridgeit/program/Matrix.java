@@ -11,14 +11,13 @@ import com.bridgeit.utility.Utility;
 
 public class Matrix {
 	public static void main(String[] args) {
-		Utility utility = new Utility();
 		System.out.println("\n1.Integer \n2.float \n3.boolean ");
 		System.out.println("enter your choice");
-		int choice = utility.inputInteger();
+		int choice = Utility.inputInteger();
 		System.out.println("Enter How Many Rows");
-		int row = utility.inputInteger();
+		int row = Utility.inputInteger();
 		System.out.println("Enter How Many colums");
-		int colum = utility.inputInteger();
+		int colum = Utility.inputInteger();
 		Utility.matrix(choice, row, colum);
 	}
 }

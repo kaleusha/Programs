@@ -10,22 +10,16 @@ package com.bridgeit.Algorithprogram;
 
 import com.bridgeit.utility.Utility;
 
-
-
-public class BinarySearch1 
-{
-	
+public class BinarySearch1 {
 	public static void main(String[] args)
 	{
-		
 		String words[],search;
-		Utility utility=new Utility();
 		words =Utility.readFile("/home/bridgeit/Programs/files/FileForBinarySearch");
 		System.out.println("Enter word to search");
-		search=utility.inputString();
+		search=Utility.inputString();
 		Utility.bubblesortString(words);
-	int result = Utility.binarySearchString(search, words, 0, words.length-1);
-		   if(result>-1)
+	    int result = Utility.binarySearchString(search, words, 0, words.length-1); 
+	    if(result>-1)
 		   {
 			   System.out.println("Element found @ "+result);
 		   }

@@ -12,9 +12,8 @@ import com.bridgeit.utility.Utility;
 public class LeaPYear {
 
 	public static void main(String[] args) {
-		Utility utility = new Utility();
 		System.out.println("Enter year");
-		int year = utility.inputInteger();
+		int year = Utility.inputInteger();
 		Utility.leapYear(year);
 
 	}

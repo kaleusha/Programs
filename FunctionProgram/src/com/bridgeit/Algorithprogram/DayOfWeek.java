@@ -12,14 +12,14 @@ import com.bridgeit.utility.Utility;
 public class DayOfWeek {
 
 	public static void main(String[] args) 
-	{
+	{ 
 		Utility utility=new Utility();
 		System.out.println("Enter Month");
 		int m=utility.inputInteger();
 		System.out.println("Enter date");
-		int d=utility.inputInteger();
+		int d=Utility.inputInteger();
 		System.out.println("Enter Year");
-		int y =utility.inputInteger();
+		int y =Utility.inputInteger();
 		int d0=Utility.dayOfWeek(m,d,y);
 		String weekDay;
 		switch(d0) 

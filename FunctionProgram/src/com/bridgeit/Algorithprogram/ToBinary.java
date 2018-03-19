@@ -15,13 +15,13 @@ public class ToBinary {
 		if(ch==1)
 		{
 		System.out.println("Enter Decimal Number");
-		int num=utility.inputInteger();
+		int num=Utility.inputInteger();
 		System.out.println("Binary number of " +num+ " is: ");
 		utility.DecimalTOBinary(num);
 		}else
 		{
 			System.out.println("Enter Binary Number is");
-			String binary=utility.inputString();
+			String binary=Utility.inputString();
 			System.out.println("Binary number of " +binary+ " is: ");
 			utility.convertBinaryToDecimal(binary);
 	   

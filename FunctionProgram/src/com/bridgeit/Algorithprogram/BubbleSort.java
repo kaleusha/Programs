@@ -10,20 +10,17 @@ package com.bridgeit.Algorithprogram;
 import com.bridgeit.utility.Utility;
 
 public class BubbleSort {
-	 
-
-
 	public static void main(String[] args) 
 	{
 		int i;
-		  Utility utility=new Utility();
+		Utility utility=new Utility();
 	      System.out.println("Enter How many Elements in Array");
-	      int number=utility.inputInteger();
+	      int number=Utility.inputInteger();
 	      System.out.println("Enter Array Elements:");
 	      int arr[]=new int[number];
 	      for(i=0;i<number;i++)
 	      {
-	    	  arr[i]=utility.inputInteger();
+	    	  arr[i]=Utility.inputInteger();
 	      }
 	      utility.bubbleSort(arr,number);
 	      System.out.println("Sorted Elements Are: ");

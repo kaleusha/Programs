@@ -2,6 +2,7 @@ package com.bridgeit.DataStructure;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import com.bridgeit.utility.Utility;
 
@@ -9,7 +10,16 @@ public class TwoDAnagram12
 {
 	public static void main(String[] args) 
 	{
-		Utility utility=new Utility();
+		ArrayList<Integer> al=Utility.primeNumber();
+        int strArray[]=new int[al.size()];
+        Iterator<Integer> iterator=al.iterator();
+                          
+        for(int i=0;i<strArray.length;i++)
+        {
+         strArray[i]=iterator.next();	  
+        }
+        Utility.primeAnagram(strArray);
+		/*Utility utility=new Utility();
 		int size;  
 		int number = size;
 		boolean status2;
@@ -42,7 +52,7 @@ public class TwoDAnagram12
 			}
 		}
 		System.out.println();
-	
+	*/
 	  
 	}
 

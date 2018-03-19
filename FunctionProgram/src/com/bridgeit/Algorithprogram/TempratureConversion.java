@@ -11,13 +11,12 @@ import com.bridgeit.utility.Utility;
 
 public class TempratureConversion
 {
-	
 	public static void main(String[] args)
 	{
             Utility utility=new Utility();
 		    System.out.println("1.Celsius->Fahrenheit \n2.Fahrenheit->Celsius");
 		    System.out.println("Select choice: ");
-		    int ch= utility.inputInteger();
+		    int ch= Utility.inputInteger();
 		    
 		    if (ch == 1) 
 		    {
@@ -34,8 +33,7 @@ public class TempratureConversion
 		        
 		    
     }
-
-
+ 
 	
 
 }

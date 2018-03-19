@@ -1,6 +1,6 @@
 package com.bridgeit.Algorithprogram;
 
-import java.util.Scanner;
+import com.bridgeit.utility.Utility;
 
 public class VendingMachine {
 
@@ -8,9 +8,8 @@ public class VendingMachine {
 	{
 		int amount;
 		int notes;
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the amount=");
-		amount = scanner.nextInt();
+		amount = Utility.inputInteger();
 		
 		/*if(amount%100 == 0)
 		{
@@ -66,7 +65,6 @@ public class VendingMachine {
 				amount = amount%1;
 				System.out.println("No of 1 Rs coins= " +notes);
 			}
-			scanner.close();
 			
 		
 	}		 

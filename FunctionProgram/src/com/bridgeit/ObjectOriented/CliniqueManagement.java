@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Clinic Management
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   17-03-2018
+ ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
 import com.bridgeit.utility.Utility;
@@ -27,7 +34,7 @@ public class CliniqueManagement {
 					Utility.addPatient();
 				    break;
 				case 3 :	 
-					System.out.println("Enter whose details you want to see press D for doctor and P for Patient ");
+					System.out.println("Enter D for doctor and P for Patient ");
 					char ch = Utility.inputString().charAt(0);
 					if(ch=='D')
 					{

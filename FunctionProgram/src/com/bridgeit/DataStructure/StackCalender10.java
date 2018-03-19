@@ -1,7 +1,15 @@
+/******************************************************************************
+ *  Purpose: Print Calendar Using Stack
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   14-03-2018
+ ******************************************************************************/
 package com.bridgeit.DataStructure;
 
 class Node1<T>
 {
+	@SuppressWarnings("rawtypes")
 	Node1 next;
 	T data;
 	Node1(T data1)
@@ -25,8 +33,11 @@ public class StackCalender10 {
 		}
 		lastNode = newNode;
 	}
-	public <T> boolean search(T dataToBeSearched)
-	{
+	/**
+	 * @param dataToBeSearched
+	 * @return
+	 */
+	public <T> boolean search(T dataToBeSearched) {
 		Node1 current = firstNode;
 			while(current != null)
 			{
@@ -38,47 +49,10 @@ public class StackCalender10 {
 			}
 			return false;
 	}
-	public <T> boolean delete(T dataToBedeleted)
-	{
-		if(firstNode.data.equals(dataToBedeleted))
-		{
-			firstNode = firstNode.next;
-			return true;
-		}
-		else if(lastNode.data.equals(dataToBedeleted))
-		{
-			Node1 currentNode = firstNode;
-			Node1 prevNode = null;
-			while(currentNode != lastNode)
-			{
-				prevNode = currentNode;
-				currentNode = currentNode.next;
-			}
-			prevNode.next = null;
-			return true;
-		}
-		else
-		{
-			Node1 prevrefrence = null;
-			boolean status  = false;
-			Node1 current = firstNode;
-			
-			while(current != lastNode && !(status=(current.data.equals(dataToBedeleted))))
-			{
-				prevrefrence = current;
-				current = current.next;
-			}
-			if(status)
-			{
-				prevrefrence.next = current.next;
-				return true;
-			}
-			
-		}
-		return false;
-	}
+	
 	public void itirate()
 	{
+		@SuppressWarnings("rawtypes")
 		Node1 currentNode = firstNode;
 		while(currentNode != null)
 		{
@@ -116,49 +90,5 @@ public class StackCalender10 {
 			return  (T) currentNode.data;
 		}
 	}
-	public void deletelast()
-	{
-		if(this.size()==1)
-		{
-			firstNode = null;
-		}
-		else
-		{
-			Node1 prevNode=null;
-			Node1 currentNode = firstNode;
-		while(currentNode.next !=null)
-		{
-			prevNode = currentNode;
-			currentNode = currentNode.next;
-		}
-		lastNode = prevNode;
-		lastNode.next = null;
-		}
-	}
-	public <T> void push(T data)
-	{
-		this.add(data);
-	}
-	public <T> T pop()
-	{
-		T data =(T) lastNode.data;
-		this.deletelast();
-		return data;
-	}
-public <T> T peek()
-	{
-		return (T) lastNode.data;
-	}
-	public boolean isEmpty()
-	{
-		if(this.size() == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}	
-	}
-
+	
 }

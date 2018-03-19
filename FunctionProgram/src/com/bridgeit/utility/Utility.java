@@ -46,10 +46,14 @@ public class Utility {
 	}
 
 	// INPUT STRING
-	public static String inputString() {
-		try {
+	public static String inputString()
+	{
+		try
+		{
 			return scanner.next();
-		} catch (Exception e) {
+		}
+		catch(Exception e)
+		{
 			System.out.println(e);
 		}
 		return "";
@@ -447,7 +451,7 @@ public class Utility {
 	public static ArrayList<Integer> primeNumber() {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int i = 0; i <= 1000; i++) {
+		for (int i = 2; i <= 1000; i++) {
 			int flag = 0;
 			for (int j = 2; j <= i / 2; j++) {
 				if (i % j == 0) {
@@ -635,38 +639,73 @@ public class Utility {
 
 		System.out.println();
 	}
+	// merge sort method
+		/**
+		 * @param array
+		 * @param low
+		 * @param high
+		 *           
+		 */
+		public static void sort(int array[], int low, int high) {
+			if (low < high) {
 
-	/**
-	 * Purpose:Print Sorted order
-	 * 
-	 * @param array
-	 * @param low
-	 * @param high
-	 */
-	public static void mergesort(int array[], int low, int high) {
-		int n = high - low;
-		if (n <= 1)
-			return;
-		int mid = low + n / 2;
-		mergesort(array, low, mid);
-		mergesort(array, mid, high);
-		int temp[] = new int[n];
-		int i = low, j = mid;
-		for (int k = 0; k < n; k++) {
-			if (i == mid) {
-				temp[k] = array[j++];
-			} else if (j == high) {
-				temp[k] = array[i++];
-			} else if (array[j] < array[i]) {
-				temp[k] = array[j++];
-			} else {
-				temp[k] = array[i++];
+				int middle = (low + high) / 2;
+
+				sort(array, low, middle);
+				sort(array, middle + 1, high);
+
+				merge(array, low, middle, high);
 			}
 		}
-		for (int k = 0; k < n; k++)
-			array[low + k] = temp[k];
 
-	}
+		/**
+		 * @param array
+		 * @param low
+		 * @param middle
+		 * @param high
+		 *            
+		 */
+		public static void merge(int array[], int low, int middle, int high) {
+
+			int n1 = middle - low + 1;
+			int n2 = high - middle;
+
+			int array1[] = new int[n1];
+			int array2[] = new int[n2];
+
+			for (int i = 0; i < n1; ++i)
+				array1[i] = array[low + i];
+			for (int j = 0; j < n2; ++j)
+				array2[j] = array[middle + 1 + j];
+
+			int i = 0, j = 0;
+
+			int k = low;
+			while (i < n1 && j < n2) {
+				if (array1[i] <= array2[j]) {
+					array[k] = array1[i];
+					i++;
+				} else {
+					array[k] = array2[j];
+					j++;
+				}
+				k++;
+			}
+
+			while (i < n1) {
+				array[k] = array1[i];
+				i++;
+				k++;
+			}
+
+			while (j < n2) {
+				array[k] = array2[j];
+				j++;
+				k++;
+			}
+		}
+
+
 
 	/**
 	 * Purpose:Print Monthly Payment
@@ -1038,14 +1077,16 @@ public class Utility {
 			if(linkedlist.search(search))
 			{
 				linkedlist.remove(search);
-				System.out.println(search+" Element found and removed from the list");
+				Utility.writeFileinteger(hashmap);
 
+				System.out.println(search+" Element found and removed from the list");
+				
 			}
 			else
 			{
 				linkedlist.add(search);
 				System.out.println(search+"element Not found and added to the list");
-
+				Utility.writeFileinteger(hashmap);
 			}
 		}
 		else
@@ -1053,7 +1094,7 @@ public class Utility {
 			hashmap.put(hash, new LinkedListStructure());
 			LinkedListStructure linkedlist=hashmap.get(hash);
 			linkedlist.add(search);
-			//Utility.writeFileinteger(search);
+			Utility.writeFileinteger(hashmap);
 
 		}
 		Set<Integer> keys = hashmap.keySet(); 
@@ -1070,17 +1111,17 @@ public class Utility {
 	/**
 	 * Purpose: Write in file
 	 * 
-	 * @param list
+	 * @param search
 	 */
-	public static<T> void writeFileinteger(OrderedListStructure<T> list) { 
-		String string = list.toString();
+	public static<T> void writeFileinteger(T search) { 
+		String string = search.toString();
 		try {
-			FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/hashing");
+			FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/writehashing");
 			BufferedWriter write = new BufferedWriter(writer);
 			write.write(string);
 
 			write.close();
-			writer.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1298,11 +1339,11 @@ public class Utility {
 			JSONObject object1 = new JSONObject();
 			//input for rice
 			System.out.println("Enter the name of rice: ");
-			String name = scanner.next();
+			String name =inputString();
 			System.out.println("Enter the weight of rice: ");
-			double weight = scanner.nextDouble();
+			double weight = inputDouble();
 			System.out.println("Enter the price of rice: ");
-			double price = scanner.nextDouble();
+			double price =inputDouble();
 			object1.put("name", name);
 			object1.put("weight", weight);
 			object1.put("price", price);
@@ -1313,9 +1354,9 @@ public class Utility {
 			System.out.println("Enter the name of pulse: ");
 			name = scanner.next();
 			System.out.println("Enter the weight of pulse: ");
-			weight =scanner.nextDouble();
+			weight =inputDouble();
 			System.out.println("Enter the price of pulse: ");
-			price =scanner.nextDouble();
+			price =inputDouble();
 			object2.put("name", name);
 			object2.put("weight", weight);
 			object2.put("price", price);
@@ -1325,11 +1366,11 @@ public class Utility {
 			//input for wheats
 			JSONObject object3 = new JSONObject();
 			System.out.println("Enter the name of wheats: ");
-			name = scanner.next();
+			name = inputString();
 			System.out.println("Enter the weight of wheats: ");
-			weight = scanner.nextDouble();
+			weight = inputDouble();
 			System.out.println("Enter the price of wheats: ");
-			price =scanner.nextDouble();
+			price =inputDouble();
 			object3.put("name", name);
 			object3.put("weight", weight);
 			object3.put("price", price);
@@ -1350,7 +1391,12 @@ public class Utility {
 
 	}
 
-	@SuppressWarnings("rawtypes")
+	/**
+	 * Purpose: Read File
+	 * 
+	 * @param file
+	 */
+	@SuppressWarnings({ "rawtypes", "unused" })
 	public void readFile(File file) {
 		try {
 
@@ -1413,8 +1459,6 @@ public class Utility {
 
 
 	}
-
-
 	public static void mobileNumber() 
 	{
 		System.out.println("Enter The Mobile Number :");
@@ -1452,7 +1496,8 @@ public class Utility {
 		return false;
 	}
 	/**
-	 * @return
+	 * @return: Updated String
+	 * 
 	 */
 	public static String RegexReplace()
 	{
@@ -1519,7 +1564,7 @@ public class Utility {
 		total[j] = share[j]*amount[j];
 	}
 	System.out.println();
-	System.out.println("*******************Stock Report**************************");
+	System.out.println("*************Stock Report****************");
 	System.out.println();
 	System.out.println("  Company Name   Shares   Price   total of each");
 	System.out.println();
@@ -1554,10 +1599,9 @@ public class Utility {
 	System.out.println("Total stock is: "+totalStock);
 
 	}
+	
 	/**
-	 * 
-	 */
-	/**
+	 * Purpose: Create Account
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
@@ -1576,8 +1620,6 @@ public class Utility {
 				char ch = scan1.next().charAt(0); 
 				if(ch=='y')
 				{	
-					Scanner scan = new Scanner(System.in);
-					 
 					try {
 						FileReader fr = new FileReader(file);
 					
@@ -1585,9 +1627,9 @@ public class Utility {
 					JSONArray arr1 = (JSONArray) parser.parse(fr);
 					JSONObject json = new JSONObject();
 			        System.out.println("Enter name");
-			        String name = scan.nextLine();
+			        String name = inputString();
 			        System.out.println("Enter balance");
-			        int bal = scan.nextInt();
+			        int bal = inputInteger();
 			        json.put("Name",name);
 			        json.put("Balance",bal);
 			        json.put("ShareCount", 100);
@@ -1624,6 +1666,7 @@ public class Utility {
 	
 
 	/**
+	 * Purpose: Buy Share
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
@@ -1631,7 +1674,6 @@ public class Utility {
 		File file = new File("/home/bridgeit/Programs/files/stock.json");
 		File file1 = new File("/home/bridgeit/Programs/files/stock1.json");
 		if (file.exists() && file1.exists()) {
-			Scanner scan = new Scanner(System.in);
 			// reading stock file
 			
 			try {
@@ -1645,7 +1687,7 @@ public class Utility {
 			JSONArray share = (JSONArray) parser1.parse(sf);
 
 			System.out.println("Enter the user");
-			String name = scan.nextLine();
+			String name =inputString();
 			Iterator<?> itr = stock.iterator();
 			Iterator<?> itr1 = share.iterator();
 			boolean flag = false;
@@ -1653,7 +1695,7 @@ public class Utility {
 				JSONObject obj = (JSONObject) itr.next();
 				if (obj.get("Name").equals(name)) {
 					System.out.println("Enter the share sysmbol to buy share:[@,!,#]");
-					String sym = scan.nextLine();
+					String sym = inputString();
 					/*
 					 * obj.put("Share symbol", sym); if(obj.get("Share Symbol").equals(sym)) {
 					 */
@@ -1661,7 +1703,7 @@ public class Utility {
 						JSONObject obj1 = (JSONObject) itr1.next();
 						if (obj1.get("Symbol").equals(sym)) {
 							System.out.println("Enter the amount");
-							int amt = scan.nextInt();
+							int amt = inputInteger();
 							int bal = Integer.parseInt(obj.get("Balance").toString());
 							int price = Integer.parseInt(obj1.get("Price").toString());
 							int noShare = Integer.parseInt(obj.get("ShareCount").toString());
@@ -1717,6 +1759,7 @@ public class Utility {
 	
 	
 	/**
+	 * Purpose: Sales Share
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
@@ -1727,7 +1770,6 @@ public class Utility {
 		File file1 =new File("/home/bridgeit/Programs/files/stock1.json");
 		if(file.exists() && file1.exists())
 		{
-			Scanner scan = new Scanner(System.in);
 			// reading stock file
 			FileReader fr;
 			try {
@@ -1735,14 +1777,14 @@ public class Utility {
 			
 			JSONParser parser = new JSONParser();
 			JSONArray stock = (JSONArray) parser.parse(fr);
-			//reading share file
+			//reading stock1 file
 			
 			FileReader sf = new FileReader(file1);
 			JSONParser parser1 = new JSONParser();
 			JSONArray share = (JSONArray) parser1.parse(sf);
 			
 			System.out.println("Enter the user");
-			String name = scan.nextLine();
+			String name = inputString();
 			Iterator<?> itr = stock.iterator();
 			Iterator<?> itr1 = share.iterator();
 			boolean flag = false;
@@ -1752,9 +1794,9 @@ public class Utility {
 				if(obj.get("Name").equals(name))
 				{
 					System.out.println("Enter the share sysmbol to sale share:[@,!,#]");
-					String sym = scan.nextLine();
+					String sym = inputString();
 					System.out.println("Enter the number of share to sale");
-					int count= scan.nextInt();
+					int count= inputInteger();
 					//obj.put("Share Symbol", sym);
 					while(itr1.hasNext())
 					{
@@ -1824,6 +1866,7 @@ public class Utility {
 		
 	
 	/**
+	 * Purpose: Display Details
 	 * 
 	 */
 	public static <E> void display() {
@@ -1892,6 +1935,12 @@ public class Utility {
 		
 	}
 
+/**
+ * 
+ * @param suits
+ * @param ranks
+ */
+@SuppressWarnings("rawtypes")
 public void deckOfCardsInQueue(String[] suits, String[] ranks) {
 	QueueStructure cardQueue = new QueueStructure();
 	int lengthOfCards = suits.length * ranks.length;
@@ -1922,26 +1971,30 @@ public void deckOfCardsInQueue(String[] suits, String[] ranks) {
 	
 }
 
+/**
+ * Purpose: Edit Details From File
+ * 
+ */
+@SuppressWarnings("unchecked")
 public void editDetails() {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
 			if (file.canRead() && file.canWrite()) {
-				Scanner scan = new Scanner(System.in);
 				FileReader fr = new FileReader(file);
 				JSONParser parser = new JSONParser();
 				JSONArray array = (JSONArray) parser.parse(fr);
 				Iterator<?> itr = array.iterator();
 				System.out.println("Enter the person name to edit details");
-				String name = scan.nextLine();
+				String name = inputString();
 				boolean flag = false;
 				while (itr.hasNext()) {
 					JSONObject obj = (JSONObject) itr.next();
 					if (obj.get("firstname").equals(name)) {
 						System.out.println("What you want to edit");
-						String edit = scan.nextLine();
+						String edit = inputString();
 						System.out.println("Enter the new " + edit + " to update.");
-						String change = scan.nextLine();
+						String change = inputString();
 						obj.remove(edit);
 						obj.put(edit, change);
 						System.out.println("Edited Successfully.");
@@ -1975,17 +2028,21 @@ public void editDetails() {
 
 }
 
+/**
+ * Purpose: Sort File
+ * 
+ */
+@SuppressWarnings("unchecked")
 public void sort() {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
 			if (file.canRead() && file.canWrite()) {
-				Scanner scan = new Scanner(System.in);
 				FileReader fr = new FileReader(file);
 				JSONParser parser = new JSONParser();
 				JSONArray array = (JSONArray) parser.parse(fr);
 				System.out.println("Enter column name to sort book");
-				String str = scan.nextLine();
+				String str = inputString();
 				//Sort sort=new Sort();
 				Collections.sort(array, new Sort(str));
 				Iterator<?> itr = array.iterator();
@@ -2013,9 +2070,14 @@ public void sort() {
 	}
 }
 
+/**
+ * Purpose: Delete Person
+ * 
+ * @throws IOException
+ * @throws ParseException
+ */
 public void deletePerson() throws IOException, ParseException {
 	try {
-		Scanner scan = new Scanner(System.in);
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
 			if (file.canRead()) {
@@ -2023,7 +2085,7 @@ public void deletePerson() throws IOException, ParseException {
 				JSONParser parser = new JSONParser();
 				JSONArray array = (JSONArray) parser.parse(fr);
 				System.out.println("Enter the user");
-				String name = scan.nextLine();
+				String name = inputString();
 				Iterator<?> iterator = array.iterator();
 				boolean flag = false;
 				while (iterator.hasNext()) {
@@ -2059,6 +2121,12 @@ public void deletePerson() throws IOException, ParseException {
 	}
 }
 
+/**
+ * Purpose: Add Person Details
+ * 
+ * @throws IOException
+ * @throws ParseException
+ */
 @SuppressWarnings("unchecked")
 public void addPerson() throws IOException, ParseException {
 	try {
@@ -2066,25 +2134,24 @@ public void addPerson() throws IOException, ParseException {
 		if (file.exists()) {
 
 			if (file.canRead() && file.canWrite()) {
-				Scanner scan = new Scanner(System.in);
 				FileReader fr = new FileReader(file);
 				JSONParser parser = new JSONParser();
 				JSONArray array = (JSONArray) parser.parse(fr);
 				JSONObject json = new JSONObject();
 				System.out.println("Enter First Name:");
-				String firstname = scan.nextLine();
+				String firstname = inputString();
 				System.out.println("Enter Last Name:");
-				String lastname = scan.nextLine();
+				String lastname = inputString();
 				System.out.println("Enter Address:");
-				String address = scan.nextLine();
+				String address = inputString();
 				System.out.println("Enter City:");
-				String city = scan.nextLine();
+				String city = inputString();
 				System.out.println("Enter State:");
-				String state = scan.nextLine();
+				String state = inputString();
 				System.out.println("Enter ZIP:");
-				String zip = scan.nextLine();
+				String zip = inputString();
 				System.out.println("Enter Mobile Number:");
-				String mobile = scan.nextLine();
+				String mobile = inputString();
 
 				json.put("firstname", firstname);
 				json.put("lastname", lastname);
@@ -2113,6 +2180,13 @@ public void addPerson() throws IOException, ParseException {
 	}
 }
 
+/**
+ * Purpose: Display Details
+ * 
+ * @throws IOException
+ * @throws ParseException
+ */
+@SuppressWarnings("rawtypes")
 public void displayDetails() throws IOException, ParseException {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
@@ -2141,15 +2215,18 @@ public void displayDetails() throws IOException, ParseException {
 	}
 }
 
+/**
+ * Purpose: Fix Appointment
+ * 
+ */
+@SuppressWarnings("unchecked")
 public void fixAppointment()
 {
 	try
 	{
-	
-		Scanner scan = new Scanner(System.in);
 		File file = new File ("/home/bridgeit/Programs/files/doctor.json");
 		File file1 = new File ("/home/bridgeit/Programs/files/patient.json");
-		if(file.exists() && file.exists())
+		if(file.exists() && file1.exists())
 		{
 			if(file.canWrite() && file.canRead() && file1.canWrite() && file1.canRead())
 			{
@@ -2162,7 +2239,7 @@ public void fixAppointment()
 
 				Iterator<?> iterator = patArray.iterator();
 				System.out.println("Enter the Patient id to get appointment");
-				String pid = scan.nextLine();
+				String pid = inputString();
 				boolean flag=false;
 				while (iterator.hasNext())
 				{
@@ -2171,7 +2248,7 @@ public void fixAppointment()
 					if (pid.equals(key))
 					{
 						System.out.println("Enter the doctor id to assign patient");
-						String did = scan.nextLine();
+						String did = inputString();
 						Iterator<?> iterator1 = docArray.iterator();
 
 						while (iterator1.hasNext())
@@ -2223,6 +2300,10 @@ public void fixAppointment()
 	}
 }
 
+/**
+ * Purpose: Patient Details
+ * 
+ */
 public static void patientDetails() 
 {
 	try
@@ -2263,12 +2344,15 @@ public static void patientDetails()
 }
 
 
+/**
+ * Purpose: Add Patient Details
+ * 
+ */
 @SuppressWarnings("unchecked")
 public static void addPatient() 
 {
 	try
 	{
-		Scanner scan = new Scanner(System.in);
 		File file = new File("/home/bridgeit/Programs/files/patient.json");
 		if(file.exists())
 		{
@@ -2279,13 +2363,13 @@ public static void addPatient()
 				JSONArray array = (JSONArray) parser.parse(fr);
 				JSONObject json = new JSONObject();
 		        System.out.println("Enter Patient Name:");
-		        String name = scan.nextLine();
+		        String name = inputString();
 		        System.out.println("Enter Id No:");
-		        String id = scan.nextLine();
+		        String id = inputString();
 		        System.out.println("Enter Mobile number:");
-		        String mob = scan.nextLine();
+		        String mob = inputString();
 		        System.out.println("Enter age:");
-		        String age = scan.nextLine();
+		        String age = inputString();
 		        Iterator<?> itr = array.iterator();
 				
 				while (itr.hasNext())
@@ -2296,7 +2380,7 @@ public static void addPatient()
 					{
 						System.out.println("The id Number "+id+" is already assingn to other patient plz enter different id number");
 						System.out.println("Enter Id No:");
-						id = scan.nextLine();
+						id = inputString();
 					}
 					
 				}
@@ -2331,11 +2415,14 @@ public static void addPatient()
 }
 
 
+/**
+ * Purpose: Doctor Details
+ * 
+ */
 public static void doctorsDetails() 
 {
 	try
 	{
-		Scanner scan = new Scanner(System.in);
 		File file = new File("/home/bridgeit/Programs/files/doctor.json");
 		if(file.exists())
 		{
@@ -2371,6 +2458,9 @@ public static void doctorsDetails()
 }
 
 
+/**
+ * Purpose: Add Doctor
+ */
 @SuppressWarnings("unchecked")
 public static void addDoctor() 
 {
@@ -2382,19 +2472,18 @@ public static void addDoctor()
 			
 			if(file.canRead() && file.canWrite())
 			{
-				Scanner scan = new Scanner(System.in);
 				FileReader fr = new FileReader(file);
 				JSONParser parser = new JSONParser();
 				JSONArray array = (JSONArray) parser.parse(fr);
 				JSONObject json = new JSONObject();
 		        System.out.println("Enter Doctor Name:");
-		        String name = scan.nextLine();
+		        String name = inputString();
 		        System.out.println("Enter Id No:");
-		        String id = scan.nextLine();
+		        String id = inputString();
 		        System.out.println("Enter Specialization:");
-		        String specialization = scan.nextLine();
+		        String specialization = inputString();
 		        System.out.println("Enter Availability:");
-		        String availability = scan.nextLine();
+		        String availability = inputString();
 		        Iterator<?> itr = array.iterator();
 		    	while (itr.hasNext())
 				{
@@ -2404,7 +2493,7 @@ public static void addDoctor()
 					{
 						System.out.println("The id Number "+id+" is already assingn to other Dcotor plz enter different id number");
 						System.out.println("Enter Id No:");
-						id = scan.nextLine();
+						id = inputString();
 					}
 					
 				}
@@ -2439,11 +2528,15 @@ public static void addDoctor()
 	
 }
 
+/**
+ * Purpose: Appointment Details
+ * 
+ */
 public void appointmentDetails() 
 {
 	try
 	{
-		Scanner scan = new Scanner(System.in);
+		
 		File file = new File ("/home/bridgeit/Programs/files/doctor.json");
 		if(file.exists() && file.exists())
 		{
@@ -2454,7 +2547,7 @@ public void appointmentDetails()
 				JSONArray docArray = (JSONArray) parser.parse(doctor);
 				Iterator<?> iterator = docArray.iterator();
 				System.out.println("Enter Doctor id to view appintment");
-				String id = scan.next();
+				String id = inputString();
 				boolean flag = false;
 				while (iterator.hasNext())
 				{
@@ -2581,5 +2674,26 @@ public static void writeFileinteger1(LinkedListStructure<String> linkedlist) {
 
 
 	}
+
+public static void writeFileinteger2(OrderedListStructure<Integer> orderlist) {
+	
+		String string = orderlist.toString();
+		System.out.println("string :"+string);
+		try {
+			FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/orderList");
+			BufferedWriter write = new BufferedWriter(writer);
+			write.write(string);
+
+			write.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+	
+
 
 }

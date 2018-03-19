@@ -13,13 +13,12 @@ public class MonthlyPayment {
 
 	public static void main(String[] args) 
 	{
-		Utility utility=new Utility();
 		System.out.println("Enter The Value Of principal");
-		int principal=utility.inputInteger();
+		int principal=Utility.inputInteger();
 		System.out.println("Enter The Value Of Rate");
-		double rate=utility.inputInteger();
+		double rate=Utility.inputInteger();
 		System.out.println("Enter the Year");
-		int year=utility.inputInteger();
+		int year=Utility.inputInteger();
 		Utility.monthlyPayment(principal,rate,year);
 	}
 

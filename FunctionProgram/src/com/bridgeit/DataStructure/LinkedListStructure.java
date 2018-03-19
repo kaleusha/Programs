@@ -275,7 +275,7 @@ public class LinkedListStructure<T>
 	     {
 	      str=str+forword.data+" ";
 	      forword=forword.next;
-	      System.out.println("r1");
+	     // System.out.println("r1");
 	     }
 	     return str; 		
 		}

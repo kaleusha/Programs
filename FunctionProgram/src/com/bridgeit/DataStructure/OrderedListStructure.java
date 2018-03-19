@@ -127,21 +127,19 @@ public class OrderedListStructure<T>
 			
 			else
 			{
-				while(temp != null)
+				OrderNode<T> prev = null;
+				while(temp.next != null && temp.data!=data)
 				{
-					if(temp.data.equals(data))
-					{
-						temp.next = temp.next.next;
-						break;
-					}
+					prev = temp;
 					temp = temp.next;
-					
+				}
+				if(temp.data.equals(data))
+				{
+					prev.next = temp.next;
+				
 				}
 			}
-			if(size != 0)
-			{
-				size--;
-			}
+			
 		}
 		
 		/**

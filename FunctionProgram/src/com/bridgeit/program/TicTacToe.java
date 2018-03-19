@@ -1,15 +1,18 @@
+/******************************************************************************
+ *  Purpose: Tic Tac Toe 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   13-03-2018
+ ******************************************************************************/
 package com.bridgeit.program;
 
 import java.util.Random;
-import java.util.Scanner;
-
 import com.bridgeit.utility.Utility;
 
 public class TicTacToe 
 {
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-
 		TicTacToe tictactoe = new TicTacToe();
 
 		String str[][] = new String[3][3];
@@ -42,7 +45,7 @@ public class TicTacToe
 
 			} else {
 				System.out.println("Enter your box Number");
-				int box = scanner.nextInt();
+				int box =Utility.inputInteger();
 				if (tictactoe.checkDuplicate(box)) {
 
 					tictactoe.userTurn(str, box);

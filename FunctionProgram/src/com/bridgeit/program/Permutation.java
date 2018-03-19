@@ -11,9 +11,7 @@ import com.bridgeit.utility.Utility;
 
 public class Permutation 
 {
-	public static void main(String[] args) 
-	{
-		
+	public static void main(String[] args) {
 		System.out.println("Enter the String: ");
 		String str = Utility.inputString();
 		int n = str.length();

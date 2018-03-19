@@ -14,11 +14,8 @@ import java.util.Iterator;
 
 import com.bridgeit.utility.Utility;
 
-public class ExtendPrime {
-	
-
-
-	public static void main(String[] args) { 
+public class ExtendPrime { 
+	public static void main(String[] args) {
           ArrayList<Integer> al=Utility.primeNumber();
           int strArray[]=new int[al.size()];
           Iterator<Integer> iterator=al.iterator();
@@ -27,13 +24,8 @@ public class ExtendPrime {
           {
            strArray[i]=iterator.next();	  
           }
-          
-         
-          
           Utility.primeAnagram(strArray);
-           Utility.pallindrom(strArray);
-         
-
+          Utility.pallindrom(strArray);
 	}
 
 }

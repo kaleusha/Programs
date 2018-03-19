@@ -13,19 +13,15 @@ public class Sqrt /* Newtons law is used finding the root of nonnegative numbers
 {
 
 	public static void main(String[] args) { 
-        Utility utility=new Utility();
         System.out.println("Enter The Value of c");
-        double c=utility.inputInteger();
+        double c=Utility.inputInteger();
         double epsilon = 1e-15;    
         double t = c;              
         while (Math.abs(t - c/t) > epsilon*t) {
             t = (c/t + t) / 2.0;
         }
        
-        System.out.println(t);  //print the square root
-
-        
-        
+        System.out.println(t);  //print the square root  
 	}
 
 }

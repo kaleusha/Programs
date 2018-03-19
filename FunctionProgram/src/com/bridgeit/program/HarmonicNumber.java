@@ -11,9 +11,8 @@ import com.bridgeit.utility.Utility;
 
 public class HarmonicNumber {
 	public static void main(String[] args) {
-		Utility utility = new Utility();
 		System.out.println("Enter How Many Times Print");
-		int number = utility.inputInteger();
+		int number = Utility.inputInteger();
 		Utility.harmonic(number);
 
 	}

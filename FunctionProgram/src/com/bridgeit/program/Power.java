@@ -11,9 +11,8 @@ import com.bridgeit.utility.*;
 
 public class Power {
 	public static void main(String[] args) {
-		Utility utility = new Utility();
 		System.out.println("Enter number of times you need power ");
-		int number = utility.inputInteger();
+		int number = Utility.inputInteger();
 		Utility.power(number);
 
 	}

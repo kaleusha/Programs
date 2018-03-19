@@ -16,14 +16,13 @@ public class InsertionSort {
 	{
 		  int i;
 		  Utility utility=new Utility();
-	      
 	      System.out.println("Enter How many Elements in Array");
-	      int number=utility.inputInteger();
+	      int number=Utility.inputInteger();
 	      System.out.println("Enter Array Elements:");
 	      int arr[]=new int[number];
 	      for(i=0;i<number;i++)
 	      {
-	    	  arr[i]=utility.inputInteger();
+	    	  arr[i]=Utility.inputInteger();
 	      }
 	      Utility.insertionSort(arr,number);
 	      System.out.println("Sorted Elements Are: ");

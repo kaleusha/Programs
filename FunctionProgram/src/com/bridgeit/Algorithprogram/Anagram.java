@@ -11,13 +11,11 @@ package com.bridgeit.Algorithprogram;
 import com.bridgeit.utility.Utility;
 
 public class Anagram {
-	public static void main(String[] args)
-	{
-		Utility utility=new Utility();
+	public static void main(String[] args) {
 		System.out.println("Enter First String");
-		String string1=utility.inputString();
+		String string1=Utility.inputString();
 		System.out.println("Enter second String");
-		String string2=utility.inputString();
+		String string2=Utility.inputString();
 		boolean result=Utility.anagram(string1,string2);
 		if(result)
 		{
