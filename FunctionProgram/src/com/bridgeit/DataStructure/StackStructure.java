@@ -11,7 +11,7 @@ import java.util.EmptyStackException;
 
 public class StackStructure 
 {
-	public Node top;
+	public Node<Integer> top;
 	int length;
 	
 	public int length(){
@@ -20,9 +20,10 @@ public class StackStructure
 	public boolean isEmpty(){
 		return length == 0;	
 	}
+	
 	public void push(int data)
 	{
-		Node temp = new Node(data);
+		Node<Integer> temp = new Node<Integer>(data);
 		temp.next = top;
 		top = temp;
 		length++;

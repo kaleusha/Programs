@@ -17,12 +17,12 @@ class Node1<T>
 		this.data = (T) data1;
 	}
 }
-public class StackCalender10 {
-	Node1 firstNode;
-	Node1 lastNode;
-	public <T> void add(T data)
+public class StackCalender10<T> {
+	Node1<T> firstNode;
+	Node1<T> lastNode;
+	public  void add(T data)
 	{
-		Node1 newNode = new Node1(data);
+		Node1<T> newNode = new Node1<T>(data);
 		if(firstNode==null)
 		{
 			firstNode = newNode;
@@ -37,8 +37,9 @@ public class StackCalender10 {
 	 * @param dataToBeSearched
 	 * @return
 	 */
-	public <T> boolean search(T dataToBeSearched) {
-		Node1 current = firstNode;
+	@SuppressWarnings("unchecked")
+	public  boolean search(T dataToBeSearched) {
+		Node1<T> current = firstNode;
 			while(current != null)
 			{
 				if(current.data.equals(dataToBeSearched))
@@ -60,10 +61,11 @@ public class StackCalender10 {
 			currentNode = currentNode.next;
 		}
 	}
+	@SuppressWarnings("unchecked")
 	public int size()
 	{
 		int size = 0;
-		Node1 currentNode = firstNode;
+		Node1<T> currentNode = firstNode;
 		while(currentNode != null)
 		{
 			size++;
@@ -71,7 +73,8 @@ public class StackCalender10 {
 		}
 		return size;
 	}
-	public <T> T dataAtPosition(int position)
+	@SuppressWarnings("unchecked")
+	public T dataAtPosition(int position)
 	{
 		int location = 0;
 		if(position >= this.size())
@@ -80,7 +83,7 @@ public class StackCalender10 {
 		}
 		else
 		{
-			Node1 currentNode = firstNode;
+			Node1<T> currentNode = firstNode;
 			while(location != position)
 			{
 				currentNode = currentNode.next;

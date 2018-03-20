@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Design Simple Address Book Problem
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   19-03-2018
+ ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
 import com.bridgeit.utility.Utility;
@@ -17,7 +24,7 @@ public class AddressBook11 {
 					System.out.println("4. Sort");
 					System.out.println("5. Display Details");
 					System.out.println("6. Exit");
-					int choice = utility.inputInteger();
+					int choice = Utility.inputInteger();
 					switch (choice) {
 					case 1:
 						utility.addPerson();

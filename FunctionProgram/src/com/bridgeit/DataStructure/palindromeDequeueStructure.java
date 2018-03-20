@@ -6,7 +6,7 @@ package com.bridgeit.DataStructure;
 		private int maxSize;
 		private char[]array;
 	
-		palindromeDequeueStructure(int n)
+		public palindromeDequeueStructure(int n)
 		{
 			maxSize=n;
 			front =-1;

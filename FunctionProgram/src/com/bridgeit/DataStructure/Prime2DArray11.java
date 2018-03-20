@@ -13,9 +13,9 @@ import com.bridgeit.utility.Utility;
 public class Prime2DArray11 {
 	public static void main(String[] args) {
 	Utility utility=new Utility();
-	ArrayList<Integer> al=Utility.primeNumber();
+	ArrayList<Integer> arraylist=Utility.primeNumber();
 	System.out.println("prime numbers are");
-	utility.prime2D(al);
+	utility.prime2D(arraylist);
 	   
 	}
 }

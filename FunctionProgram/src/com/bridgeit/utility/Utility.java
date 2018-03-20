@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -24,12 +26,13 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.bridgeit.DataStructure.BankingQueueStructure;
 import com.bridgeit.DataStructure.LinkedListStructure;
 import com.bridgeit.DataStructure.OrderedListStructure;
 import com.bridgeit.DataStructure.QueueStructure;
 import com.bridgeit.DataStructure.StackCalender10;
 import com.bridgeit.DataStructure.StackStructure;
-
+import com.bridgeit.DataStructure.palindromeDequeueStructure;
 
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -82,7 +85,7 @@ public class Utility {
 	
 	
 	// INPUT Double
-	public long inputDouble() {
+	public static long inputDouble() {
 		try {
 			return scanner.nextInt();
 		} catch (Exception e) {
@@ -500,13 +503,20 @@ public class Utility {
 	public static <E> boolean anagram(String string1, String string2) {
 		boolean status = true;
 
-
-		if ( string1.length()!= string2.length()) {
+		String[] words=string1.split("\\s");
+		String[] words1=string2.split("\\s");
+		for (int i=0;i<words.length;i++)
+		/*{
+			BufferedReader bf=new BufferedReader(words);
+		}*/
+		System.out.println(words);
+		System.out.println(words1);
+		if (words.equals(words1)) {
 			status = false;
 		} else {
-			char [] ArrayS1 = string1.toCharArray();
+			char [] ArrayS1 = string1.toLowerCase().toCharArray(); 
 			Arrays.sort(ArrayS1);
-			char ArrayS2[] = string2.toCharArray();
+			char ArrayS2[] = string2.toLowerCase().toCharArray(); 
 			Arrays.sort(ArrayS2);
 			status = Arrays.equals(ArrayS1, ArrayS2);
 
@@ -531,7 +541,7 @@ public class Utility {
 		int temp;
 		int n = arr.length;
 		for (int i = 0; i < n - 1; ++i) {
-			for (int j = i + 1; j < n - 2; j++) {
+			for (int j = i + 1; j < n ; j++) {
 				if (arr[i] > arr[j]) {
 
 					temp = arr[i];
@@ -897,7 +907,7 @@ public class Utility {
 	 * Purpose: Banking 
 	 * @param amunt
 	 */
-	static double balance = 0;
+	static double balance = 1000;
 
 	public static void enqueue(double amunt) {
 
@@ -1028,12 +1038,13 @@ public class Utility {
 	 * 
 	 * @param cel
 	 */
-	public void celTofar(double cel) { double far=(cel*(9/5))+32;
+	public void celTofar(double cel) {
+	double far=(cel*(9.0/5))+32;
 	System.out.println("\nFahrenheit : "+far);
 	}
 	public void farTocel(double far) 
 	{
-		double cel=((far-32)*(5/9));
+		double cel=((far-32)*(5.0/9));
 		System.out.println("\nCelsius Temperature : "+cel);
 	}
 
@@ -1046,7 +1057,7 @@ public class Utility {
 	public static void hashing(String[] words) {
 
 		HashMap<Integer, LinkedListStructure> hashmap = new HashMap<Integer, LinkedListStructure >();
-		int hash = 0;
+		int hash = -1;
 		int hasharray[]=new int[words.length];
 		for(int i=0;i<words.length;i++)
 		{
@@ -1076,6 +1087,7 @@ public class Utility {
 			LinkedListStructure linkedlist=hashmap.get(hash);
 			if(linkedlist.search(search))
 			{
+				
 				linkedlist.remove(search);
 				Utility.writeFileinteger(hashmap);
 
@@ -1094,8 +1106,16 @@ public class Utility {
 			hashmap.put(hash, new LinkedListStructure());
 			LinkedListStructure linkedlist=hashmap.get(hash);
 			linkedlist.add(search);
+			/*hashmap.put(hash, new LinkedListStructure());
+			LinkedListStructure linkedlist=hashmap.get(hash);
+			if(!linkedlist.search(search))
+			{
+				linkedlist.add(search);	
+			}	 
+			
 			Utility.writeFileinteger(hashmap);
-
+			System.out.println("Element Added");
+*/
 		}
 		Set<Integer> keys = hashmap.keySet(); 
 		for(Integer key1: keys)
@@ -1163,7 +1183,7 @@ public class Utility {
 					System.out.print(" ");
 				}else
 				{
-					System.out.printf("%3d ",array2D[r][s]);
+					System.out.printf("%4d ",array2D[r][s]);
 				}
 			}
 			System.out.println();
@@ -1217,14 +1237,14 @@ public class Utility {
 	 * 
 	 * @param strArray
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void queueAnagram(int[] strArray) {
 		// TODO Auto-generated method stub
 		QueueStructure queue=new QueueStructure();
 		for (int i = 0; i < strArray.length; i++) {
 			for (int j = i + 1; j < strArray.length; j++) {
 
-				if (Utility.anagram(strArray[i]+ " ", strArray[j]+ " ")) {
+				if (anagram(strArray[i]+ " ", strArray[j]+ " ")) {
 					queue.insert(strArray[i]);
 					queue.insert(strArray[j]);
 				}
@@ -1272,6 +1292,7 @@ public class Utility {
 	 * @param month
 	 * @param year
 	 */
+	@SuppressWarnings("rawtypes")
 	public static void calenderWithStack(int month, int year) {
 		StackCalender10 week = new StackCalender10();
 		int start = Utility.dayOfWeek(month,1, year);
@@ -1291,7 +1312,7 @@ public class Utility {
 		}
 		for(int i = 0; i < numberOfObject;i++)
 		{
-			StackCalender10 stack =week.dataAtPosition(i);
+			StackCalender10 stack =(StackCalender10) week.dataAtPosition(i);
 			if(i==0)
 			{
 				for(int j = 0; j <start; j++)
@@ -1318,7 +1339,7 @@ public class Utility {
 		System.out.println("Sun"+"\t"+"Mon"+"\t"+"Tue"+"\t"+"Wed"+"\t"+"Thu"+"\t"+"Fri"+"\t"+"Sat");
 		for(int i = 0; i < numberOfObject; i++)
 		{
-			StackCalender10 stack =  week.dataAtPosition(i);
+			StackCalender10 stack =  (StackCalender10) week.dataAtPosition(i);
 			int length = stack.size();
 			for(int j = 0; j <length; j++)
 			{
@@ -1348,7 +1369,6 @@ public class Utility {
 			object1.put("weight", weight);
 			object1.put("price", price);
 
-
 			//input for pulses
 			JSONObject object2 = new JSONObject();
 			System.out.println("Enter the name of pulse: ");
@@ -1360,8 +1380,6 @@ public class Utility {
 			object2.put("name", name);
 			object2.put("weight", weight);
 			object2.put("price", price);
-			System.out.println("Enter ");
-
 
 			//input for wheats
 			JSONObject object3 = new JSONObject();
@@ -1556,8 +1574,8 @@ public class Utility {
 
 	for(int k=0; k<number; k++){
 		System.out.println("Enter the number of shares for "+array[k]+" and share amount");
-		share[k] = scanner.nextInt();
-		amount[k] = scanner.nextInt();
+		share[k] = inputInteger();
+		amount[k] = inputInteger();
 	}
 
 	for(int j=0; j<number; j++){
@@ -1771,37 +1789,37 @@ public class Utility {
 		if(file.exists() && file1.exists())
 		{
 			// reading stock file
-			FileReader fr;
+			FileReader fileread;
 			try {
-				fr = new FileReader(file);
+				fileread = new FileReader(file);
 			
 			JSONParser parser = new JSONParser();
-			JSONArray stock = (JSONArray) parser.parse(fr);
+			JSONArray stock = (JSONArray) parser.parse(fileread);
 			//reading stock1 file
 			
-			FileReader sf = new FileReader(file1);
+			FileReader fileread1 = new FileReader(file1);
 			JSONParser parser1 = new JSONParser();
-			JSONArray share = (JSONArray) parser1.parse(sf);
+			JSONArray share = (JSONArray) parser1.parse(fileread1);
 			
 			System.out.println("Enter the user");
 			String name = inputString();
-			Iterator<?> itr = stock.iterator();
+			Iterator<?> iterator = stock.iterator();
 			Iterator<?> itr1 = share.iterator();
 			boolean flag = false;
-			while (itr.hasNext())
+			while (iterator.hasNext())
 			{
-				JSONObject obj=(JSONObject) itr.next();
+				JSONObject obj=(JSONObject) iterator.next();
 				if(obj.get("Name").equals(name))
 				{
 					System.out.println("Enter the share sysmbol to sale share:[@,!,#]");
-					String sym = inputString();
+					String symbol = inputString();
 					System.out.println("Enter the number of share to sale");
 					int count= inputInteger();
 					//obj.put("Share Symbol", sym);
 					while(itr1.hasNext())
 					{
 						JSONObject obj1 = (JSONObject) itr1.next();
-						if(obj1.get("Symbol").equals(sym))
+						if(obj1.get("Symbol").equals(symbol))
 						{	
 							int bal =  Integer.parseInt(obj.get("Balance").toString());
 							int price = Integer.parseInt(obj1.get("Price").toString());
@@ -1828,24 +1846,24 @@ public class Utility {
 					}
 				}
 
-				FileWriter fs = new FileWriter(file);
+				FileWriter filewrite = new FileWriter(file);
 				try {
-					fs.write(JSONValue.toJSONString(stock));
+					filewrite.write(JSONValue.toJSONString(stock));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				fs.flush();
-				fs.close();
+				filewrite.flush();
+				filewrite.close();
 			}
 			if(flag == false)
 			{
 				System.out.println("User name not exits");
 			}
-			FileWriter fw = new FileWriter(file1);
-			fw.write(JSONValue.toJSONString(share));
-			fw.flush();
-			fw.close();
+			FileWriter filew = new FileWriter(file1);
+			filew.write(JSONValue.toJSONString(share));
+			filew.flush();
+			filew.close();
 		}
 		 catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -1873,16 +1891,16 @@ public class Utility {
 		File file = new File("/home/bridgeit/Programs/files/stock.json");
 
 		try {
-			FileReader fr = new FileReader(file);
+			FileReader filereader = new FileReader(file);
 
 			JSONParser parser = new JSONParser();
-			JSONArray arr1 = (JSONArray) parser.parse(fr);
+			JSONArray arr1 = (JSONArray) parser.parse(filereader);
 			@SuppressWarnings("unchecked")
 			Iterator <E>itr = arr1.iterator();
 			while (itr.hasNext())
 			{
-				JSONObject obj = (JSONObject) itr.next();
-				System.out.println(obj);
+				JSONObject object = (JSONObject) itr.next();
+				System.out.println(object);
 			}
 
 		} catch (FileNotFoundException e) {
@@ -1920,15 +1938,15 @@ public class Utility {
 			deck[r] = deck[i];
 			deck[i] = temp;
 		}
-		String arr[][] = new String[suits.length][9];
+		String array[][] = new String[suits.length][9];
 		for (int i = 0; i < suits.length ; i++)
 		{
 			System.out.println("**********Player " + (i + 1)+"**********");
 			System.out.println();
 			for (int j = 0; j < 9; j++)
 			{
-				arr[i][j] = deck[i + j];
-				System.out.println("    "+arr[i][j] + ", ");
+				array[i][j] = deck[i + j];
+				System.out.println("    "+array[i][j] + ", ");
 			}
 			System.out.println();
 		}
@@ -1956,14 +1974,14 @@ public void deckOfCardsInQueue(String[] suits, String[] ranks) {
 		deck[r] = deck[i];
 		deck[i] = temp;
 	}
-	String arr[][]=new String[suits.length][9];
+	String array[][]=new String[suits.length][9];
 	for(int i=0; i<suits.length; i++)
 	{
-		//  System.out.println("Player "+(i+1));
+		 System.out.println("Player "+(i+1));
 		for(int j=0; j<9; j++)
 		{
-			arr[i][j]=deck[i+j];
-			cardQueue.push(arr[i][j]);
+			array[i][j]=deck[i+j];
+			cardQueue.push(array[i][j]);
 		}
 		
 		System.out.println();
@@ -1981,22 +1999,22 @@ public void editDetails() {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
 			if (file.canRead() && file.canWrite()) {
-				FileReader fr = new FileReader(file);
+				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
-				JSONArray array = (JSONArray) parser.parse(fr);
-				Iterator<?> itr = array.iterator();
+				JSONArray array = (JSONArray) parser.parse(fileread);
+				Iterator<?> itrator = array.iterator();
 				System.out.println("Enter the person name to edit details");
 				String name = inputString();
 				boolean flag = false;
-				while (itr.hasNext()) {
-					JSONObject obj = (JSONObject) itr.next();
-					if (obj.get("firstname").equals(name)) {
+				while (itrator.hasNext()) {
+					JSONObject object = (JSONObject) itrator.next();
+					if (object.get("firstname").equals(name)) {
 						System.out.println("What you want to edit");
 						String edit = inputString();
 						System.out.println("Enter the new " + edit + " to update.");
 						String change = inputString();
-						obj.remove(edit);
-						obj.put(edit, change);
+						object.remove(edit);
+						object.put(edit, change);
 						System.out.println("Edited Successfully.");
 						flag = true;
 						break;
@@ -2005,12 +2023,12 @@ public void editDetails() {
 				if (flag == false) {
 					System.out.println("Person not found");
 				}
-				FileWriter fw = new FileWriter(file);
+				FileWriter filewrite = new FileWriter(file);
 
-				fw.write(JSONArray.toJSONString(array));
+				filewrite.write(JSONArray.toJSONString(array));
 
-				fw.flush();
-				fw.close();
+				filewrite.flush();
+				filewrite.close();
 
 			} else {
 				System.out.println("File can not edit");
@@ -2038,25 +2056,25 @@ public void sort() {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
 			if (file.canRead() && file.canWrite()) {
-				FileReader fr = new FileReader(file);
+				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
-				JSONArray array = (JSONArray) parser.parse(fr);
+				JSONArray array = (JSONArray) parser.parse(fileread);
 				System.out.println("Enter column name to sort book");
-				String str = inputString();
+				String string = inputString();
 				//Sort sort=new Sort();
-				Collections.sort(array, new Sort(str));
-				Iterator<?> itr = array.iterator();
-				while (itr.hasNext()) {
-					JSONObject obj1 = (JSONObject) itr.next();
-					System.out.println("firstname : " + obj1.get("firstname") + " " + "lastname : "
-							+ obj1.get("lastname") + " " + "address: " + obj1.get("address") + " " + "city : "
-							+ obj1.get("city") + " " + "state : " + obj1.get("state") + " " + "zip: "
-							+ obj1.get("zip") + " " + "mobile: " + obj1.get("mobile"));
+				Collections.sort(array, new Sort(string));
+				Iterator<?> iterator = array.iterator();
+				while (iterator.hasNext()) {
+					JSONObject object = (JSONObject) iterator.next();
+					System.out.println("firstname : " + object.get("firstname") + " " + "lastname : "
+							+ object.get("lastname") + " " + "address: " + object.get("address") + " " + "city : "
+							+ object.get("city") + " " + "state : " + object.get("state") + " " + "zip: "
+							+ object.get("zip") + " " + "mobile: " + object.get("mobile"));
 				}
-				FileWriter fw = new FileWriter(file);
-				fw.write(JSONArray.toJSONString(array));
-				fw.flush();
-				fw.close();
+				FileWriter filewrite = new FileWriter(file);
+				filewrite.write(JSONArray.toJSONString(array));
+				filewrite.flush();
+				filewrite.close();
 
 			} else {
 				System.out.println("File can not edit");
@@ -2081,10 +2099,10 @@ public void deletePerson() throws IOException, ParseException {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
 			if (file.canRead()) {
-				FileReader fr = new FileReader(file);
+				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
-				JSONArray array = (JSONArray) parser.parse(fr);
-				System.out.println("Enter the user");
+				JSONArray array = (JSONArray) parser.parse(fileread);
+				System.out.println("Enter the name to delete user");
 				String name = inputString();
 				Iterator<?> iterator = array.iterator();
 				boolean flag = false;
@@ -2102,10 +2120,10 @@ public void deletePerson() throws IOException, ParseException {
 					System.out.println("User not found.");
 				}
 				if (file.canWrite()) {
-					FileWriter fw = new FileWriter(file);
-					fw.write(JSONArray.toJSONString(array));
-					fw.flush();
-					fw.close();
+					FileWriter filewrite = new FileWriter(file);
+					filewrite.write(JSONArray.toJSONString(array));
+					filewrite.flush();
+					filewrite.close();
 				} else {
 					System.out.println("File does not haveedit permission");
 				}
@@ -2134,9 +2152,9 @@ public void addPerson() throws IOException, ParseException {
 		if (file.exists()) {
 
 			if (file.canRead() && file.canWrite()) {
-				FileReader fr = new FileReader(file);
+				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
-				JSONArray array = (JSONArray) parser.parse(fr);
+				JSONArray array = (JSONArray) parser.parse(fileread);
 				JSONObject json = new JSONObject();
 				System.out.println("Enter First Name:");
 				String firstname = inputString();
@@ -2162,10 +2180,10 @@ public void addPerson() throws IOException, ParseException {
 				json.put("mobile", mobile);
 				array.add(json);
 				System.out.println("Added Successfully.");
-				FileWriter fw = new FileWriter(file);
-				fw.write(JSONArray.toJSONString(array));
-				fw.flush();
-				fw.close();
+				FileWriter filewrite = new FileWriter(file);
+				filewrite.write(JSONArray.toJSONString(array));
+				filewrite.flush();
+				filewrite.close();
 
 			}
 
@@ -2192,16 +2210,16 @@ public void displayDetails() throws IOException, ParseException {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
 			if (file.canRead() && file.canWrite()) {
-				FileReader fr = new FileReader(file);
+				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
-				JSONArray array = (JSONArray) parser.parse(fr);
-				Iterator itr = array.iterator();
-				while (itr.hasNext()) {
-					JSONObject obj = (JSONObject) itr.next();
-					System.out.println("firstname : " + obj.get("firstname") + " " + "lastname : "
-							+ obj.get("lastname") + " " + "address: " + obj.get("address") + " " + "city : "
-							+ obj.get("city") + " " + "state : " + obj.get("state") + " " + "zip: " + obj.get("zip")
-							+ " " + "mobile: " + obj.get("mobile"));
+				JSONArray array = (JSONArray) parser.parse(fileread);
+				Iterator iterator = array.iterator();
+				while (iterator.hasNext()) {
+					JSONObject object = (JSONObject) iterator.next();
+					System.out.println("firstname : " + object.get("firstname") + " " + "lastname : "
+							+ object.get("lastname") + " " + "address: " + object.get("address") + " " + "city : "
+							+ object.get("city") + " " + "state : " + object.get("state") + " " + "zip: " + object.get("zip")
+							+ " " + "mobile: " + object.get("mobile"));
 
 				}
 			} else {
@@ -2257,16 +2275,16 @@ public void fixAppointment()
 							String key1 = object1.get("Id").toString();
 							if (key1.equals(did))
 							{
-								JSONArray arr = (JSONArray) object1.get("Patient");
+								JSONArray array = (JSONArray) object1.get("Patient");
 
-								if (arr.size()==2)
+								if (array.size()==2)
 								{
 									System.out.println("Doctor appointment is full ... Take appointment next day.");
 									break;
 								}
 								else
 								{
-									arr.add(object);
+									array.add(object);
 									FileWriter write = new FileWriter(file);
 									write.write(JSONValue.toJSONString(docArray));
 									write.flush();
@@ -2316,13 +2334,13 @@ public static void patientDetails()
 				FileReader fr = new FileReader(file);
 				JSONParser parser = new JSONParser();
 				JSONArray array = (JSONArray) parser.parse(fr);
-				Iterator<?> itr = array.iterator();
+				Iterator<?> iterater = array.iterator();
 				
-				while (itr.hasNext())
+				while (iterater.hasNext())
 				{
-					JSONObject obj = (JSONObject) itr.next();
+					JSONObject object = (JSONObject) iterater.next();
 					
-						System.out.println("Name : "+obj.get("Name")+"\tID : "+obj.get("Id")+"\tAge : "+obj.get("Age")+"\tMob: "+obj.get("Mob"));
+						System.out.println("Name : "+object.get("Name")+"\tID : "+object.get("Id")+"\tAge : "+object.get("Age")+"\tMob: "+object.get("Mob"));
 					
 				}
 			}
@@ -2358,9 +2376,9 @@ public static void addPatient()
 		{
 			if(file.canRead() && file.canWrite())
 			{
-				FileReader fr = new FileReader(file);
+				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
-				JSONArray array = (JSONArray) parser.parse(fr);
+				JSONArray array = (JSONArray) parser.parse(fileread);
 				JSONObject json = new JSONObject();
 		        System.out.println("Enter Patient Name:");
 		        String name = inputString();
@@ -2370,11 +2388,11 @@ public static void addPatient()
 		        String mob = inputString();
 		        System.out.println("Enter age:");
 		        String age = inputString();
-		        Iterator<?> itr = array.iterator();
+		        Iterator<?> iterator = array.iterator();
 				
-				while (itr.hasNext())
+				while (iterator.hasNext())
 				{
-					JSONObject obj = (JSONObject) itr.next();
+					JSONObject obj = (JSONObject) iterator.next();
 					String key = obj.get("Id").toString();
 					if(key.equals(id))
 					{
@@ -2391,10 +2409,10 @@ public static void addPatient()
 		        
 		        array.add(json);
 		        System.out.println("Added Successfully.");
-		        FileWriter fw = new FileWriter(file);
-		        fw.write(JSONArray.toJSONString(array));
-		        fw.flush();
-		        fw.close();
+		        FileWriter filewrite = new FileWriter(file);
+		        filewrite.write(JSONArray.toJSONString(array));
+		        filewrite.flush();
+		        filewrite.close();
 				
 			}
 			else
@@ -2428,15 +2446,15 @@ public static void doctorsDetails()
 		{
 			if(file.canRead() && file.canWrite())
 			{
-				FileReader fr = new FileReader(file);
+				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
-				JSONArray array = (JSONArray) parser.parse(fr);
-				Iterator <?>itr = array.iterator();
+				JSONArray array = (JSONArray) parser.parse(fileread);
+				Iterator <?>iterator = array.iterator();
 				
-				while (itr.hasNext())
+				while (iterator.hasNext())
 				{
-					JSONObject obj = (JSONObject) itr.next();
-					System.out.println("Name : "+obj.get("Name")+"\tID : "+obj.get("Id")+"\tSpecialization : "+obj.get("Specialization")+"\t\tAvailability : "+obj.get("Availability"));
+					JSONObject object = (JSONObject) iterator.next();
+					System.out.println("Name : "+object.get("Name")+"\tID : "+object.get("Id")+"\tSpecialization : "+object.get("Specialization")+"\t\tAvailability : "+object.get("Availability"));
 		
 				}
 			}
@@ -2472,9 +2490,9 @@ public static void addDoctor()
 			
 			if(file.canRead() && file.canWrite())
 			{
-				FileReader fr = new FileReader(file);
+				FileReader filewrite = new FileReader(file);
 				JSONParser parser = new JSONParser();
-				JSONArray array = (JSONArray) parser.parse(fr);
+				JSONArray array = (JSONArray) parser.parse(filewrite);
 				JSONObject json = new JSONObject();
 		        System.out.println("Enter Doctor Name:");
 		        String name = inputString();
@@ -2484,11 +2502,11 @@ public static void addDoctor()
 		        String specialization = inputString();
 		        System.out.println("Enter Availability:");
 		        String availability = inputString();
-		        Iterator<?> itr = array.iterator();
-		    	while (itr.hasNext())
+		        Iterator<?> iterator = array.iterator();
+		    	while (iterator.hasNext())
 				{
-					JSONObject obj = (JSONObject) itr.next();
-					String key = obj.get("Id").toString();
+					JSONObject object = (JSONObject) iterator.next();
+					String key = object.get("Id").toString();
 					if(key.equals(id))
 					{
 						System.out.println("The id Number "+id+" is already assingn to other Dcotor plz enter different id number");
@@ -2504,10 +2522,10 @@ public static void addDoctor()
 		        
 		        array.add(json);
 		        System.out.println("Added Successfully.");
-		        FileWriter fw = new FileWriter(file);
-		        fw.write(JSONArray.toJSONString(array));
-		        fw.flush();
-		        fw.close();
+		        FileWriter filewrite1 = new FileWriter(file);
+		        filewrite1.write(JSONArray.toJSONString(array));
+		        filewrite1.flush();
+		        filewrite1.close();
 			}
 		
 			else
@@ -2551,11 +2569,11 @@ public void appointmentDetails()
 				boolean flag = false;
 				while (iterator.hasNext())
 				{
-					JSONObject obj = (JSONObject) iterator.next();
-					String id1 = obj.get("Id").toString();
+					JSONObject object = (JSONObject) iterator.next();
+					String id1 = object.get("Id").toString();
 					if(id1.equals(id))
 					{
-						JSONArray patient1 =(JSONArray) obj.get("Patient");
+						JSONArray patient1 =(JSONArray) object.get("Patient");
 						Iterator<?> itr = patient1.iterator();
 						while(itr.hasNext())
 						{
@@ -2693,7 +2711,306 @@ public static void writeFileinteger2(OrderedListStructure<Integer> orderlist) {
 
 
 	}
+
+/**
+ * 
+ * @param string
+ */
+public static void pallindrom(String string) {
+	char[]array=string.toCharArray();
+	int size=array.length-1;
+	palindromeDequeueStructure dequeueStructure=new palindromeDequeueStructure(20);
+
+	for(int i=0;i<array.length;i++)
+	{
+		dequeueStructure.addFront(array[i]);
+	}
+
+	String String="";
+
+	for(int i=0;i<=size;i++)
+	{
+		char c=dequeueStructure.removeFront();
+		String=String+c;
+	}
+	System.out.println("Reversed - "+String);
+	if(string.equals(String))
+	{
+		System.out.println("String is Palindrome ");
+	}
+	else
+	{
+		System.out.println(" String Is not a palindrome ");
+	}
 	
+	
+}
+
+/**
+ * purpose: Sort Element
+ * 
+ * @param words
+ */
+public static void orderList(String[] words) {
+	OrderedListStructure<Integer> orderlist = new OrderedListStructure<>();
+	for(int i=0;i<words.length;i++)
+	{
+		orderlist.add(Integer.parseInt(words[i]));
+	}
+	System.out.println("\nYour list size:==>>" +orderlist.size()); 
+	
+	
+	orderlist.sortList(orderlist);  
+	Utility.writeFileinteger2(orderlist);
+	
+	
+	System.out.println("\nEnter the value to search: ");
+	int search = Utility.inputInteger();
+	if(orderlist.search(search))
+	{
+		System.out.println("Integer is present");
+		orderlist.remove(search);
+		System.out.println("Your list size:==>>" +orderlist.size());
+		Utility.writeFileinteger2(orderlist);
+	}
+	else
+	{
+		//System.out.println("Enter the position: ");
+		//int pos = scanner.nextInt();
+		orderlist.add( search);
+		System.out.println("Integer added");
+		System.out.println("Your list size:==>>" +orderlist.size());
+		Utility.writeFileinteger2(orderlist);
+		orderlist.printlist();
+	}
+	
+}
+
+/**
+ * Purpose: Check Entered Expression is Balanced or NotS
+ * 
+ * @param expression
+ */
+public static void balenced(String expression) { 
+	int len = expression.length();
+	StackStructure stack = new StackStructure();
+	for (int i = 0; i < len; i++)
+	{    
+	    char ch = expression.charAt(i);
+
+		if (ch == '(')
+		{
+		   stack.push(i);
+		}
+			else if (ch == ')')
+			{
+				try
+				{
+				    long p = (stack.pop() + 1);
+				    System.out.println("')' at index "+(i+1)+" Balanced with '(' at index "+p);
+				}
+				catch(Exception e)
+				{
+				    System.out.println("')' at index "+(i+1)+" is UnBalanced");
+				}
+			}            
+	}
+	while (!stack.isEmpty() )
+	{
+	     System.out.println("'(' at index "+(stack.pop() +1)+" is UnBalanced");
+	}                          
+	
+}
+
+/**
+ * Purpose:Banking Transactions
+ * 
+ * 
+ */
+public static void bank() {
+	int choice;
+	BankingQueueStructure queueStructure=new BankingQueueStructure();
+	do {
+		System.out.println("\n1.For enter to Queue\n2.Procede with Transaction");
+		System.out.println("Enter choice");
+		choice=Utility.inputInteger();
+		if(choice==1)
+			queueStructure.add();
+		if(choice==2&&queueStructure.empty())
+			System.out.println("First Enter into Queue");
+	
+	
+		int option;
+	if(choice==2)
+	{
+		do
+		{
+	     System.out.println("Select your operation in Bank \n1.Deposite \n.2 WithDraw \n3.Check Balance \n4.Exit ");
+	     System.out.println("Enter option");
+	      option =Utility.inputInteger();
+	
+	switch (option)
+	{
+	case 1:
+		    System.out.println("Enter the amount to deoposite");
+		    double amunt=inputDouble();
+		    queueStructure.exit();
+		    Utility.enqueue(amunt);
+		    break;
+	
+	case 2:
+		   System.out.println("Enter the amount to withdraw");
+		   double amuntw=inputDouble();
+		   queueStructure.exit();
+		   Utility.dequeue(amuntw);
+		   break;
+	
+	case 3:
+		   Utility.checkbalance();
+		   break;
+		   
+	case 4:
+		//qs.add();
+		  System.exit(option);
+		  
+	
+	
+  default:
+	      System.out.println("Invalid choice");
+		}
+		
+		}while(option<4);
+	}
+	}while(choice<3);
+		
+	
+}
+
+/**
+ * Purpose: Print Calendar
+ * 
+ * @param month
+ * @param year
+ */
+public static void calenderWithStack1(int month, int year) {
+	String[] months= {"","January", "February", "March","April", "May", "June", "July",
+			 "August", "September", "October", "November", "December" };                              
+	            
+	int[] days = {0,31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	           
+	if (month == 2 && Utility.isLeapYear(year)) days[month] = 29;     
+    
+	// print calendar header
+    System.out.println("   " + months[month] + " " + year);
+    System.out.println(" S  M Tu  W Th  F  S");
+ 
+    int d = Utility.dayOfWeek(month, 1, year);          
+    for (int i = 0; i < d; i++)
+           System.out.print("   ");
+       for (int i = 1; i <= days[month]; i++) {
+           System.out.printf("%2d ", i);
+           if (((i + d) % 7 == 0) || (i == days[month])) 
+           	System.out.println();
+       }
+  
+}
+
+/**
+ * Purpose:Search Word in File If found Then remove It Otherwise Add 
+ * 
+ * @param words
+ */
+public static void unorderList(String[] words) {
+	LinkedListStructure<String> linkedlist = new LinkedListStructure<>();
+
+	for(int i=0;i<words.length;i++)
+	{
+		linkedlist.add(words[i]);
+	}
+	
+	//System.out.println("Your list size: "+linkedlist.size());
+    System.out.println("Enter the word to search: ");
+    String search = inputString();
+	if(linkedlist.search(search))
+	{
+		System.out.println("Word is present in the linked list");
+		linkedlist.remove(search);
+		Utility.writeFileinteger1(linkedlist);
+		System.out.println("remove successfully");
+	}
+	else
+	{
+		linkedlist.append(search);
+		Utility.writeFileinteger1(linkedlist);
+		System.out.println("Word added");
+		
+	}
+	linkedlist.printlist();
+	
+}
+
+/**
+ * @param month
+ * @param year
+ * @param start
+ * @param maxDay
+ */
+public static void weekDay(int month, int year, int start, int maxDay) {
+	int numberOfObject;
+	Queue week  = new LinkedList<>();
+	int date = 0;
+	if (maxDay + start > 35) {
+		numberOfObject = 6;
+	} else {
+		numberOfObject = 5;
+	}
+	for (int i = 0; i < numberOfObject; i++) {
+		week.add(new LinkedList<>());
+	}
+	for (int i = 0; i < numberOfObject; i++) {
+		Queue queue = (Queue) week.poll();
+		if (i == 0) {
+			for (int j = 0; j < start; j++)
+			{
+				queue.add(" ");
+			}
+			for(int j = start;j<7;j++)
+			{
+				queue.add(++date);
+			}
+		}
+		else
+		{
+			for(int j = 0; j <7;j++)
+			{
+				queue.add(++date);
+				if(date == maxDay)
+				{
+					break;
+				}
+			}
+			
+		}
+		week.add(queue);
+	}
+	System.out.println("Sun"+"\t"+"Mon"+"\t"+"Tue"+"\t"+"Wed"+"\t"+"Thu"+"\t"+"Fri"+"\t"+"Sat");
+	for(int i = 0; i < numberOfObject; i++)
+	{
+		Queue queue = (Queue) week.poll();
+		int length = queue.size();
+		for(int j = 0; j <length; j++)
+		{
+			System.out.print(queue.poll());
+			System.out.print("\t");
+		}
+		System.out.println();
+	}
+	
+}
 
 
 }
+	
+
+
+

@@ -1,5 +1,6 @@
 /******************************************************************************
  *  Purpose: List of Numbers from a file and arrange it ascending Order
+ *           And If Element Found In List Then Remove It Otherwise Add It
  *  
  *  @author  Usha Kale
  *  @version 1.0
@@ -18,36 +19,6 @@ public class OrderedList
 	{
 		System.out.print(Integer.parseInt(words[i])+" ");
 	}
-	OrderedListStructure<Integer> orderlist = new OrderedListStructure<>();
-	for(int i=0;i<words.length;i++)
-	{
-		orderlist.add(Integer.parseInt(words[i]));
-	}
-	System.out.println("\nYour list size:==>>" +orderlist.size()); 
-	
-	
-	orderlist.sortList(orderlist);  
-	Utility.writeFileinteger2(orderlist);
-	
-	
-	System.out.println("\nEnter the value to search: ");
-	int search = Utility.inputInteger();
-	if(orderlist.search(search))
-	{
-		System.out.println("Integer is present");
-		orderlist.remove(search);
-		System.out.println("Your list size:==>>" +orderlist.size());
-		Utility.writeFileinteger2(orderlist);
-	}
-	else
-	{
-		//System.out.println("Enter the position: ");
-		//int pos = scanner.nextInt();
-		orderlist.add( search);
-		System.out.println("Integer added");
-		System.out.println("Your list size:==>>" +orderlist.size());
-		Utility.writeFileinteger2(orderlist);
-		orderlist.printlist();
-	}
+	Utility.orderList(words);
 	}
 }

@@ -13,37 +13,11 @@ public class BalancedParentheses
 {
 	public static void main(String[] args) 
 	{
-		Utility utility=new Utility(); 
-		StackStructure stack = new StackStructure();
+		//Utility utility=new Utility(); 
+		
 		System.out.println("Enter expression: ");
-		String exp = Utility.inputString();        
-		int len = exp.length();
-
-		for (int i = 0; i < len; i++)
-		{    
-		    char ch = exp.charAt(i);
-
-			if (ch == '(')
-			{
-			   stack.push(i);
-			}
-				else if (ch == ')')
-				{
-					try
-					{
-					    long p = (stack.pop() + 1);
-					    System.out.println("')' at index "+(i+1)+" Balanced with '(' at index "+p);
-					}
-					catch(Exception e)
-					{
-					    System.out.println("')' at index "+(i+1)+" is UnBalanced");
-					}
-				}            
-		}
-		while (!stack.isEmpty() )
-		{
-		     System.out.println("'(' at index "+(stack.pop() +1)+" is UnBalanced");
-		}                          
+		String expression = Utility.inputString();        
+		Utility.balenced(expression);
     }
 
 }

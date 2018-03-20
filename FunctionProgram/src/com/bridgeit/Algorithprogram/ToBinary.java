@@ -11,7 +11,7 @@ public class ToBinary {
 		
 		System.out.println("\n1.Decimal To Binary Conversion \n2.Binary to Decimal Conversion");
 		System.out.println("Enter your Choice");
-		int ch=utility.inputInteger();
+		int ch=Utility.inputInteger();
 		if(ch==1)
 		{
 		System.out.println("Enter Decimal Number");

@@ -25,8 +25,8 @@ class ListNode1<T> {
 
 }
 public class QueueStructure<T> {
-	private ListNode1 front;
-	private ListNode1 rear;
+	private ListNode1<T> front;
+	private ListNode1<T> rear;
 	private int length;
 
 
@@ -40,9 +40,10 @@ public class QueueStructure<T> {
 	{
 		return length == 0;
 	}
-	public void insert(int data)
+	
+	public void insert(T data)
 	{
-		ListNode1 temp = new ListNode1();
+		ListNode1<T> temp = new ListNode1<T>();
 		temp.data=data;
 		temp.next=null;
 		if(isEmpty())
@@ -77,7 +78,7 @@ public class QueueStructure<T> {
 		if(isEmpty()){
 			return;
 		}
-		ListNode1 current = front;
+		ListNode1<T> current = front;
 		while(current != null)
 		{
 			System.out.print(current.data+"   ");
@@ -87,10 +88,10 @@ public class QueueStructure<T> {
 	
 	}
 
-@SuppressWarnings("rawtypes")
-public void push(String data)
+
+public void push(T data)
 {
-	ListNode1 temp = new ListNode1();
+	ListNode1<T> temp = new ListNode1<T>();
 	temp.data=data;
 	temp.next=null;
 	if(isEmpty())

@@ -13,9 +13,9 @@ public class DayOfWeek {
 
 	public static void main(String[] args) 
 	{ 
-		Utility utility=new Utility();
+		//Utility utility=new Utility();
 		System.out.println("Enter Month");
-		int m=utility.inputInteger();
+		int m=Utility.inputInteger();
 		System.out.println("Enter date");
 		int d=Utility.inputInteger();
 		System.out.println("Enter Year");

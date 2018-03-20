@@ -51,7 +51,7 @@ public class VendingMachine {
 			{
 				notes = amount /5;
 				amount = amount %5;
-				System.out.println("No of 5 Rs coins= "+notes);
+				System.out.println("binarySearchNo of 5 Rs coins= "+notes);
 			}
 		     if(amount >=2)
 			{

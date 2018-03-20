@@ -27,7 +27,6 @@ public class AnagramQueue14 {
         }
         
        System.out.println(strArray);
-        
         Utility.queueAnagram(strArray);
 		
 	}
