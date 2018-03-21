@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import com.bridgeit.utility.Utility;
 
-public class TwoDAnagram12 
+public class TwoDAnagram 
 {
 	public static void main(String[] args) 
 	{

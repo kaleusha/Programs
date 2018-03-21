@@ -35,12 +35,12 @@ public class CliniqueManagement {
 				    break;
 				case 3 :	 
 					System.out.println("Enter D for doctor and P for Patient ");
-					char ch = Utility.inputString().charAt(0);
-					if(ch=='D')
+					char character = Utility.inputString().charAt(0);
+					if(character=='D')
 					{
 						Utility.doctorsDetails();
 					}
-					if(ch=='P')
+					if(character=='P')
 					{
 						Utility.patientDetails();
 					}

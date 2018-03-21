@@ -10,7 +10,7 @@ package com.bridgeit.ObjectOriented;
 import com.bridgeit.DataStructure.LinkedListStructure;
 import com.bridgeit.utility.Utility;
 
-public class CompanyShares6 {
+public class CompanyShares {
 	public static void main(String[] args) {
 		@SuppressWarnings("rawtypes")
 		LinkedListStructure list = new LinkedListStructure();

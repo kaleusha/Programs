@@ -9,7 +9,7 @@ package com.bridgeit.ObjectOriented;
 
 import com.bridgeit.utility.Utility;
 
-public class DeckOfCards9 {
+public class DeckOfCards {
 public static void main(String[] args) {
 		
 		Utility utility = new Utility();

@@ -17,7 +17,7 @@ class Node1<T>
 		this.data = (T) data1;
 	}
 }
-public class StackCalender10<T> {
+public class StackCalender<T> {
 	Node1<T> firstNode;
 	Node1<T> lastNode;
 	public  void add(T data)

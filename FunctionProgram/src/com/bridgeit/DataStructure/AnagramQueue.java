@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 import com.bridgeit.utility.Utility;
 
-public class AnagramQueue14 {
+public class AnagramQueue {
 
 	public static void main(String[] args) {
 		

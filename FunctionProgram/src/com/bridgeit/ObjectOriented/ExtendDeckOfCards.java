@@ -9,7 +9,7 @@ package com.bridgeit.ObjectOriented;
 
 import com.bridgeit.utility.Utility;
 
-public class ExtendDeckOfCards10 {
+public class ExtendDeckOfCards {
 public static void main(String[] args) {
 		Utility utility = new Utility();
 		String suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};

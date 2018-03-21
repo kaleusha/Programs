@@ -1,24 +1,21 @@
 /******************************************************************************
- *  Purpose: Print the Modified Message.
+ *  Purpose: Print Calendar Using Stack
  *  
  *  @author  Usha Kale
  *  @version 1.0
  *  @since   14-03-2018
  ******************************************************************************/
-package com.bridgeit.ObjectOriented;
+package com.bridgeit.DataStructure;
 
 import com.bridgeit.utility.Utility;
 
-public class RegularExpression2 {
+public class WeekDaysStack {
 	public static void main(String[] args) {
-		//Utility utility=new Utility();
-        Utility.firstName();
-		Utility.fullName();
-		Utility.mobileNumber();
-		Utility.Date();
-		String msg=Utility.RegexReplace();
-		System.out.println(msg);	
-		
+		System.out.println("Enter the month");
+		int month = Utility.inputInteger();
+		System.out.println("Enter the year");
+		int year = Utility.inputInteger();
+		Utility.calenderWithStack(month,year);
 	}
 
 }

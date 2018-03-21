@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Purpose:Print the Stock Report.
+ *  Purpose: Print the Modified Message.
  *  
  *  @author  Usha Kale
  *  @version 1.0
@@ -9,12 +9,16 @@ package com.bridgeit.ObjectOriented;
 
 import com.bridgeit.utility.Utility;
 
-public class StockReport3 {
+public class RegularExpression {
 	public static void main(String[] args) {
-	Utility utility=new Utility();
-	System.out.println("Enter Number of companys");
-	int number = utility.inputInteger();
-	Utility.stockReport(number);
-}
+		//Utility utility=new Utility();
+        Utility.firstName();
+		Utility.fullName();
+		Utility.mobileNumber();
+		Utility.Date();
+		String msg=Utility.RegexReplace();
+		System.out.println(msg);	
+		
+	}
 
 }

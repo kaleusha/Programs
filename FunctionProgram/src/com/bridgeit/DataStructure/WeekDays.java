@@ -9,7 +9,7 @@ package com.bridgeit.DataStructure;
 
 import com.bridgeit.utility.Utility;
 
-public class WeekDays9 {
+public class WeekDays {
 	public static void main(String[] args) 
 	{
 		System.out.println("Enter the month");

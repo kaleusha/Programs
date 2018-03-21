@@ -10,7 +10,7 @@ package com.bridgeit.DataStructure;
 import java.util.ArrayList;
 import com.bridgeit.utility.Utility;
 
-public class Prime2DArray11 {
+public class Prime2DArray {
 	public static void main(String[] args) {
 	Utility utility=new Utility();
 	ArrayList<Integer> arraylist=Utility.primeNumber();
