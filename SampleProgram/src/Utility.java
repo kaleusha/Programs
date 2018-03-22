@@ -11,7 +11,8 @@ public class Utility {
 	Scanner scanner=new Scanner(System.in);
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addPerson() {
+	public void addPerson() 
+	{
 		String  file=("/home/bridgeit/Programs/files/sample");
 		try {
 			FileReader fileread = new FileReader(file);
@@ -88,27 +89,47 @@ public class Utility {
 	
 	}
 
-	public void update() throws IOException {
+	@SuppressWarnings("unchecked")
+	public void update(ArrayList al) throws IOException {
+		
 		String file = "/home/bridgeit/Programs/files/sample";
-		FileWriter fw=new FileWriter(file);
-		BufferedWriter be=new BufferedWriter(fw);
-		//be.write(str);
+		FileWriter filewriter=new FileWriter(file);
+		BufferedWriter bufferwiter=new BufferedWriter(filewriter);
 		System.out.println("Enter the person name to edit details");
 		String name = scanner.nextLine();
-		System.out.println("What you want to edit");
-		String edit = scanner.nextLine();
-		System.out.println("Enter the new " + edit + " to update.");
+		System.out.println("Enter the new name to update.");
 		String change = scanner.nextLine();
-		ArrayList al=new ArrayList<>();
-		/*al.add(e)
-		object.remove(edit);
-		object.put(edit, change);
-		System.out.println("Edited Successfully.");*/
+		for(int i=0;i<al.size();i++)
+		{
+			if(al.get(i).equals(name))
+			{
+				al.set(i, change);
+			}
+		}System.out.println("update successful: "+al);
 		
+		bufferwiter.close();
 	}
 
-	public void delete() {
-		// TODO Auto-generated method stub
+	public void delete(ArrayList al) {
+		try {
+			String file = "/home/bridgeit/Programs/files/sample";
+			FileWriter fw=new FileWriter(file);
+			BufferedWriter bufferwiter=new BufferedWriter(fw);
+			System.out.println("Enter the new name to delete.");
+			String delete = scanner.nextLine();
+			for(int i=0;i<al.size();i++)
+			{
+				if(al.get(i).equals(delete))
+				{
+					al.remove(delete);
+					
+				}
+			}System.out.println("delete successful: "+al);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
 		
 	}
 

@@ -1,4 +1,3 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,12 +15,12 @@ public class Person {
 	Scanner scanner=new Scanner(System.in);
 
 	//@SuppressWarnings({ "unchecked", "rawtypes" })
-	Person() {
+	Person(ArrayList<String> al) {
 		String  file=("/home/bridgeit/Programs/files/sample");
 		try {
 			FileReader fileread = new FileReader(file);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (FileNotFoundException e) 
+		{
 			e.printStackTrace();
 		}
 		
@@ -33,8 +32,6 @@ public class Person {
 		 city=scanner.nextLine();
 		System.out.println("Enter state Name: ");
 	    state=scanner.nextLine();
-	  //Array.add(firstname);
-	  	ArrayList<String> al=new ArrayList<String>();
 	  		al.add(firstname);
 	  		al.add(secondname);
 	  		al.add(city);
@@ -59,25 +56,8 @@ public class Person {
 		
 	
 
-	public void read() throws FileNotFoundException {
-		FileReader fileread=new FileReader("/home/bridgeit/Programs/files/sample");
-		BufferedReader br=new BufferedReader(fileread);
-		String data=" ";
-		while(true)
-		{
-			try {
-				data=br.readLine();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(data==null)
-				break;
-			System.out.println(data);
-			
-		}
-		
 	
-	}
+	
+	
 
 }
