@@ -1,6 +1,7 @@
 package com.bridgeit.DesignPattern;
 
-public abstract class FactoryPattern {
+public abstract class Computer 
+{
 	public abstract String getRAM();
 	public abstract String getHDD();
 	public abstract String getCPU();

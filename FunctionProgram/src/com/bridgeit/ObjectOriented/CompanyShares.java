@@ -25,18 +25,20 @@ public class CompanyShares {
 			switch (choice)
 			{
 			case 1 :
-				System.out.println("enter position ");
-				int pos=Utility.inputInteger();
-				System.out.println("Enter element to insert");
+				
+				System.out.println("Enter share amount to insert");
 				int data=Utility.inputInteger();
-				list.insert(pos,data);
+				list.add(data);
+				System.out.println("Add successfuly");
+				System.out.println(list);
 				break;      
 	
 			case 2 : 
-				System.out.println("Enter position");
-				int position = Utility.inputInteger();
-				list.removeAt(position);
+				System.out.println("Enter share to remove ");
+				int data1 = Utility.inputInteger();
+				list.remove(data1);
 				System.out.println("remove successfuly");
+				System.out.println(list);
 				break;
 				
 			case 3:

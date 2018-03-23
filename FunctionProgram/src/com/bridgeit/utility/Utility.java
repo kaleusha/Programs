@@ -3013,7 +3013,8 @@ public static void weekDay(int month, int year, int start, int maxDay) {
 @SuppressWarnings("rawtypes")
 public static void shareCompany() {
 	Stack stack = new Stack();
-	Queue queue = new Queue();
+	com.bridgeit.ObjectOriented.Queue queue = new com.bridgeit.ObjectOriented.Queue();
+	
 	File file = new File("/home/bridgeit/Programs/files/companyshare.json");
 	FileReader fileread;
 	try {
