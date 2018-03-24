@@ -1,4 +1,4 @@
-package com.bridgeit.DesignPattern;
+package com.bridgeit.DesignPattern.factory;
 
 public class Server extends Computer {
 	private String ram;

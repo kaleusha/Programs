@@ -1,7 +1,4 @@
-package com.bridgeit.DesignPattern;
-
-import com.bridgeit.DesignPattern.Computer;
-import com.bridgeit.DesignPattern.ComputerFactory;
+package com.bridgeit.DesignPattern.factory;
 
 public class TestFactory {
 	

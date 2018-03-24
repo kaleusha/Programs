@@ -1,8 +1,4 @@
-package com.bridgeit.DesignPattern;
-
-import com.bridgeit.DesignPattern.PC;
-import com.bridgeit.DesignPattern.Server;
-import com.bridgeit.DesignPattern.Computer;
+package com.bridgeit.DesignPattern.factory;
 
 public class ComputerFactory {
 

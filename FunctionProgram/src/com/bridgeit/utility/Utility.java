@@ -1799,7 +1799,7 @@ public class Utility {
 			JSONParser parser1 = new JSONParser();
 			JSONArray share = (JSONArray) parser1.parse(fileread1);
 			
-			System.out.println("Enter the user");
+			System.out.println("Enter the user name to share sale");
 			String name = inputString();
 			Iterator<?> iterator = stock.iterator();
 			Iterator<?> itr1 = share.iterator();
@@ -3103,6 +3103,66 @@ public static void shareCompany() {
 	}
 	
 }
+
+
+	public static void addNewSymbol(String symbol, long noOfShares, long priceOfEachShare) 
+	{
+		String file1 ="/home/bridgeit/Programs/files/stock1.json";
+		JSONObject jsonObject = Utility.readFromJsonFile1(file1);
+		JSONObject jsonSymbol = new JSONObject();
+		jsonSymbol.put("NumberOfShare", noOfShares);
+		jsonSymbol.put("Price", priceOfEachShare);
+		jsonObject.put(symbol, jsonSymbol);
+		Utility.writeJsonObjectToFile2(file1, jsonObject);
+	}
+
+	
+			
+	public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject) 
+	{
+	     PrintWriter printWriter;
+		 try {
+			printWriter = new PrintWriter(fileName);
+			printWriter.write(jsonObject.toJSONString());
+			printWriter.flush();
+			printWriter.close();
+			} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+	}
+		
+	
+
+			public static JSONObject readFromJsonFile1(String filename)
+			{
+				Object obj;
+				JSONObject jsonObject = null;
+				try
+				{
+					obj = new JSONParser().parse(new FileReader(filename));
+					jsonObject = (JSONObject) obj;
+				}
+				catch(IOException | ParseException e)
+				{
+					e.printStackTrace();
+				}
+				
+			   
+				return jsonObject; 
+			}
+	
+
+		public void removeSymbol(String symbol) 
+		{
+			String file1 = "/home/bridgeit/Programs/files/stock1.json";
+			JSONObject jsonObject = Utility.readFromJsonFile1(file1);
+			jsonObject.remove(symbol);
+			Utility.writeJsonObjectToFile2(file1, jsonObject);
+		}
+	
+
 
 
 }

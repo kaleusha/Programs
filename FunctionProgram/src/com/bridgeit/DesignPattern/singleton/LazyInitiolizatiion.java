@@ -1,4 +1,4 @@
-package com.bridgeit.DesignPattern;
+package com.bridgeit.DesignPattern.singleton;
 
 public class LazyInitiolizatiion {
 	private static LazyInitiolizatiion instance;

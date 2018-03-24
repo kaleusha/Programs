@@ -1,4 +1,4 @@
-package com.bridgeit.DesignPattern;
+package com.bridgeit.DesignPattern.singleton;
 
 import java.lang.reflect.Constructor;
 

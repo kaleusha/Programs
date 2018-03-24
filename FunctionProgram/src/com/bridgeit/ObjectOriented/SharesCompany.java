@@ -7,7 +7,6 @@
  ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
-import java.awt.HeadlessException;
 import java.awt.List;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,7 +50,8 @@ public class SharesCompany {
 				case 2:
 					System.out.println("Enter Symbol to Sold");
 					String symbol1=Utility.inputString();
-					System.out.println("enter Amount ");
+					System.out.println("enter Amount to sold symbol");
+					
 					
 					//stack.remove(symbol);
 					

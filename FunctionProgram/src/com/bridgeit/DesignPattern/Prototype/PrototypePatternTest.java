@@ -1,6 +1,4 @@
-package com.bridgeit.ObjectOriented;
-
-import com.bridgeit.DesignPattern.PrototypePattern;
+package com.bridgeit.DesignPattern.Prototype;
 
 public class PrototypePatternTest {
 	
