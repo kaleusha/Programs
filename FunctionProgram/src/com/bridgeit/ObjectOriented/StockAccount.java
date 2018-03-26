@@ -1,75 +1,193 @@
 /******************************************************************************
- *  Purpose: 
+ *  Purpose: maintains a list of CompanyShares object which has Stock Symbol 
+ *           and Number of Shares as well as DateTime of the transaction
  *  
  *  @author  Usha Kale
  *  @version 1.0
- *  @since   14-03-2018
+ *  @since   24-03-2018
  ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.json.simple.JSONObject;
+
 import com.bridgeit.utility.Utility;
 
-public class StockAccount {
-	public static void main(String[] args) {
-		
-			Utility utility = new Utility();
-			while(true)
-			{	
-				System.out.println("Enter your choice:");
-				
-				System.out.println("1. Create user");
-				System.out.println("2. Buy Share");
-				System.out.println("3. Sale Share");
-				System.out.println("4. Add Company symbol");
-				System.out.println("5. remove company symbol");
-				System.out.println("6. Display Details");
-				System.out.println("7. Exit");
-				int choice = Utility.inputInteger();
-				switch(choice)
-				{
-				case 1:	 	
-					Utility.createAcc();
-				    break;
-				case 2 :	
-					Utility.buyShare();
-					break;
-					
+public class StockAccount 
+{
+	String mCustomerPath = "/home/bridgeit/Programs/files/stockCustomer.json";
+	String mStockPath = "/home/bridgeit/Programs/files/stockAccount.json";
 
-				case 3 :	
-					Utility.saleShare();
-				    break;
-					
-				case 4: 
-					System.out.println("Enter the Symbol of Company to Add in File: ");
-					String symbol=Utility.inputString();
-					System.out.println("Enter no of Shares=");
-					long noOfShares=utility.inputLong();
-					System.out.println("Enter Price of Shares");
-					long priceOfEachShare=utility.inputLong();
-					//System.out.println(symbol+" "+noOfShares+" "+priceOfEachShare);
-					Utility.addNewSymbol(symbol, noOfShares, priceOfEachShare);
-					System.out.println("Company Added Successfully");
-					break;
-					
+	Map<String, String> transaction = new HashMap<String, String>();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("hh-mm-ss dd/MM/YYYY");
+	Date date = new Date();
+	int count = 1;
 
-				case 5:
-					System.out.println("Enter the Symbol of Company to Add in File: ");
-					String symbol1=Utility.inputString();
-					//System.out.println(symbol);
-					utility.removeSymbol(symbol1);
-					System.out.println("Company Removed Successfully");
-					break;
-				
-				case 6 :	
-					Utility.display();
-				    break;
-				case  7:
-					System.exit(0);
-				default : 
-					System.out.println("wrong entry");
-				}
+	public StockAccount() 
+	{	}
+
+	/**
+	 * StockAccount constructor used to initialize the customer object
+	 * @param customer
+	 */
+	@SuppressWarnings({ "unchecked", "unused" })
+	public StockAccount(Customer customer)
+	{
+		// System.out.println(customer);
+		JSONObject name = new JSONObject();
+		JSONObject jsonObject = Utility.readFromJsonFile1(mCustomerPath);
+		JSONObject jsonObject1 = new JSONObject();
+
+		name.put("Money", customer.getMoney());
+		name.put("TotalShare", customer.getTotal_share());
+		jsonObject.put(customer.getName(), name);
+		Utility.writeJsonObjectToFile2(mCustomerPath, jsonObject);
+	}
+
+	/**
+	 * buy the share
+	 * @param symbol
+	 * @param no_of_shares
+	 * @param name
+	 */
+	@SuppressWarnings("unchecked")
+	public void buyShare(String symbol, long no_of_shares, String name) 
+	{
+		JSONObject jsonStock = Utility.readFromJsonFile1(mStockPath);
+		JSONObject stockSymbol = (JSONObject) jsonStock.get(symbol);
+		long price = (long) stockSymbol.get("Price");
+		stockSymbol.put("NumberOfShare", (long) stockSymbol.get("NumberOfShare") - no_of_shares);
+		jsonStock.put(symbol, stockSymbol);
+		Utility.writeJsonObjectToFile2(mStockPath, jsonStock);
+		boolean flag = false;
+		JSONObject jsonObject = Utility.readFromJsonFile1(mCustomerPath);
+		JSONObject customer = (JSONObject) jsonObject.get(name);
+		JSONObject share_value = null;
+		if (customer.get("Shares") == null)
+		{
+			share_value = new JSONObject();
+			flag = true;
+		} else 
+		{
+			share_value = (JSONObject) customer.get("Shares");
+			flag = false;
+		}
+		if (flag == true) 
+		{
+			share_value.put(symbol, no_of_shares);
+		} 
+		else 
+		{
+			if (share_value.get(symbol) == null) 
+			{
+				share_value.put(symbol, no_of_shares);
+			} else 
+			{
+				share_value.put(symbol, (long) share_value.get(symbol) + no_of_shares);
 			}
 		}
+		customer.put("Money", (long) customer.get("Money") - (no_of_shares * price));
+		customer.put("TotalShare", (long) customer.get("TotalShare") + no_of_shares);
+		customer.put("Shares", share_value);
+		jsonObject.put(name, customer);
+		Utility.writeJsonObjectToFile2(mCustomerPath, jsonObject);
+		transaction.put((count++) + " " + symbol,
+				name + " bought " + no_of_shares + " Share at time " + dateFormat.format(date));
+
+	}
+
+	/**
+	 * sell the share
+	 * @param symbol
+	 * @param no_of_shares
+	 * @param name
+	 */
+	@SuppressWarnings("unchecked")
+	public void sellShare(String symbol, long no_of_shares, String name)
+	{
+		JSONObject customerJson = Utility.readFromJsonFile1(mCustomerPath);
+		JSONObject stockJson = Utility.readFromJsonFile1(mStockPath);
+
+		JSONObject symbolJson = (JSONObject) stockJson.get(symbol);
+		long price = (long) symbolJson.get("Price");
+		symbolJson.put("NumberOfShare", (long) symbolJson.get("NumberOfShare") + no_of_shares);
+		stockJson.put(symbol, symbolJson);
+		Utility.writeJsonObjectToFile2(mStockPath, stockJson);
+
+		JSONObject nameJson = (JSONObject) customerJson.get(name);
+		nameJson.put("Money", (long) nameJson.get("Money") + (price * no_of_shares));
+		customerJson.put(name, nameJson);
+
+		nameJson.put("TotalShare", (long) nameJson.get("TotalShare") - no_of_shares);
+		customerJson.put(name, nameJson);
+
+		JSONObject share = (JSONObject) nameJson.get("Shares");
+		share.put(symbol, (long) share.get(symbol) - no_of_shares);
+
+		nameJson.put("Shares", share);
+		customerJson.put(name, nameJson);
+
+		Utility.writeJsonObjectToFile2(mCustomerPath, customerJson);
+
+		transaction.put((count++) + " " + symbol,
+				name + " sold " + no_of_shares + " Share at time " + dateFormat.format(date));
+	}
+
+	/**
+	 * add new company
+	 * @param symbol
+	 * @param noOfShares
+	 * @param priceOfEachShare
+	 */
+	@SuppressWarnings("unchecked")
+	public void addNewSymbol(String symbol, long noOfShares, long priceOfEachShare) 
+	{
+		JSONObject jsonObject = Utility.readFromJsonFile1(mStockPath);
+		JSONObject jsonSymbol = new JSONObject();
+		jsonSymbol.put("NumberOfShare", noOfShares);
+		jsonSymbol.put("Price", priceOfEachShare);
+		jsonObject.put(symbol, jsonSymbol);
+		Utility.writeJsonObjectToFile2(mStockPath, jsonObject);
+	}
+
+	/**remove the company
+	 * @param symbol
+	 */
+	public void removeSymbol(String symbol) 
+	{
+		JSONObject jsonObject = Utility.readFromJsonFile1(mStockPath);
+		jsonObject.remove(symbol);
+		Utility.writeJsonObjectToFile2(mStockPath, jsonObject);
+	}
+
+	/**
+	 * display transactions details
+	 */
+	public void displayTransactionDetails() 
+	{
+		Iterator<Map.Entry<String, String>> iterator = transaction.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<String, String> entry = iterator.next();
+			System.out.println(entry.getKey() + "    " + entry.getValue());
+		}
+	}
+
+	/**
+	 * print the report 
+	 */
+	public void displayReport() 
+	{
+		JSONObject jsonStock = Utility.readFromJsonFile1(mStockPath);
+		System.out.println(jsonStock.toJSONString());
+		JSONObject jsonCustomer = Utility.readFromJsonFile1(mCustomerPath);
+		System.out.println(jsonCustomer.toJSONString());
+	}
 
 
 }

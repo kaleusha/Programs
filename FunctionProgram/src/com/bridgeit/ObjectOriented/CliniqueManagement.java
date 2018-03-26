@@ -9,58 +9,41 @@ package com.bridgeit.ObjectOriented;
 
 import com.bridgeit.utility.Utility;
 
-public class CliniqueManagement {
-	public static void main(String[] args) 
-	{
-		try
-		{
-			Utility utility=new Utility();
-			while(true)
-			{	
-				System.out.println("Enter your choice:");
-				System.out.println("1. Add Doctor.");
-				System.out.println("2. Add Patient.");
-				System.out.println("3. Display Details.");
-				System.out.println("4. Fix Appointments.");
-				System.out.println("5. Appointment Details.");
-				System.out.println("6. Exit");
-				int choice = Utility.inputInteger();
-				switch(choice)
-				{
-				case 1 :	
-					Utility.addDoctor();
-				    break;
-				case 2 :	
-					Utility.addPatient();
-				    break;
-				case 3 :	 
-					System.out.println("Enter D for doctor and P for Patient ");
-					char character = Utility.inputString().charAt(0);
-					if(character=='D')
-					{
-						Utility.doctorsDetails();
-					}
-					if(character=='P')
-					{
-						Utility.patientDetails();
-					}
-				    break;
-				case 5 	:	
-					utility.appointmentDetails();
-				    break;
-				case 4: 	
-					utility.fixAppointment();
-				    break;
-				default : 
-					return;
-				}
-				
+public class CliniqueManagement
+{
+	public static void main(String[] args) throws Exception {
+	    Utility utility = new Utility();
+		while (true) {
+			System.out.println("Enter 1 to Add Doctors");
+			System.out.println("Enter 2 to Add Patients");
+			System.out.println("Enter 3 to Search Doctor");
+			System.out.println("Enter 4 to Search Patient by name");
+			System.out.println("Enter 5 to Take an appoitment");
+			System.out.println("Enter 6 to Exit");
+			int choice =Utility.inputInteger();
+			switch (choice) {
+			case 1:
+				utility.addDoctors();
+				break;
+			case 2:
+				utility.addPatients();
+				break;
+			case 3:
+				utility.searchDoctorm();
+				break;
+			case 4:
+				utility.searchPatient();
+				break;
+			case 5:
+				utility.takeAppointment1();
+				break;
+			case 6:
+				System.exit(0);
+			default:
+				System.out.println("Invalid case");
+
 			}
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+	}
 		
 	}
-}
