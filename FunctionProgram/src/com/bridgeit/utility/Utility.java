@@ -1351,11 +1351,11 @@ public class Utility {
 
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void writeFile(File file) {
 		try {
-			FileWriter writer = new FileWriter(file);
-			JSONObject object1 = new JSONObject();
+			FileWriter fileWriter = new FileWriter(file);
+			JSONObject jsonObject = new JSONObject();
 			//input for rice
 			System.out.println("Enter the name of rice: ");
 			String name =inputString();
@@ -1363,43 +1363,43 @@ public class Utility {
 			double weight = inputDouble();
 			System.out.println("Enter the price of rice: ");
 			double price =inputDouble();
-			object1.put("name", name);
-			object1.put("weight", weight);
-			object1.put("price", price);
+			jsonObject.put("name", name);
+			jsonObject.put("weight", weight);
+			jsonObject.put("price", price);
 
 			//input for pulses
-			JSONObject object2 = new JSONObject();
+			JSONObject jsonObject2 = new JSONObject();
 			System.out.println("Enter the name of pulse: ");
 			name = scanner.next();
 			System.out.println("Enter the weight of pulse: ");
 			weight =inputDouble();
 			System.out.println("Enter the price of pulse: ");
 			price =inputDouble();
-			object2.put("name", name);
-			object2.put("weight", weight);
-			object2.put("price", price);
+			jsonObject2.put("name", name);
+			jsonObject2.put("weight", weight);
+			jsonObject2.put("price", price);
 
 			//input for wheats
-			JSONObject object3 = new JSONObject();
+			JSONObject jsonObject3 = new JSONObject();
 			System.out.println("Enter the name of wheats: ");
 			name = inputString();
 			System.out.println("Enter the weight of wheats: ");
 			weight = inputDouble();
 			System.out.println("Enter the price of wheats: ");
 			price =inputDouble();
-			object3.put("name", name);
-			object3.put("weight", weight);
-			object3.put("price", price);
+			jsonObject3.put("name", name);
+			jsonObject3.put("weight", weight);
+			jsonObject3.put("price", price);
 
 			JSONObject items = new JSONObject();
-			items.put("rice", object1);
-			items.put("pulse", object2);
-			items.put("wheat", object3);
+			items.put("rice", jsonObject);
+			items.put("pulse", jsonObject2);
+			items.put("wheat", jsonObject3);
 
-			writer.write(JSONValue.toJSONString(items));
+			fileWriter.write(JSONValue.toJSONString(items));
 
-			writer.flush();
-			writer.close();
+			fileWriter.flush();
+			fileWriter.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1417,23 +1417,23 @@ public class Utility {
 		try {
 
 
-			FileReader reader = new FileReader(file);
-			JSONParser parser = new JSONParser();
-			JSONObject object =(JSONObject) parser.parse(reader);
-			Iterator iterator = object.keySet().iterator();
+			FileReader fileReader = new FileReader(file);
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject =(JSONObject) jsonParser.parse(fileReader);
+			Iterator iterator = jsonObject.keySet().iterator();
 			while(iterator.hasNext())
 			{
-				String key = (String)iterator.next();
-				JSONObject object1 = (JSONObject) object.get(key);
-				Iterator iterator1 = object.keySet().iterator();
+				String string = (String)iterator.next();
+				JSONObject jsonObject1 = (JSONObject) jsonObject.get(string);
+				Iterator iterator1 = jsonObject.keySet().iterator();
 				while(iterator1.hasNext())
 				{
 					String key1 = (String)iterator1.next();
 
 				}System.out.println();
-				System.out.println("Total cost of "+object1.get("name") + " is: "
-						+ Double.parseDouble(object1.get("weight").toString())
-						* Double.parseDouble(object1.get("price").toString()));
+				System.out.println("Total cost of "+jsonObject1.get("name") + " is: "
+						+ Double.parseDouble(jsonObject1.get("weight").toString())
+						* Double.parseDouble(jsonObject1.get("price").toString()));
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -1627,34 +1627,33 @@ public class Utility {
 		if(file.exists())
 		{
 			@SuppressWarnings("unused")
-			JSONArray arr = new JSONArray();
-			Scanner scan1 = new Scanner(System.in);
+			JSONArray array = new JSONArray();
 			boolean check= true;
 			while (check==true)
 			{	
 				System.out.println("Want to add user: y or n");
-				char ch = scan1.next().charAt(0); 
-				if(ch=='y')
+				char choice = scanner.next().charAt(0); 
+				if(choice=='y')
 				{	
 					try {
-						FileReader fr = new FileReader(file);
+						FileReader fileReader = new FileReader(file);
 					
-					JSONParser parser = new JSONParser();
-					JSONArray arr1 = (JSONArray) parser.parse(fr);
-					JSONObject json = new JSONObject();
+					JSONParser jsonparser = new JSONParser();
+					JSONArray jsonArray = (JSONArray) jsonparser.parse(fileReader);
+					JSONObject jsonObject = new JSONObject();
 			        System.out.println("Enter name");
 			        String name = inputString();
 			        System.out.println("Enter balance");
-			        int bal = inputInteger();
-			        json.put("Name",name);
-			        json.put("Balance",bal);
-			        json.put("ShareCount", 100);
+			        int balance = inputInteger();
+			        jsonObject.put("Name",name);
+			        jsonObject.put("Balance",balance);
+			        jsonObject.put("ShareCount", 100);
 			    
-			        arr1.add(json);
-			      	FileWriter fw = new FileWriter(file);
-			        fw.write(JSONArray.toJSONString(arr1));
-			        fw.flush();
-			        fw.close();
+			        jsonArray.add(jsonObject);
+			      	FileWriter fileWriter = new FileWriter(file);
+			      	fileWriter.write(JSONArray.toJSONString(jsonArray));
+			      	fileWriter.flush();
+			      	fileWriter.close();
 		
 				}catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -1693,50 +1692,50 @@ public class Utility {
 			// reading stock file
 			
 			try {
-				FileReader fr = new FileReader(file);
+				FileReader fileReader = new FileReader(file);
 			JSONParser parser = new JSONParser();
-			JSONArray stock = (JSONArray) parser.parse(fr);
+			JSONArray stockArray = (JSONArray) parser.parse(fileReader);
 			// reading stock1 file
 
-			FileReader sf = new FileReader(file1);
+			FileReader fileReader1 = new FileReader(file1);
 			JSONParser parser1 = new JSONParser();
-			JSONArray share = (JSONArray) parser1.parse(sf);
+			JSONArray shareArray = (JSONArray) parser1.parse(fileReader1);
 
 			System.out.println("Enter the user");
 			String name =inputString();
-			Iterator<?> iterator = stock.iterator();
-			Iterator<?> iterator1 = share.iterator();
+			Iterator<?> iterator = stockArray.iterator();
+			Iterator<?> iterator1 = shareArray.iterator();
 			boolean flag = false;
 			while (iterator.hasNext()) {
-				JSONObject object = (JSONObject) iterator.next();
-				if (object.get("Name").equals(name)) {
+				JSONObject jsonObject = (JSONObject) iterator.next();
+				if (jsonObject.get("Name").equals(name)) {
 					System.out.println("Enter the share sysmbol to buy share:[@,!,#]");
-					String sym = inputString();
+					String symbol = inputString();
 					/*
 					 * obj.put("Share symbol", sym); if(obj.get("Share Symbol").equals(sym)) {
 					 */
 					while (iterator1.hasNext()) {
-						JSONObject object1 = (JSONObject) iterator1.next();
-						if (object1.get("Symbol").equals(sym)) {
+						JSONObject jsonObject1 = (JSONObject) iterator1.next();
+						if (jsonObject1.get("Symbol").equals(symbol)) {
 							System.out.println("Enter the amount");
-							int amt = inputInteger();
-							int bal = Integer.parseInt(object.get("Balance").toString());
-							int price = Integer.parseInt(object1.get("Price").toString());
-							int noShare = Integer.parseInt(object.get("ShareCount").toString());
-							int stockShare = Integer.parseInt(object1.get("Count").toString());
-							int numofshare = amt / price;
-							int newbal = bal - amt;
-							int sharecountcus = noShare + numofshare;
+							int amount = inputInteger();
+							int balance = Integer.parseInt(jsonObject.get("Balance").toString());
+							int price = Integer.parseInt(jsonObject1.get("Price").toString());
+							int noOfShare = Integer.parseInt(jsonObject.get("ShareCount").toString());
+							int stockShare = Integer.parseInt(jsonObject1.get("Count").toString());
+							int numofshare = amount / price;
+							int newbalance = balance - amount;
+							int sharecountcus = noOfShare + numofshare;
 							int sharecountstock = stockShare - numofshare;
-							object.remove("Balance");
-							object.remove("ShareCount");
-							object1.remove("Count");
+							jsonObject.remove("Balance");
+							jsonObject.remove("ShareCount");
+							jsonObject1.remove("Count");
 
-							object.put("Balance", newbal);
-							object.put("ShareCount", sharecountcus);
-							object1.put("Count", sharecountstock);
-							Date d = new Date();
-							String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(d);
+							jsonObject.put("Balance", newbalance);
+							jsonObject.put("ShareCount", sharecountcus);
+							jsonObject1.put("Count", sharecountstock);
+							Date date1 = new Date();
+							String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(date1);
 							System.out.println("Date " + date);
 							flag = true;
 							break;
@@ -1745,7 +1744,7 @@ public class Utility {
 					
 				}
 				FileWriter filewritwer = new FileWriter(file);
-				filewritwer.write(JSONValue.toJSONString(stock));
+				filewritwer.write(JSONValue.toJSONString(stockArray));
 				filewritwer.flush();
 				filewritwer.close();
 			}
@@ -1753,7 +1752,7 @@ public class Utility {
 				System.out.println("User name not exits");
 			}
 			FileWriter filewritwer1 = new FileWriter(file1);
-			filewritwer1.write(JSONValue.toJSONString(share));
+			filewritwer1.write(JSONValue.toJSONString(shareArray));
 			filewritwer1.flush();
 			filewritwer1.close();
 		}
@@ -1778,7 +1777,7 @@ public class Utility {
 	 * Purpose: Sales Share
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public static void saleShare() 
 	{
 		
@@ -1792,22 +1791,22 @@ public class Utility {
 				fileread = new FileReader(file);
 			
 			JSONParser parser = new JSONParser();
-			JSONArray stock = (JSONArray) parser.parse(fileread);
+			JSONArray stockArray = (JSONArray) parser.parse(fileread);
 			//reading stock1 file
 			
 			FileReader fileread1 = new FileReader(file1);
 			JSONParser parser1 = new JSONParser();
-			JSONArray share = (JSONArray) parser1.parse(fileread1);
+			JSONArray shareArray = (JSONArray) parser1.parse(fileread1);
 			
 			System.out.println("Enter the user name to share sale");
 			String name = inputString();
-			Iterator<?> iterator = stock.iterator();
-			Iterator<?> iterator1 = share.iterator();
+			Iterator<?> iterator = stockArray.iterator();
+			Iterator<?> iterator1 = shareArray.iterator();
 			boolean flag = false;
 			while (iterator.hasNext())
 			{
-				JSONObject object=(JSONObject) iterator.next();
-				if(object.get("Name").equals(name))
+				JSONObject jsonObject=(JSONObject) iterator.next();
+				if(jsonObject.get("Name").equals(name))
 				{
 					System.out.println("Enter the share sysmbol to sale share:[@,!,#]");
 					String symbol = inputString();
@@ -1816,26 +1815,26 @@ public class Utility {
 					//obj.put("Share Symbol", sym);
 					while(iterator1.hasNext())
 					{
-						JSONObject object1 = (JSONObject) iterator1.next();
-						if(object1.get("Symbol").equals(symbol))
+						JSONObject jsonObject1 = (JSONObject) iterator1.next();
+						if(jsonObject1.get("Symbol").equals(symbol))
 						{	
-							int bal =  Integer.parseInt(object.get("Balance").toString());
-							int price = Integer.parseInt(object1.get("Price").toString());
-							int noShare =  Integer.parseInt(object.get("ShareCount").toString());
-							int stockShare = Integer.parseInt(object1.get("Count").toString());
+							int balance =  Integer.parseInt(jsonObject.get("Balance").toString());
+							int price = Integer.parseInt(jsonObject1.get("Price").toString());
+							int noOfShare =  Integer.parseInt(jsonObject.get("ShareCount").toString());
+							int stockShare = Integer.parseInt(jsonObject1.get("Count").toString());
 							int saleprize = count*price;
-							int newbal = bal+saleprize;
-							int sharecountcus = noShare-count;
+							int newBalance = balance+saleprize;
+							int sharecountcus = noOfShare-count;
 							int sharecountstock = stockShare+count;
-							object.remove("Balance");
-							object.remove("ShareCount");
-							object1.remove("Count");
+							jsonObject.remove("Balance");
+							jsonObject.remove("ShareCount");
+							jsonObject1.remove("Count");
 							
-							object.put("Balance",newbal);
-							object.put("ShareCount",sharecountcus);
-							object1.put("Count", sharecountstock);
-							Date d = new Date();
-							String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(d);
+							jsonObject.put("Balance",newBalance);
+							jsonObject.put("ShareCount",sharecountcus);
+							jsonObject1.put("Count", sharecountstock);
+							Date date1 = new Date();
+							String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(date1);
 							System.out.println("Date "+date);
 							flag = true;
 							break;
@@ -1846,7 +1845,7 @@ public class Utility {
 
 				FileWriter filewrite = new FileWriter(file);
 				try {
-					filewrite.write(JSONValue.toJSONString(stock));
+					filewrite.write(JSONValue.toJSONString(stockArray));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1858,10 +1857,10 @@ public class Utility {
 			{
 				System.out.println("User name not exits");
 			}
-			FileWriter filew = new FileWriter(file1);
-			filew.write(JSONValue.toJSONString(share));
-			filew.flush();
-			filew.close();
+			FileWriter fileWriter = new FileWriter(file1);
+			fileWriter.write(JSONValue.toJSONString(shareArray));
+			fileWriter.flush();
+			fileWriter.close();
 		}
 		 catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -1892,13 +1891,12 @@ public class Utility {
 			FileReader filereader = new FileReader(file);
 
 			JSONParser parser = new JSONParser();
-			JSONArray arr1 = (JSONArray) parser.parse(filereader);
-			@SuppressWarnings("unchecked")
-			Iterator <E>itr = arr1.iterator();
-			while (itr.hasNext())
+			JSONArray array = (JSONArray) parser.parse(filereader);
+			Iterator <E>iterator = array.iterator();
+			while (iterator.hasNext())
 			{
-				JSONObject object = (JSONObject) itr.next();
-				System.out.println(object);
+				JSONObject jsonObject = (JSONObject) iterator.next();
+				System.out.println(jsonObject);
 			}
 
 		} catch (FileNotFoundException e) {
@@ -1931,9 +1929,9 @@ public class Utility {
 
 		for (int i = 0; i < lengthOfCards; i++)
 		{
-			int r = i + (int) (Math.random() * (lengthOfCards - i));
-			String temp = deck[r];
-			deck[r] = deck[i];
+			int shuffle = i + (int) (Math.random() * (lengthOfCards - i));
+			String temp = deck[shuffle];
+			deck[shuffle] = deck[i];
 			deck[i] = temp;
 		}
 		String array[][] = new String[suits.length][9];
@@ -1967,9 +1965,9 @@ public void deckOfCardsInQueue(String[] suits, String[] ranks) {
 		}
 	}
 	for (int i = 0; i < lengthOfCards; i++) {
-		int r = i + (int) (Math.random() * (lengthOfCards-i));
-		String temp = deck[r];
-		deck[r] = deck[i];
+		int shuffle = i + (int) (Math.random() * (lengthOfCards-i));
+		String temp = deck[shuffle];
+		deck[shuffle] = deck[i];
 		deck[i] = temp;
 	}
 	String array[][]=new String[suits.length][9];
@@ -1991,7 +1989,7 @@ public void deckOfCardsInQueue(String[] suits, String[] ranks) {
  * Purpose: Edit Details From File
  * 
  */
-@SuppressWarnings("unchecked")
+
 public void editDetails() {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
@@ -2005,14 +2003,14 @@ public void editDetails() {
 				String name = inputString();
 				boolean flag = false;
 				while (itrator.hasNext()) {
-					JSONObject object = (JSONObject) itrator.next();
-					if (object.get("firstname").equals(name)) {
+					JSONObject jsonObject = (JSONObject) itrator.next();
+					if (jsonObject.get("firstname").equals(name)) {
 						System.out.println("What you want to edit");
 						String edit = inputString();
 						System.out.println("Enter the new " + edit + " to update.");
 						String change = inputString();
-						object.remove(edit);
-						object.put(edit, change);
+						jsonObject.remove(edit);
+						jsonObject.put(edit, change);
 						System.out.println("Edited Successfully.");
 						flag = true;
 						break;
@@ -2048,7 +2046,7 @@ public void editDetails() {
  * Purpose: Sort File
  * 
  */
-@SuppressWarnings("unchecked")
+
 public void sort() {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
@@ -2143,7 +2141,7 @@ public void deletePerson() throws IOException, ParseException {
  * @throws IOException
  * @throws ParseException
  */
-@SuppressWarnings("unchecked")
+
 public void addPerson() throws IOException, ParseException {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
@@ -2153,7 +2151,7 @@ public void addPerson() throws IOException, ParseException {
 				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
 				JSONArray array = (JSONArray) parser.parse(fileread);
-				JSONObject json = new JSONObject();
+				JSONObject jsonobject = new JSONObject();
 				System.out.println("Enter First Name:");
 				String firstname = inputString();
 				System.out.println("Enter Last Name:");
@@ -2169,14 +2167,14 @@ public void addPerson() throws IOException, ParseException {
 				System.out.println("Enter Mobile Number:");
 				String mobile = inputString();
 
-				json.put("firstname", firstname);
-				json.put("lastname", lastname);
-				json.put("address", address);
-				json.put("city", city);
-				json.put("state", state);
-				json.put("zip", zip);
-				json.put("mobile", mobile);
-				array.add(json);
+				jsonobject.put("firstname", firstname);
+				jsonobject.put("lastname", lastname);
+				jsonobject.put("address", address);
+				jsonobject.put("city", city);
+				jsonobject.put("state", state);
+				jsonobject.put("zip", zip);
+				jsonobject.put("mobile", mobile);
+				array.add(jsonobject);
 				System.out.println("Added Successfully.");
 				FileWriter filewrite = new FileWriter(file);
 				filewrite.write(JSONArray.toJSONString(array));
@@ -2308,10 +2306,10 @@ public static void writeFileinteger1(LinkedListStructure<String> linkedlist) {
 		String string = linkedlist.toString();
 		System.out.println("String : "+string);
 		try {
-			FileWriter fw = new FileWriter("/home/bridgeit/Programs/files/FileForBinarySearch");
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(string);
-			bw.close();
+			FileWriter fileWriter = new FileWriter("/home/bridgeit/Programs/files/FileForBinarySearch");
+			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
+			bufferWriter.write(string);
+			bufferWriter.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2325,11 +2323,11 @@ public static void writeFileinteger2(OrderedListStructure<Integer> orderlist) {
 		String string = orderlist.toString();
 		System.out.println("string :"+string);
 		try {
-			FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/orderList");
-			BufferedWriter write = new BufferedWriter(writer);
-			write.write(string);
+			FileWriter fileWriter = new FileWriter("/home/bridgeit/Programs/files/orderList");
+			BufferedWriter BufferWrite = new BufferedWriter(fileWriter);
+			BufferWrite.write(string);
 
-			write.close();
+			BufferWrite.close();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -2784,7 +2782,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					FileReader filereader = new FileReader(file);
 					JSONParser parser = new JSONParser();
 					JSONArray array1 = (JSONArray) parser.parse(filereader);
-					JSONObject json = new JSONObject();
+					JSONObject jsonobject = new JSONObject();
 					System.out.println("Enter number of doctors :");
 					int num0fDoctor = inputInteger();
 
@@ -2792,17 +2790,17 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 
 					System.out.println("Enter name of doctor");
 					String name = inputString();
-					json.put("Doctor_Name", name);
+					jsonobject.put("Doctor_Name", name);
 					System.out.println("Enter I.D doctor");
 					String id = inputString();
-					json.put("Doctor_ID", id);
+					jsonobject.put("Doctor_ID", id);
 					System.out.println("Enter Specialization of doctor");
 					String specilization = scanner.next();
-					json.put("Doctor_Specialization", specilization);
+					jsonobject.put("Doctor_Specialization", specilization);
 					System.out.println("Enter Availablity of doctor");
 					String available = scanner.next();
-					json.put("Doctor_Availiablity", available);
-					array1.add(json);
+					jsonobject.put("Doctor_Availiablity", available);
+					array1.add(jsonobject);
 					}
 					try {
 					System.out.println("Data has been uploaded :");
@@ -2826,36 +2824,36 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 						File file = new File("/home/bridgeit/Programs/files/Patient.json");
 						FileReader filereader = new FileReader(file);
 						JSONParser parser = new JSONParser();
-						JSONArray array1 = (JSONArray) parser.parse(filereader);
-						JSONObject json1 = new JSONObject();
+						JSONArray array = (JSONArray) parser.parse(filereader);
+						JSONObject jsonobject = new JSONObject();
 						System.out.println("Enter number of Patients: ");
 						int num0fPatients = inputInteger();
 						for (int i = 0; i < num0fPatients; i++) {
 
 					System.out.println("Enter name of Patient");
 					String name = inputString();
-					json1.put("Patient_Name", name);
+					jsonobject.put("Patient_Name", name);
 
 					System.out.println("Enter I.D Patient");
 					String id = inputString();
-					json1.put("Patient_ID", id);
+					jsonobject.put("Patient_ID", id);
 
 					System.out.println("Enter mobile number of Patient");
 					long mobileNumber = scanner.nextLong();
-					json1.put("Patient_mobileNumber", mobileNumber);
+					jsonobject.put("Patient_mobileNumber", mobileNumber);
 
 					System.out.println("Enter Patient age");
 					int age = inputInteger();
-					json1.put("Patient_ID", age);
-					array1.add(json1);
+					jsonobject.put("Patient_ID", age);
+					array.add(jsonobject);
 					}
 					try {
 					System.out.println("Data has been uploaded :");
 					FileWriter jsonFileWriter = new FileWriter(file);
-					jsonFileWriter.write(JSONArray.toJSONString(array1));
+					jsonFileWriter.write(JSONArray.toJSONString(array));
 					jsonFileWriter.flush();
 					jsonFileWriter.close();
-					System.out.println("Patient Added:" + array1);
+					System.out.println("Patient Added:" + array);
 					} catch (IOException e) {
 					System.out.println("exception");
 
@@ -2940,11 +2938,11 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					System.out.println("Search Doctor_name :");
 					String name = inputString();
 
-					Iterator itr = array.iterator();
+					Iterator iterator = array.iterator();
 
 					boolean flag = false;
-					while (itr.hasNext()) {
-					JSONObject jsonobject = (JSONObject) itr.next();
+					while (iterator.hasNext()) {
+					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_Name").equals(name)) {
 
 					System.out.println("Doctor_founded" + jsonobject);
@@ -2974,11 +2972,11 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					JSONArray array = (JSONArray) parser.parse(new FileReader("/home/bridgeit/Programs/files/doctor.json"));
 					System.out.println("Search doctor_ID :");
 					String id = inputString();
-					Iterator itr = array.iterator();
+					Iterator iterator = array.iterator();
 
 					boolean flag = false;
-					while (itr.hasNext()) {
-					JSONObject jsonobject = (JSONObject) itr.next();
+					while (iterator.hasNext()) {
+					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_ID").equals(id)) {
 
 					System.out.println("doctar_founded" + jsonobject);
@@ -3009,11 +3007,11 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					System.out.println("Search doctor by specialization:");
 					String name = inputString();
 
-					Iterator itr = array.iterator();
+					Iterator iterator = array.iterator();
 
 					boolean flag = false;
-					while (itr.hasNext()) {
-					JSONObject jsonobject = (JSONObject) itr.next();
+					while (iterator.hasNext()) {
+					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_Specialization").equals(name)) {
 
 					System.out.println("Doctor_founded" + jsonobject);
@@ -3041,11 +3039,11 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					System.out.println("Search doctor by availability :");
 					String name = inputString();
 
-					Iterator itr = array.iterator();
+					Iterator iterator = array.iterator();
 
 					boolean flag = false;
-					while (itr.hasNext()) {
-					JSONObject jsonobject = (JSONObject) itr.next();
+					while (iterator.hasNext()) {
+					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_Availiablity").equals(name)) {
 
 					System.out.println("doctor_founded" + jsonobject);
@@ -3073,11 +3071,11 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					System.out.println("Search Patient_Name :");
 					String name = inputString();
 
-					Iterator itr = array.iterator();
+					Iterator iterator = array.iterator();
 
 					boolean flag = false;
-					while (itr.hasNext()) {
-					JSONObject jsonobject = (JSONObject) itr.next();
+					while (iterator.hasNext()) {
+					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Patient_Name").equals(name)) {
 
 					System.out.println("Patient_founded" + jsonobject);
@@ -3149,7 +3147,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					System.out.println("Enter Doctor name for to take an Appointment");
 					String doctername = inputString();
 
-					String docInfo = null;
+					String doctorInfo = null;
 					try {
 					JSONArray array = (JSONArray) parser.parse(new FileReader(file));
 					Iterator iterator = array.iterator();
@@ -3165,7 +3163,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 
 					flag = false;
 					}
-					docInfo = doctername;
+					doctorInfo = doctername;
 
 					JSONArray array2 = new JSONArray();
 
@@ -3186,7 +3184,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					    filewriter.flush();
 					    filewriter.close();
 					}
-					System.out.println("hello " + patient_name + " Your Appointment is fixed With Doctor " + docInfo + " on: "
+					System.out.println("hello " + patient_name + " Your Appointment is fixed With Doctor " + doctorInfo + " on: "
 					+ (stringDate));
 
 					} catch (IOException e) {

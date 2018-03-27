@@ -21,52 +21,48 @@ import com.bridgeit.utility.Utility;
 
 public class StockAccount 
 {
-	String mCustomerPath = "/home/bridgeit/Programs/files/stockCustomer.json";
-	String mStockPath = "/home/bridgeit/Programs/files/stockAccount.json";
+	String customerPath = "/home/bridgeit/Programs/files/stockCustomer.json";
+	String stockPath = "/home/bridgeit/Programs/files/stockAccount.json";
 
 	Map<String, String> transaction = new HashMap<String, String>();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("hh-mm-ss dd/MM/YYYY");
 	Date date = new Date();
 	int count = 1;
-
-	public StockAccount() 
-	{	}
-
-	/**
-	 * StockAccount constructor used to initialize the customer object
-	 * @param customer
-	 */
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings("unused")
 	public StockAccount(Customer customer)
 	{
-		// System.out.println(customer);
+		
 		JSONObject name = new JSONObject();
-		JSONObject jsonObject = Utility.readFromJsonFile1(mCustomerPath);
+		JSONObject jsonObject = Utility.readFromJsonFile1(customerPath);
 		JSONObject jsonObject1 = new JSONObject();
 
 		name.put("Money", customer.getMoney());
 		name.put("TotalShare", customer.getTotal_share());
 		jsonObject.put(customer.getName(), name);
-		Utility.writeJsonObjectToFile2(mCustomerPath, jsonObject);
+		Utility.writeJsonObjectToFile2(customerPath, jsonObject);
+	}
+
+	public StockAccount() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * buy the share
 	 * @param symbol
-	 * @param no_of_shares
+	 * @param noOfShare
 	 * @param name
 	 */
-	@SuppressWarnings("unchecked")
-	public void buyShare(String symbol, long no_of_shares, String name) 
+	
+	public void buyShare(String symbol, long noOfShare, String name) 
 	{
-		JSONObject jsonStock = Utility.readFromJsonFile1(mStockPath);
-		JSONObject stockSymbol = (JSONObject) jsonStock.get(symbol);
-		long price = (long) stockSymbol.get("Price");
-		stockSymbol.put("NumberOfShare", (long) stockSymbol.get("NumberOfShare") - no_of_shares);
-		jsonStock.put(symbol, stockSymbol);
-		Utility.writeJsonObjectToFile2(mStockPath, jsonStock);
+		JSONObject jsonStockObject = Utility.readFromJsonFile1(stockPath);
+		JSONObject stockSymbolObject = (JSONObject) jsonStockObject.get(symbol);
+		long price = (long) stockSymbolObject.get("Price");
+		stockSymbolObject.put("NumberOfShare", (long) stockSymbolObject.get("NumberOfShare") - noOfShare);
+		jsonStockObject.put(symbol, stockSymbolObject);
+		Utility.writeJsonObjectToFile2(stockPath, jsonStockObject);
 		boolean flag = false;
-		JSONObject jsonObject = Utility.readFromJsonFile1(mCustomerPath);
+		JSONObject jsonObject = Utility.readFromJsonFile1(customerPath);
 		JSONObject customer = (JSONObject) jsonObject.get(name);
 		JSONObject share_value = null;
 		if (customer.get("Shares") == null)
@@ -80,63 +76,63 @@ public class StockAccount
 		}
 		if (flag == true) 
 		{
-			share_value.put(symbol, no_of_shares);
+			share_value.put(symbol, noOfShare);
 		} 
 		else 
 		{
 			if (share_value.get(symbol) == null) 
 			{
-				share_value.put(symbol, no_of_shares);
+				share_value.put(symbol, noOfShare);
 			} else 
 			{
-				share_value.put(symbol, (long) share_value.get(symbol) + no_of_shares);
+				share_value.put(symbol, (long) share_value.get(symbol) + noOfShare);
 			}
 		}
-		customer.put("Money", (long) customer.get("Money") - (no_of_shares * price));
-		customer.put("TotalShare", (long) customer.get("TotalShare") + no_of_shares);
+		customer.put("Money", (long) customer.get("Money") - (noOfShare * price));
+		customer.put("TotalShare", (long) customer.get("TotalShare") + noOfShare);
 		customer.put("Shares", share_value);
 		jsonObject.put(name, customer);
-		Utility.writeJsonObjectToFile2(mCustomerPath, jsonObject);
+		Utility.writeJsonObjectToFile2(customerPath, jsonObject);
 		transaction.put((count++) + " " + symbol,
-				name + " bought " + no_of_shares + " Share at time " + dateFormat.format(date));
+				name + " bought " + noOfShare + " Share at time " + dateFormat.format(date));
 
 	}
 
 	/**
 	 * sell the share
 	 * @param symbol
-	 * @param no_of_shares
+	 * @param noOfShare
 	 * @param name
 	 */
-	@SuppressWarnings("unchecked")
-	public void sellShare(String symbol, long no_of_shares, String name)
+	
+	public void sellShare(String symbol, long noOfShare, String name)
 	{
-		JSONObject customerJson = Utility.readFromJsonFile1(mCustomerPath);
-		JSONObject stockJson = Utility.readFromJsonFile1(mStockPath);
+		JSONObject customerJsonObject = Utility.readFromJsonFile1(customerPath);
+		JSONObject stockJsonObject = Utility.readFromJsonFile1(stockPath);
 
-		JSONObject symbolJson = (JSONObject) stockJson.get(symbol);
+		JSONObject symbolJson = (JSONObject) stockJsonObject.get(symbol);
 		long price = (long) symbolJson.get("Price");
-		symbolJson.put("NumberOfShare", (long) symbolJson.get("NumberOfShare") + no_of_shares);
-		stockJson.put(symbol, symbolJson);
-		Utility.writeJsonObjectToFile2(mStockPath, stockJson);
+		symbolJson.put("NumberOfShare", (long) symbolJson.get("NumberOfShare") + noOfShare);
+		stockJsonObject.put(symbol, symbolJson);
+		Utility.writeJsonObjectToFile2(stockPath, stockJsonObject);
 
-		JSONObject nameJson = (JSONObject) customerJson.get(name);
-		nameJson.put("Money", (long) nameJson.get("Money") + (price * no_of_shares));
-		customerJson.put(name, nameJson);
+		JSONObject nameJsonObject = (JSONObject) customerJsonObject.get(name);
+		nameJsonObject.put("Money", (long) nameJsonObject.get("Money") + (price * noOfShare));
+		customerJsonObject.put(name, nameJsonObject);
 
-		nameJson.put("TotalShare", (long) nameJson.get("TotalShare") - no_of_shares);
-		customerJson.put(name, nameJson);
+		nameJsonObject.put("TotalShare", (long) nameJsonObject.get("TotalShare") - noOfShare);
+		customerJsonObject.put(name, nameJsonObject);
 
-		JSONObject share = (JSONObject) nameJson.get("Shares");
-		share.put(symbol, (long) share.get(symbol) - no_of_shares);
+		JSONObject share = (JSONObject) nameJsonObject.get("Shares");
+		share.put(symbol, (long) share.get(symbol) - noOfShare);
 
-		nameJson.put("Shares", share);
-		customerJson.put(name, nameJson);
+		nameJsonObject.put("Shares", share);
+		customerJsonObject.put(name, nameJsonObject);
 
-		Utility.writeJsonObjectToFile2(mCustomerPath, customerJson);
+		Utility.writeJsonObjectToFile2(customerPath, customerJsonObject);
 
 		transaction.put((count++) + " " + symbol,
-				name + " sold " + no_of_shares + " Share at time " + dateFormat.format(date));
+				name + " sold " + noOfShare + " Share at time " + dateFormat.format(date));
 	}
 
 	/**
@@ -145,15 +141,15 @@ public class StockAccount
 	 * @param noOfShares
 	 * @param priceOfEachShare
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public void addNewSymbol(String symbol, long noOfShares, long priceOfEachShare) 
 	{
-		JSONObject jsonObject = Utility.readFromJsonFile1(mStockPath);
-		JSONObject jsonSymbol = new JSONObject();
-		jsonSymbol.put("NumberOfShare", noOfShares);
-		jsonSymbol.put("Price", priceOfEachShare);
-		jsonObject.put(symbol, jsonSymbol);
-		Utility.writeJsonObjectToFile2(mStockPath, jsonObject);
+		JSONObject jsonObject = Utility.readFromJsonFile1(stockPath);
+		JSONObject jsonSymbolObject = new JSONObject();
+		jsonSymbolObject.put("NumberOfShare", noOfShares);
+		jsonSymbolObject.put("Price", priceOfEachShare);
+		jsonObject.put(symbol, jsonSymbolObject);
+		Utility.writeJsonObjectToFile2(stockPath, jsonObject);
 	}
 
 	/**remove the company
@@ -161,9 +157,9 @@ public class StockAccount
 	 */
 	public void removeSymbol(String symbol) 
 	{
-		JSONObject jsonObject = Utility.readFromJsonFile1(mStockPath);
+		JSONObject jsonObject = Utility.readFromJsonFile1(stockPath);
 		jsonObject.remove(symbol);
-		Utility.writeJsonObjectToFile2(mStockPath, jsonObject);
+		Utility.writeJsonObjectToFile2(stockPath, jsonObject);
 	}
 
 	/**
@@ -183,10 +179,10 @@ public class StockAccount
 	 */
 	public void displayReport() 
 	{
-		JSONObject jsonStock = Utility.readFromJsonFile1(mStockPath);
-		System.out.println(jsonStock.toJSONString());
-		JSONObject jsonCustomer = Utility.readFromJsonFile1(mCustomerPath);
-		System.out.println(jsonCustomer.toJSONString());
+		JSONObject jsonObject = Utility.readFromJsonFile1(stockPath);
+		System.out.println(jsonObject.toJSONString());
+		JSONObject jsonCustomerObject = Utility.readFromJsonFile1(customerPath);
+		System.out.println(jsonCustomerObject.toJSONString());
 	}
 
 

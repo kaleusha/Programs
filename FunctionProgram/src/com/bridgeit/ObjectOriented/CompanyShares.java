@@ -14,7 +14,7 @@ public class CompanyShares {
 	public static void main(String[] args) {
 		@SuppressWarnings("rawtypes")
 		LinkedListStructure list = new LinkedListStructure();
-	    System.out.println(); System.out.println("********* Company Shares ********");
+	    System.out.println("********* Company Shares ********");
 	    while(true) {
 			System.out.println("1. add the shares");
 			System.out.println("2. remove the shares");

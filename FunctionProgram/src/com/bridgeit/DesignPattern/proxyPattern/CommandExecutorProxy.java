@@ -14,7 +14,7 @@ public class CommandExecutorProxy implements CommandExecutor
 	
 	public CommandExecutorProxy(String user, String pwd)
 	{
-		if("Pankaj".equals(user) && "J@urnalD$v".equals(pwd)) isAdmin=true;
+		if("usha".equals(user) && "usha123".equals(pwd)) isAdmin=true;
 		executor = new CommandExecutorImpl();
 	}
 

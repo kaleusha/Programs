@@ -13,7 +13,7 @@ import com.bridgeit.utility.Utility;
 public class StockAccount1 {
 	public static void main(String[] args) {
 		
-			Utility utility = new Utility();
+			
 			while(true)
 			{	
 				System.out.println("Enter your choice:");

@@ -11,7 +11,6 @@ import com.bridgeit.utility.Utility;
 
 public class RegularExpression {
 	public static void main(String[] args) {
-		//Utility utility=new Utility();
         Utility.firstName();
 		Utility.fullName();
 		Utility.mobileNumber();

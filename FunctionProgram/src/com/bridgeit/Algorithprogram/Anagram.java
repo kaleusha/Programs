@@ -8,17 +8,15 @@
 
 package com.bridgeit.Algorithprogram;
 
-import java.util.Scanner;
-
 import com.bridgeit.utility.Utility;
 
 public class Anagram {
 	public static void main(String[] args) {
-		Scanner sc=new Scanner(System.in);
+		//Utility utility=new Utility();
 		System.out.println("Enter First String");
-		String string1=sc.nextLine();
+		String string1=Utility.inputString();
 		System.out.println("Enter second String");
-		String string2=sc.nextLine();
+		String string2=Utility.inputString();
 		boolean result=Utility.anagram(string1,string2);
 		if(result)
 		{

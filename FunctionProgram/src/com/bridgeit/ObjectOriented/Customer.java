@@ -10,52 +10,52 @@ package com.bridgeit.ObjectOriented;
 
 public class Customer 
 {
-	private String mName;
-	private long mMoney;
-	private long mTotalShare;
+	private String name;
+	private long money;
+	private long totalShare;
 	
 	public Customer(String name, long money, long totalShare) 
 	{
-		this.mName = name;
-		this.mMoney = money;
-		this.mTotalShare = totalShare;
+		this.name = name;
+		this.money = money;
+		this.totalShare = totalShare;
 	}
 
 	public String getName() 
 	{
-		return mName;
+		return name;
 	}
 
 	public void setName(String name) 
 	{
-		this.mName = name;
+		this.name = name;
 	}
 
 	public long getMoney() 
 	{
-		return mMoney;
+		return money;
 	}
 
 	public void setMoney(long money) 
 	{
-		this.mMoney = money;
+		this.money = money;
 	}
 
 
 	public long getTotal_share() 
 	{
-		return mTotalShare;
+		return totalShare;
 	}
 
 	public void setTotal_share(int totalShare) 
 	{
-		this.mTotalShare = totalShare;
+		this.totalShare = totalShare;
 	}
 
 	@Override
 	public String toString() 
 	{
-		return "Customer [name=" + mName + ", money=" + mMoney + ", total_share=" + mTotalShare	+ "]";
+		return "Customer [name=" + name + ", money=" + money + ", total_share=" + totalShare	+ "]";
 	}	
 
 }

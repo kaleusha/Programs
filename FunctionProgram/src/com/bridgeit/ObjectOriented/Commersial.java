@@ -15,11 +15,10 @@ public class Commersial
 	public static void main(String[] args) 
 	{
 		Utility utility=new Utility();
-		StockAccount account=new StockAccount();
-		StockAccount stockAccount1=new StockAccount();
+		StockAccount stockAccount=new StockAccount();
 		String name,symbol;
 		long money,noOfShares,priceOfEachShare;
-		long total_share;
+		long totalShare;
 		int choice=0;
 		do
 		{
@@ -42,10 +41,10 @@ public class Commersial
 				System.out.println("Enter Initial Money:");
 				money=utility.inputLong();
 				System.out.println("Enter the Shares: ");
-				total_share=utility.inputLong();
-				Customer customer = new Customer(name, money, total_share);
+				totalShare=utility.inputLong();
+				Customer customer = new Customer(name, money, totalShare);
 				System.out.println(customer);
-				account=new StockAccount(customer);
+				stockAccount=new StockAccount(customer);
 				System.out.println("Account created Sucessfully");
 				break;
 				
@@ -57,7 +56,7 @@ public class Commersial
 				System.out.println("Enter no of Shares=");
 				noOfShares=utility.inputLong();
 				//System.out.println(symbol + " "+ noOfShares + " "+name);
-				stockAccount1.buyShare(symbol, noOfShares, name);
+				stockAccount.buyShare(symbol, noOfShares, name);
 				System.out.println("Share buy Successfully.....");
 				break;
 				
@@ -69,7 +68,7 @@ public class Commersial
 				System.out.println("Enter no of Shares=");
 				noOfShares=utility.inputLong();
 				//System.out.println(symbol + " "+ noOfShares + " "+name);
-				stockAccount1.sellShare(symbol, noOfShares, name);
+				stockAccount.sellShare(symbol, noOfShares, name);
 				System.out.println("Share Sell Successfully");
 				break;
 			case 4:
@@ -80,7 +79,7 @@ public class Commersial
 				System.out.println("Enter Price of Shares");
 				priceOfEachShare=utility.inputLong();
 				//System.out.println(symbol+" "+noOfShares+" "+priceOfEachShare);
-				stockAccount1.addNewSymbol(symbol, noOfShares, priceOfEachShare);
+				stockAccount.addNewSymbol(symbol, noOfShares, priceOfEachShare);
 				System.out.println("Company Added Successfully");
 				break;
 				
@@ -88,16 +87,16 @@ public class Commersial
 				System.out.println("Enter the Symbol of Company to remove in File: ");
 				symbol=Utility.inputString();
 				//System.out.println(symbol);
-				account.removeSymbol(symbol);
+				stockAccount.removeSymbol(symbol);
 				System.out.println("Company Removed Successfully");
 				break;
 			case 6:
 				System.out.println("Transaction Details");
-				stockAccount1.displayTransactionDetails();
+				stockAccount.displayTransactionDetails();
 				break;
 			case 7:
 				System.out.println("Report");
-				stockAccount1.displayReport();
+				stockAccount.displayReport();
 				break;
 			case 8:
 				System.out.println("Thanks");
