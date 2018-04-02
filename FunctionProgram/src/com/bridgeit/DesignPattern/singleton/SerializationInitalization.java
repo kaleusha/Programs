@@ -9,6 +9,7 @@ package com.bridgeit.DesignPattern.singleton;
 
 import java.io.Serializable;
 
+
 @SuppressWarnings("serial")
 public class SerializationInitalization implements Serializable
 {

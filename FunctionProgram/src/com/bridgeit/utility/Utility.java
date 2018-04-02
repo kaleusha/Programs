@@ -19,6 +19,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -1973,7 +1974,7 @@ public void deckOfCardsInQueue(String[] suits, String[] ranks) {
 	String array[][]=new String[suits.length][9];
 	for(int i=0; i<suits.length; i++)
 	{
-		 System.out.println("Player "+(i+1));
+		 System.out.println("***Player*** "+(i+1));
 		for(int j=0; j<9; j++)
 		{
 			array[i][j]=deck[i+j];
@@ -3193,9 +3194,161 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 			
 		
-	
+					/**
+					 * @param treeset
+					 */
+					public static void twoDimentionlPrimeAnagramNumber(TreeSet<Integer> treeset) {
+
+						int row = 0, column = 0, i, j, number = 100;
+						Object integerArray[] = treeset.toArray();
+						String stringArray[][] = new String[10][25];
+						for (i = 0; i < 10; i++) {
+							for (j = 0; j < 25; j++) {
+								stringArray[i][j] = "";
+							}
+						}
+						for (i = 0; i < integerArray.length; i++) {
+							int temperaroy = (int) integerArray[i];
+							if (temperaroy > number) {
+								number = number + 100;
+								row++;
+								column = 0;
+							}
+							stringArray[row][column++] = Integer.toString(temperaroy);
+						}
+
+						System.out.println("Anagram numbers are: ");
+						for (i = 0; i < 10; i++) {
+							for (j = 0; j < 25; j++) {
+								System.out.print(stringArray[i][j] + "\t");
+							}
+							System.out.println();
+						}
+					}
 
 
+					/**
+					 * @param arrayList
+					 * @return anagram array list
+					 */
+					public static TreeSet<Integer> anagramInArraylist(ArrayList<Integer> arrayList) {
+						TreeSet<Integer> treeSet = new TreeSet<>();
+						for (int i = 0; i < arrayList.size() - 1; i++) {
+							for (int j = i + 1; j < arrayList.size(); j++) {
+								if (anagram(arrayList.get(i)+" ", arrayList.get(j)+" ")) {
+									treeSet.add(arrayList.get(i));
+									treeSet.add(arrayList.get(j));
+								}
+							}
+						}
+						return treeSet;
+					}
+					
+
+					/**
+					 * @return
+					 */
+					@SuppressWarnings("rawtypes")
+					Queue cardQueue = new java.util.LinkedList<>();
+
+					public String[] assignDeckOfCards() {
+						String[] suit = { "Club", "Diamond", "Heart", "Spade" };
+						String[] rank = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+						String[] deckOfCards = new String[52];
+						int index = 0;
+						for (int i = 0; i < suit.length; i++) {
+							for (int j = 0; j < rank.length; j++) {
+								deckOfCards[index++] = suit[i] + " " + rank[j];
+							}
+						}
+						return deckOfCards;
+					}
+
+					/**
+					 * @param deckCards
+					 * @return
+					 */
+					public String[] shuffle(String[] deckCards) {
+						for (int i = 0; i < deckCards.length; i++) {
+							int random = (int) (Math.random() * (52));
+							String temp = deckCards[i];
+							deckCards[i] = deckCards[random];
+							deckCards[random] = temp;
+						}
+						return deckCards;
+					}
+
+					/**
+					 * @param deckOfShuffleCards
+					 * @param noOfPlayers
+					 * @param noOfCards
+					 * @return
+					 */
+					public String[][] distribute(String[] deckOfShuffleCards, int noOfPlayers, int noOfCards) {
+						int index = 0;
+						String[][] distributedCards = new String[noOfPlayers][noOfCards];
+						for (int i = 0; i < noOfPlayers; i++) {
+							for (int j = 0; j < noOfCards; j++) {
+								distributedCards[i][j] = deckOfShuffleCards[index++];
+							}
+						}
+						return distributedCards;
+					}
+
+					/**
+					 * @param cardsOfPlayers
+					 * @param noOfPlayers
+					 * @param noOfCards
+					 */
+					public void printDistibutedCards(String[][] cardsOfPlayers, int noOfPlayers, int noOfCards) {
+						for (int i = 0; i < noOfPlayers; i++) {
+							System.out.println("*** player*** " + (i + 1));
+							for (int j = 0; j < noOfCards; j++) {
+								System.out.println(cardsOfPlayers[i][j]);
+							}
+							System.out.println();
+						}
+					}
+
+					private void sort(String[] cards) {
+						char[] rank = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K' };
+						for (int i = 0; i < rank.length; i++) {
+							for (int j = 0; j < cards.length; j++) {
+								String card = cards[j];
+								char cardRank = card.charAt(card.length() - 1);
+								if (cardRank == rank[i])
+									cardQueue.add(card);
+							}
+						}
+					}
+
+					/**
+					 * @param playerCards
+					 * @param noOfPlayers
+					 * @param noOfCards
+					 */
+					public void printSortedCards(String[][] playerCards, int noOfPlayers, int noOfCards) {
+						String[] cards = new String[noOfCards];
+						for (int i = 0; i < noOfPlayers; i++) {
+							for (int j = 0; j < noOfCards; j++) {
+								cards[j] = playerCards[i][j];
+							}
+							cardQueue.add("***Player*** " + (i + 1));
+							sort(cards);
+						}
+						printSortedQueue(cardQueue);
+					}
+
+					@SuppressWarnings("rawtypes")
+					private void printSortedQueue(Queue cardQueue2) {
+						for (int i = 0; i < 40; i++) {
+							if (i % 10 == 0) {
+								System.out.println();
+							}
+							System.out.println(cardQueue2.remove());
+						}
+
+					}				
 
 }
 	

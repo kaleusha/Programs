@@ -49,7 +49,8 @@ public class CompanyShares {
 			case 4 : 
 				System.out.println("Size = "+ list.size() +" \n");
 				break;   
-			case 5: System.exit(0);
+			case 5:
+				System.exit(0);
 			default : 
 				System.out.println("Wrong Entry \n ");
 				break;   
