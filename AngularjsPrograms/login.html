@@ -3,13 +3,16 @@
   <head>
     <meta charset="utf-8">
     <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
+  <script src="Controller.js" charset="utf-8"></script>
     <title></title>
   </head>
-  <body ng-app="myApp" >
-   <form name="myForm">
-    userName: <input type="text" ng-model="user.userName" required><br>
-    pass:<input type="text" ng-model="user.pass" required><br>
-    <input type="button" value="login">
+  <body >
+    <div ng-app="mainApp" ng-controller="loginCtrl">
+   <form action="/" id="myLogin">
+    userName: <input type="text" name="userName" id="userName" ng-model="userName" required><br>
+    pass:<input type="text" name="pass" id="pass" ng-model="pass" required><br>
+    <button type="submit" ng-click="submit()">Login</button>
 </form>
+</div>
   </body>
 </html>

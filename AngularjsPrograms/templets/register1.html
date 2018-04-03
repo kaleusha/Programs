@@ -1,0 +1,16 @@
+
+    <div ng-app="myApp" ng-controller="regCtrl">
+   <form ng-submit="function()">
+     <h3> Registration Page </h3>
+     <input type="text" class="form-control" ng-model="name" placeholder="name" required=""/><br></input>
+     <br>
+     <input type="email" class="form-control" ng-model="email" placeholder="email-id" required=""/><br></input>
+      <br>
+     <input type="text" class="form-control" ng-model="username" placeholder="username" required=""/><br></input>
+      <br>
+     <input type="password" class="form-control" ng-model="password" placeholder="password"  required=""/><br></input>
+      <br>
+     <button type="submit" ng-click="signup(name,email,username,password)">Register</button>
+     <a ui-sref="login1"><button type="button">Login</button></a>
+</form>
+</div>
