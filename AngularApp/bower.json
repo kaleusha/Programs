@@ -1,0 +1,17 @@
+{
+  "name": "AngularApp",
+  "homepage": "https://github.com/kaleusha/Programs",
+  "authors": [
+    "kaleusha <kaleusha766@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
