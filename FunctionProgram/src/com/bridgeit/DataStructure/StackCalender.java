@@ -37,7 +37,7 @@ public class StackCalender<T> {
 	 * @param dataToBeSearched
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public  boolean search(T dataToBeSearched) {
 		Node1<T> current = firstNode;
 			while(current != null)
@@ -61,7 +61,7 @@ public class StackCalender<T> {
 			currentNode = currentNode.next;
 		}
 	}
-	@SuppressWarnings("unchecked")
+	
 	public int size()
 	{
 		int size = 0;
@@ -73,7 +73,7 @@ public class StackCalender<T> {
 		}
 		return size;
 	}
-	@SuppressWarnings("unchecked")
+	
 	public T dataAtPosition(int position)
 	{
 		int location = 0;

@@ -14,9 +14,9 @@ import com.bridgeit.utility.Utility;
 
 public class AnagramStack {
 	public static void main(String[] args) {
-		 ArrayList<Integer> al=Utility.primeNumber();
-         int strArray[]=new int[al.size()];
-         Iterator<Integer> iterator=al.iterator();
+		 ArrayList<Integer> arrayList=Utility.primeNumber();
+         int strArray[]=new int[arrayList.size()];
+         Iterator<Integer> iterator=arrayList.iterator();
                            
          for(int i=0;i<strArray.length;i++)
          {

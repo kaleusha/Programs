@@ -17,6 +17,9 @@ import com.bridgeit.utility.Utility;
 public class AddressBook {
 		public static void main(String[] args) {
 			Utility utility = new Utility();
+			int choice=0;
+			do {
+				
 					System.out.println("Enter your choice:");
 					System.out.println("1. Add New Person");
 					System.out.println("2. Delete Person");
@@ -24,7 +27,7 @@ public class AddressBook {
 					System.out.println("4. Sort");
 					System.out.println("5. Display Details");
 					System.out.println("6. Exit");
-					int choice = Utility.inputInteger();
+					 choice = Utility.inputInteger();
 					try {
 						switch (choice) {
 						case 1:
@@ -52,7 +55,9 @@ public class AddressBook {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+				}while(choice<6);
+		}
+		
 			
 }
 

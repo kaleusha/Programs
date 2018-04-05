@@ -7,15 +7,19 @@
  ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
-import java.io.File;
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
 import com.bridgeit.utility.Utility;
 
 public class DataManagement {
-	public static void main(String[] args) {
-		Utility utility=new Utility();
-	    File file = new File("/home/bridgeit/Programs/files/dataManagement.json");
-	    utility.writeFile(file);
-	    utility.readFile(file);
+	public static void main(String[] args) throws IOException, ParseException {
+		Utility.writefile();
+	
+		Utility.dataManagement();
+
+	    
 	}
 
 }

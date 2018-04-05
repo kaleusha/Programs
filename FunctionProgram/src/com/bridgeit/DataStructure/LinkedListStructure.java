@@ -136,12 +136,13 @@ public class LinkedListStructure<T>
 				{
 					prev = temp;
 					temp = temp.next;
+					if(temp.data.equals(data))
+					{
+						prev.next = temp.next;
+					
+					}
 				}
-				if(temp.data.equals(data))
-				{
-					prev.next = temp.next;
 				
-				}
 			}
 			
 		}

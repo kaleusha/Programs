@@ -276,7 +276,7 @@ public class OrderedListStructure<T>
 			return string;
 		}
 		
-		public void sort(String arr[])
+		public String[] sort(String arr[])
 		{
 			for(int i=0;i<arr.length;i++)
 			{
@@ -294,15 +294,17 @@ public class OrderedListStructure<T>
 	        for(int i=0; i < arr.length; i++)
 	        {  
 	                System.out.print(arr[i] + " ");  
-	        }  
+	        }
+			return arr;  
 				
 		}
-		public void sortList(OrderedListStructure<T> list)
+		public String[] sortList(OrderedListStructure<T> list)
 		{
 			String string = list.toString();
 			String array[] = string.split(" ");
-			sort(array);
-			Utility.writeFileinteger(list);
+			String array1[]=sort(array);
+			//Utility.writeFileinteger(list);
+			return array1;
 		}
 		
 		

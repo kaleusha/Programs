@@ -14,7 +14,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
@@ -1155,7 +1157,7 @@ public class Utility {
 	 * 
 	 * @param array
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T>void prime2D(ArrayList<T> array) {
 
 		int array2D[][]=new int[10][30]; 
@@ -1236,10 +1238,10 @@ public class Utility {
 	 * 
 	 * @param strArray
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	
 	public static void queueAnagram(int[] strArray) {
 		// TODO Auto-generated method stub
-		QueueStructure queue=new QueueStructure();
+		QueueStructure<Integer> queue=new QueueStructure<Integer>();
 		for (int i = 0; i < strArray.length; i++) {
 			for (int j = i + 1; j < strArray.length; j++) {
 
@@ -1343,115 +1345,137 @@ public class Utility {
 			for(int j = 0; j <length; j++)
 			{
 
-				String s1 = stack.dataAtPosition(j).toString();
-				System.out.print(s1);
+				String string = stack.dataAtPosition(j).toString();
+				System.out.print(string);
 				System.out.print("\t");
 			}
 			System.out.println();
 		}
 
 	}
-
 	
-	public void writeFile(File file) {
-		try {
-			FileWriter fileWriter = new FileWriter(file);
-			JSONObject jsonObject = new JSONObject();
-			//input for rice
-			System.out.println("Enter the name of rice: ");
-			String name =inputString();
-			System.out.println("Enter the weight of rice: ");
-			double weight = inputDouble();
-			System.out.println("Enter the price of rice: ");
-			double price =inputDouble();
-			jsonObject.put("name", name);
-			jsonObject.put("weight", weight);
-			jsonObject.put("price", price);
+	
+	/**
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	static String file1="/home/bridgeit/Programs/files/dataManagement.json";
+	static JSONArray jsonArray=new JSONArray();
+	static JSONObject jsonObject=new JSONObject();
+	
+	public static void writefile() throws IOException, ParseException 
+	{
+		FileReader fileReader = new FileReader(file1);
+		BufferedReader bufferReader = new BufferedReader(fileReader);
 
-			//input for pulses
-			JSONObject jsonObject2 = new JSONObject();
-			System.out.println("Enter the name of pulse: ");
-			name = scanner.next();
-			System.out.println("Enter the weight of pulse: ");
-			weight =inputDouble();
-			System.out.println("Enter the price of pulse: ");
-			price =inputDouble();
-			jsonObject2.put("name", name);
-			jsonObject2.put("weight", weight);
-			jsonObject2.put("price", price);
-
-			//input for wheats
-			JSONObject jsonObject3 = new JSONObject();
-			System.out.println("Enter the name of wheats: ");
-			name = inputString();
-			System.out.println("Enter the weight of wheats: ");
-			weight = inputDouble();
-			System.out.println("Enter the price of wheats: ");
-			price =inputDouble();
-			jsonObject3.put("name", name);
-			jsonObject3.put("weight", weight);
-			jsonObject3.put("price", price);
-
-			JSONObject items = new JSONObject();
-			items.put("rice", jsonObject);
-			items.put("pulse", jsonObject2);
-			items.put("wheat", jsonObject3);
-
-			fileWriter.write(JSONValue.toJSONString(items));
-
-			fileWriter.flush();
-			fileWriter.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (bufferReader.readLine() == null) {
+			addInventoryObject(jsonArray);
+		} else {
+			jsonArray = getCurrentInventoryObject();
+			addInventoryObject(jsonArray);
 		}
-
+      
+		bufferReader.close();
+		
 	}
 
 	/**
-	 * Purpose: Read File
-	 * 
-	 * @param file
+	 * @param jsonInventoryArray
 	 */
-	@SuppressWarnings({ "rawtypes", "unused" })
-	public void readFile(File file) {
-		try {
+	private static void addInventoryObject(JSONArray jsonInventoryArray) 
+	{
+		
+		System.out.print("Enter the Number that you are want to store Inventory :");
+		int number = inputInteger();
+		String array[] = new String[number];
 
-
-			FileReader fileReader = new FileReader(file);
-			JSONParser jsonParser = new JSONParser();
-			JSONObject jsonObject =(JSONObject) jsonParser.parse(fileReader);
-			Iterator iterator = jsonObject.keySet().iterator();
-			while(iterator.hasNext())
-			{
-				String string = (String)iterator.next();
-				JSONObject jsonObject1 = (JSONObject) jsonObject.get(string);
-				Iterator iterator1 = jsonObject.keySet().iterator();
-				while(iterator1.hasNext())
-				{
-					String key1 = (String)iterator1.next();
-
-				}System.out.println();
-				System.out.println("Total cost of "+jsonObject1.get("name") + " is: "
-						+ Double.parseDouble(jsonObject1.get("weight").toString())
-						* Double.parseDouble(jsonObject1.get("price").toString()));
-			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(+ (i + 1) + ".Enter the Inventory name : ");
+			array[i] = inputString();
 		}
 
+		for (String name : array) {
+			System.out.print("Enter the number of types for " + name + " : ");
+			int count = inputInteger();
+			for (int p = 0; p < count; p++) {
+				JSONObject jsonObject = new JSONObject();
+				System.out.print("Enter Name of " + name + " : ");
+				String value = inputString();
+				jsonObject.put("name", value);
+				System.out.print("Enter Weight of " + name + "     : ");
+				double weight = inputDouble();
+				jsonObject.put("weight",weight);
+				System.out.print("Enter Price of " + name + "      : ");
+				double price = inputDouble();
+				jsonObject.put("price",price);
+				jsonObject.put("total",weight * price);
+				jsonInventoryArray.add(jsonObject);
+			}
+			
+		}
+
+		jsonObject.put("Inventory_Data", jsonInventoryArray);
+
+		PrintWriter printWriter = null;
+
+		try {
+			printWriter = new PrintWriter(file1);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		printWriter.write(jsonObject.toJSONString());
+		printWriter.close();
+	
+	}
+
+	/**
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	private static JSONArray getCurrentInventoryObject() throws FileNotFoundException, IOException, ParseException 
+	{
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(new FileReader(file1));
+		JSONObject temp = (JSONObject) obj;
+		JSONArray jsonArray = (JSONArray) temp.get("Inventory_Data");
+		return jsonArray;
+	}
+	
+	/**
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public static void dataManagement() throws FileNotFoundException, IOException, ParseException {
+
+		double totalAmount = 0;
+		JSONParser parse = new JSONParser();
+		Object obj = parse.parse(new FileReader(file1));
+		JSONObject outer = (JSONObject) obj;
+		JSONArray jsonArray = (JSONArray) outer.get("Inventory_Data");
+		JSONObject compareObj;
+		String name = "", price = "", total = "", weight = "";
+		System.out.println();
+		
+		System.out.println("Inventory_Name | Inventory_Weight  | Inventory_Price | Inventory_Total");
+
+		for (int i = 0; i < jsonArray.size(); i++) {
+			compareObj = (JSONObject) jsonArray.get(i);
+			name = (String) compareObj.get("name");
+			weight =  compareObj.get("weight").toString();
+			price = compareObj.get("price").toString();
+			total =  compareObj.get("total").toString();
+			totalAmount += Double.valueOf(total);
+			System.out.printf("  %10s %10s %30s %10s ", name, weight, price, total);
+			System.out.println();
+		}
+		System.out.println(" Total Amount in the Inventory  : " + totalAmount);
 
 	}
+
+	
 
 
 	static String message="Hello <<Name>>, We have your full name as <<Full Name>> in our system. "
@@ -1523,11 +1547,7 @@ public class Utility {
 		String mobileno="xxxxxxxxxx" ;
 		String Date="12/02/2018";
 		
-		/*message.replaceAll("<<Name>>", fName);
-		message.replaceAll("<<Full Name>>", lName);
-		message.replaceAll("xxxxxxxxxx", mNumber);
-		message.replaceAll("12/02/2018", date);
-		return message;*/
+		
 		//Regex to replace first Name 
 		Pattern pattern = Pattern.compile(firstName);
 		Matcher matcher = pattern.matcher(message);
@@ -1913,42 +1933,6 @@ public class Utility {
 
 	}
 
- /**
- * @param suits
- * @param ranks
- */
-   public void deckOfCards(String[] suits, String[] ranks) {
-		int lengthOfCards = suits.length * ranks.length;
-		String deck[] = new String[lengthOfCards];
-		for (int i = 0; i < ranks.length; i++) 
-		{
-			for (int j = 0; j < suits.length; j++) 
-			{
-				deck[suits.length * i + j] = ranks[i] + " of " + suits[j];
-			}
-		}
-
-		for (int i = 0; i < lengthOfCards; i++)
-		{
-			int shuffle = i + (int) (Math.random() * (lengthOfCards - i));
-			String temp = deck[shuffle];
-			deck[shuffle] = deck[i];
-			deck[i] = temp;
-		}
-		String array[][] = new String[suits.length][9];
-		for (int i = 0; i < suits.length ; i++)
-		{
-			System.out.println("**********Player " + (i + 1)+"**********");
-			System.out.println();
-			for (int j = 0; j < 9; j++)
-			{
-				array[i][j] = deck[i + j];
-				System.out.println("    "+array[i][j] + ", ");
-			}
-			System.out.println();
-		}
-		
-	}
 
 /**
  * 
@@ -1988,10 +1972,11 @@ public void deckOfCardsInQueue(String[] suits, String[] ranks) {
 
 /**
  * Purpose: Edit Details From File
+ * @param <T>
  * 
  */
 
-public void editDetails() {
+public <T> void editDetails() {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
@@ -1999,14 +1984,14 @@ public void editDetails() {
 				FileReader fileread = new FileReader(file);
 				JSONParser parser = new JSONParser();
 				JSONArray array = (JSONArray) parser.parse(fileread);
-				Iterator<?> itrator = array.iterator();
+				Iterator<T> itrator = array.iterator();
 				System.out.println("Enter the person name to edit details");
 				String name = inputString();
 				boolean flag = false;
 				while (itrator.hasNext()) {
 					JSONObject jsonObject = (JSONObject) itrator.next();
 					if (jsonObject.get("firstname").equals(name)) {
-						System.out.println("What you want to edit");
+						System.out.println("which column  you want to edit");
 						String edit = inputString();
 						System.out.println("Enter the new " + edit + " to update.");
 						String change = inputString();
@@ -2087,11 +2072,12 @@ public void sort() {
 
 /**
  * Purpose: Delete Person
+ * @param <T>
  * 
  * @throws IOException
  * @throws ParseException
  */
-public void deletePerson() throws IOException, ParseException {
+public <T> void deletePerson() throws IOException, ParseException {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
 		if (file.exists()) {
@@ -2101,7 +2087,7 @@ public void deletePerson() throws IOException, ParseException {
 				JSONArray array = (JSONArray) parser.parse(fileread);
 				System.out.println("Enter the name to delete user");
 				String name = inputString();
-				Iterator<?> iterator = array.iterator();
+				Iterator<T> iterator = array.iterator();
 				boolean flag = false;
 				while (iterator.hasNext()) {
 					JSONObject jsonObject = (JSONObject) iterator.next();
@@ -2318,16 +2304,23 @@ public static void writeFileinteger1(LinkedListStructure<String> linkedlist) {
 
 
 	}
-
-public static void writeFileinteger2(OrderedListStructure<Integer> orderlist) {
+static String path="/home/bridgeit/Programs/files/orderList";
+/**
+ * @param list1
+ */
+public static void writeFileinteger2(String[] list1) {
 	
-		String string = orderlist.toString();
-		System.out.println("string :"+string);
+		
+	StringBuilder builder = new StringBuilder();
+	for(String s : list1) {
+	    builder.append(s+" ");
+	}
+	String string = builder.toString();
 		try {
-			FileWriter fileWriter = new FileWriter("/home/bridgeit/Programs/files/orderList");
+			FileWriter fileWriter = new FileWriter(path);
 			BufferedWriter BufferWrite = new BufferedWriter(fileWriter);
 			BufferWrite.write(string);
-
+			BufferWrite.flush();
 			BufferWrite.close();
 			
 		} catch (IOException e) {
@@ -2385,9 +2378,9 @@ public static void orderList(String[] words) {
 	}
 	System.out.println("\nYour list size:==>>" +orderlist.size()); 
 	
+	String list[]=orderlist.sortList(orderlist); 
 	
-	orderlist.sortList(orderlist);  
-	Utility.writeFileinteger2(orderlist);
+	Utility.writeFileinteger2(list);
 	
 	
 	System.out.println("\nEnter the value to search: ");
@@ -2397,7 +2390,7 @@ public static void orderList(String[] words) {
 		System.out.println("Integer is present");
 		orderlist.remove(search);
 		System.out.println("Your list size:==>>" +orderlist.size());
-		Utility.writeFileinteger2(orderlist);
+		
 	}
 	else
 	{
@@ -2406,9 +2399,12 @@ public static void orderList(String[] words) {
 		orderlist.add( search);
 		System.out.println("Integer added");
 		System.out.println("Your list size:==>>" +orderlist.size());
-		Utility.writeFileinteger2(orderlist);
+	
 		orderlist.printlist();
 	}
+String[] list1=orderlist.sortList(orderlist); 
+	
+	Utility.writeFileinteger2(list1);
 	
 }
 
@@ -2519,11 +2515,11 @@ public static void bank() {
  * @param year
  */
 public static void calenderWithStack1(int month, int year) {
-	String[] months= {"","January", "February", "March","April", "May", "June", "July",
+	String[] months= {"January", "February", "March","April", "May", "June", "July",
 			 "August", "September", "October", "November", "December" };                              
 	            
-	int[] days = {0,31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	           
+	int[] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	          
 	if (month == 2 && Utility.isLeapYear(year)) days[month] = 29;     
     
 	// print calendar header
@@ -2584,7 +2580,7 @@ public static void unorderList(String[] words) {
 @SuppressWarnings("rawtypes")
 public static void weekDay(int month, int year, int start, int maxDay) {
 	int numberOfObject;
-	Queue week  = new LinkedList<>();
+	Queue week  = new LinkedList<LinkedList>();
 	int date = 0;
 	if (maxDay + start > 35) {
 		numberOfObject = 6;
@@ -2779,7 +2775,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					 * @throws Exception
 					 */
 					public void addDoctors() throws IOException, Exception {
-					File file = new File("/home/bridgeit/Prograsms/file/doctor.json");
+					File file = new File("/home/bridgeit/Programs/files/doctor.json");
 					FileReader filereader = new FileReader(file);
 					JSONParser parser = new JSONParser();
 					JSONArray array1 = (JSONArray) parser.parse(filereader);
@@ -2814,6 +2810,42 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					System.out.println("exception");
 					}
 					}
+					
+					
+					/**
+					 * Purpose:display doctor details
+					 */
+					public void displayDoctorDetails() {
+						
+						
+						try {
+							File file = new File("/home/bridgeit/Programs/files/doctor.json");
+							if (file.exists()) {
+								if (file.canRead() && file.canWrite()) {
+									FileReader fileread = new FileReader(file);
+									JSONParser parser = new JSONParser();
+									JSONArray array = (JSONArray) parser.parse(fileread);
+									Iterator iterator = array.iterator();
+									while (iterator.hasNext()) {
+										JSONObject object = (JSONObject) iterator.next();
+										//System.out.println("hiii"+object.get("available"));
+										System.out.println("Doctor_Availiablity : " + object.get("Doctor_Availiablity") + " " + "Doctor_Specialization : "
+												+ object.get("Doctor_Specialization") + " " + "Doctor_ID: " + object.get("Doctor_ID") + " " + "Doctor_Name: "
+												+ object.get("Doctor_Name") );
+
+									}
+								} else {
+									System.out.println("File can't have read permissions.");
+								}
+							} else {
+								System.out.println("File does not exits on disk.");
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+
+				
 
 					/**
 					* Add Patients record by name, id,mobile number and age
@@ -3348,7 +3380,14 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 							System.out.println(cardQueue2.remove());
 						}
 
-					}				
+					}
+
+				
+					
+
+	// TODO Auto-generated method stub
+	
+								
 
 }
 	
