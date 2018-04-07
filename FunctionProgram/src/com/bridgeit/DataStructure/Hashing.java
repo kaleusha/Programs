@@ -8,13 +8,13 @@
  ******************************************************************************/
 package com.bridgeit.DataStructure;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import com.bridgeit.utility.Utility;
 
 public class Hashing
 {
-	public static void main(String[] args) throws FileNotFoundException 
+	public static void main(String[] args) throws NumberFormatException, IOException 
 	{
 		String filepath="/home/bridgeit/Programs/files/readhashing";
 		String words[] = Utility.readFile(filepath);
@@ -24,6 +24,7 @@ public class Hashing
 		}
 			System.out.println();
 			Utility.hashing(words);
+			
 		
 	}
 

@@ -10,7 +10,7 @@ package com.bridgeit.DesignPattern.singleton;
 import java.lang.reflect.Constructor;
 
 public class ReflectionToDestroy {
-	@SuppressWarnings("rawtypes")
+	
 	public static void main(String[] args) {
 		EagerInitialization insatce1= EagerInitialization.getinstance();
 		EagerInitialization insatnce2=null;

@@ -8,11 +8,13 @@
  ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
+import java.io.IOException;
+
 import com.bridgeit.utility.Utility;
 
 public class Commersial 
 {
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException 
 	{
 		Utility utility=new Utility();
 		StockAccount stockAccount=new StockAccount();

@@ -1,3 +1,4 @@
+package com.bridgeit.DataStructure;
 /******************************************************************************
  *  Purpose: Print Calendar Using Stack
  *  
@@ -5,11 +6,11 @@
  *  @version 1.0
  *  @since   14-03-2018
  ******************************************************************************/
-package com.bridgeit.DataStructure;
+
 
 class Node1<T>
 {
-	@SuppressWarnings("rawtypes")
+	
 	Node1 next;
 	T data;
 	Node1(T data1)
@@ -53,7 +54,7 @@ public class StackCalender<T> {
 	
 	public void itirate()
 	{
-		@SuppressWarnings("rawtypes")
+		
 		Node1 currentNode = firstNode;
 		while(currentNode != null)
 		{

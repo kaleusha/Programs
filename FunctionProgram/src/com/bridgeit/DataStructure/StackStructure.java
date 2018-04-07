@@ -9,9 +9,9 @@ package com.bridgeit.DataStructure;
 
 import java.util.EmptyStackException;
 
-public class StackStructure 
+public class StackStructure<T> 
 {
-	public Node<Integer> top;
+	public Node<T> top;
 	int length;
 	
 	public int length(){
@@ -21,9 +21,9 @@ public class StackStructure
 		return length == 0;	
 	}
 	
-	public void push(int data)
+	public void push(T data)
 	{
-		Node<Integer> temp = new Node<Integer>(data);
+		Node<T> temp = new Node<T>(data);
 		temp.next = top;
 		top = temp;
 		length++;
@@ -65,6 +65,7 @@ public class StackStructure
 			}
 	
 		}
+		
 
 
 }

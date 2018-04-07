@@ -8,6 +8,8 @@
  ******************************************************************************/
 package com.bridgeit.ObjectOriented;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,18 +30,27 @@ public class StockAccount
 	SimpleDateFormat dateFormat = new SimpleDateFormat("hh-mm-ss dd/MM/YYYY");
 	Date date = new Date();
 	int count = 1;
-	@SuppressWarnings("unused")
-	public StockAccount(Customer customer)
+	
+	public StockAccount(Customer customer) throws IOException
 	{
 		
 		JSONObject name = new JSONObject();
-		JSONObject jsonObject = Utility.readFromJsonFile1(customerPath);
-		JSONObject jsonObject1 = new JSONObject();
+		//JSONObject jsonObject = Utility.readFromJsonFile1(customerPath);
+		JSONObject jsonObject = new JSONObject();
 
 		name.put("Money", customer.getMoney());
 		name.put("TotalShare", customer.getTotal_share());
-		jsonObject.put(customer.getName(), name);
-		Utility.writeJsonObjectToFile2(customerPath, jsonObject);
+		//jsonObject.put(customer.getName(), name);
+		
+		
+		FileWriter file = new FileWriter("/home/bridgeit/Programs/files/stockCustomer.json"); 
+		file.write(name.toJSONString());
+		System.out.println("Successfully Copied JSON Object to File...in stock account");
+		System.out.println("\nJSON Object: " + name);
+		file.close();
+		
+		
+		//Utility.writeJsonObjectToFile2(customerPath, jsonObject);
 	}
 
 	public StockAccount() {
@@ -51,9 +62,10 @@ public class StockAccount
 	 * @param symbol
 	 * @param noOfShare
 	 * @param name
+	 * @throws IOException 
 	 */
 	
-	public void buyShare(String symbol, long noOfShare, String name) 
+	public void buyShare(String symbol, long noOfShare, String name) throws IOException 
 	{
 		JSONObject jsonStockObject = Utility.readFromJsonFile1(stockPath);
 		JSONObject stockSymbolObject = (JSONObject) jsonStockObject.get(symbol);
@@ -103,9 +115,10 @@ public class StockAccount
 	 * @param symbol
 	 * @param noOfShare
 	 * @param name
+	 * @throws IOException 
 	 */
 	
-	public void sellShare(String symbol, long noOfShare, String name)
+	public void sellShare(String symbol, long noOfShare, String name) throws IOException
 	{
 		JSONObject customerJsonObject = Utility.readFromJsonFile1(customerPath);
 		JSONObject stockJsonObject = Utility.readFromJsonFile1(stockPath);
@@ -140,9 +153,10 @@ public class StockAccount
 	 * @param symbol
 	 * @param noOfShares
 	 * @param priceOfEachShare
+	 * @throws IOException 
 	 */
 	
-	public void addNewSymbol(String symbol, long noOfShares, long priceOfEachShare) 
+	public void addNewSymbol(String symbol, long noOfShares, long priceOfEachShare) throws IOException 
 	{
 		JSONObject jsonObject = Utility.readFromJsonFile1(stockPath);
 		JSONObject jsonSymbolObject = new JSONObject();
@@ -154,8 +168,9 @@ public class StockAccount
 
 	/**remove the company
 	 * @param symbol
+	 * @throws IOException 
 	 */
-	public void removeSymbol(String symbol) 
+	public void removeSymbol(String symbol) throws IOException 
 	{
 		JSONObject jsonObject = Utility.readFromJsonFile1(stockPath);
 		jsonObject.remove(symbol);

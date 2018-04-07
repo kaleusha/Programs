@@ -12,7 +12,7 @@ import com.bridgeit.utility.Utility;
 
 public class CompanyShares {
 	public static void main(String[] args) {
-		@SuppressWarnings("rawtypes")
+	
 		LinkedListStructure list = new LinkedListStructure();
 	    System.out.println("********* Company Shares ********");
 	    while(true) {

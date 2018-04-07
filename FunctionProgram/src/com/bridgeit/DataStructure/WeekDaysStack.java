@@ -1,3 +1,4 @@
+package com.bridgeit.DataStructure;
 /******************************************************************************
  *  Purpose: Print Calendar Using Stack
  *  
@@ -5,7 +6,7 @@
  *  @version 1.0
  *  @since   14-03-2018
  ******************************************************************************/
-package com.bridgeit.DataStructure;
+
 
 import com.bridgeit.utility.Utility;
 

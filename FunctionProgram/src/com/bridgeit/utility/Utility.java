@@ -14,9 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
@@ -29,11 +27,10 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.bridgeit.DataStructure.BankingQueueStructure;
 import com.bridgeit.DataStructure.LinkedListStructure;
 import com.bridgeit.DataStructure.OrderedListStructure;
 import com.bridgeit.DataStructure.QueueStructure;
-import com.bridgeit.DataStructure.StackCalender;
+
 import com.bridgeit.DataStructure.StackStructure;
 import com.bridgeit.DataStructure.palindromeDequeueStructure;
 import com.bridgeit.ObjectOriented.Stack;
@@ -919,9 +916,15 @@ public class Utility {
 	}
 
 	public static void dequeue(double amuntw) {
+		if(amuntw<=balance)
+		{
 		balance = balance - amuntw;
 		System.out.println(" Rs" + amuntw + " Withdraws Sucessfully");
 		System.out.println("Current Balance is Rs " + balance);
+	}else
+	{
+		System.out.println("insufficent amount");
+	}
 	}
 
 	public static void checkbalance() {
@@ -1049,108 +1052,7 @@ public class Utility {
 		System.out.println("\nCelsius Temperature : "+cel);
 	}
 
-	/**
-	 * Purpose: Hashing
-	 * 
-	 * @param words
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void hashing(String[] words) {
-
-		HashMap<Integer, LinkedListStructure> hashmap = new HashMap<Integer, LinkedListStructure >();
-		int hash = -1;
-		int hasharray[]=new int[words.length];
-		for(int i=0;i<words.length;i++)
-		{
-			hasharray[i]=Integer.parseInt(words[i]);
-		}
-		for(int i=0;i<hasharray.length;i++)
-		{
-			hash=hasharray[i]%11;
-			if(hashmap.containsKey(hash))
-			{
-
-				LinkedListStructure linkedlist=hashmap.get(hash);
-				linkedlist.add(hasharray[i]);
-			}
-			else
-			{
-				hashmap.put(hash, new LinkedListStructure());
-				LinkedListStructure linkedlist=hashmap.get(hash);
-				linkedlist.add(hasharray[i]);
-			}
-		}
-		System.out.println("Enter the key to search");
-		int search = inputInteger();
-        hash= search % 11;
-		if(hashmap.containsKey(hash))
-		{
-			LinkedListStructure linkedlist=hashmap.get(hash);
-			if(linkedlist.search(search))
-			{
-				
-				linkedlist.remove(search);
-				Utility.writeFileinteger(hashmap);
-
-				System.out.println(search+" Element found and removed from the list");
-				
-			}
-			else
-			{
-				linkedlist.add(search);
-				System.out.println(search+"element Not found and added to the list");
-				Utility.writeFileinteger(hashmap);
-			}
-		}
-		else
-		{
-			hashmap.put(hash, new LinkedListStructure());
-			LinkedListStructure linkedlist=hashmap.get(hash);
-			linkedlist.add(search);
-			/*hashmap.put(hash, new LinkedListStructure());
-			LinkedListStructure linkedlist=hashmap.get(hash);
-			if(!linkedlist.search(search))
-			{
-				linkedlist.add(search);	
-			}	 
-			
-			Utility.writeFileinteger(hashmap);
-			System.out.println("Element Added");
-*/
-		}
-		Set<Integer> keys = hashmap.keySet(); 
-		for(Integer key1: keys)
-		{ 
-			LinkedListStructure value = hashmap.get(key1);
-			System.out.print(key1+"->");
-			value.printlist();
-			System.out.println();
-		}
-		
-	}
-
-	/**
-	 * Purpose: Write in file
-	 * 
-	 * @param search
-	 */
-	public static<T> void writeFileinteger(T search) { 
-		String string = search.toString();
-		try {
-			FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/writehashing");
-			BufferedWriter write = new BufferedWriter(writer);
-			write.write(string);
-
-			write.close();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-
-	}
-
+	 
 
 	/**
 	 * Purpose: Print Prime Numbers In 2D Array
@@ -1287,75 +1189,12 @@ public class Utility {
 
 	}
 
+	
+	
+	
 	/**
-	 * Purpose:Print Calendar Using Stack
+	 * Purpose: Write file
 	 * 
-	 * @param month
-	 * @param year
-	 */
-	@SuppressWarnings("rawtypes")
-	public static void calenderWithStack(int month, int year) {
-		StackCalender week = new StackCalender();
-		int start = Utility.dayOfWeek(month,1, year);
-		int maxDay = Utility.maxDay(month, year);
-		int numberOfObject;
-		int date = 0;
-		if(maxDay + start>35)
-		{
-			numberOfObject = 6;
-		}
-		else
-		{
-			numberOfObject = 5; }
-		for(int i = 0; i < numberOfObject;i++)
-		{
-			week.add(new StackCalender());
-		}
-		for(int i = 0; i < numberOfObject;i++)
-		{
-			StackCalender stack =(StackCalender) week.dataAtPosition(i);
-			if(i==0)
-			{
-				for(int j = 0; j <start; j++)
-				{
-					stack.add(" ");
-				}
-				for(int j = start;j<7;j++)
-				{
-					stack.add(++date);
-				}
-			}
-			else
-			{
-				for(int j = 0; j <7;j++)
-				{
-					stack.add(++date);
-					if(date == maxDay)
-					{
-						break;
-					}
-				}	
-			}
-		}
-		System.out.println("Sun"+"\t"+"Mon"+"\t"+"Tue"+"\t"+"Wed"+"\t"+"Thu"+"\t"+"Fri"+"\t"+"Sat");
-		for(int i = 0; i < numberOfObject; i++)
-		{
-			StackCalender stack =  (StackCalender) week.dataAtPosition(i);
-			int length = stack.size();
-			for(int j = 0; j <length; j++)
-			{
-
-				String string = stack.dataAtPosition(j).toString();
-				System.out.print(string);
-				System.out.print("\t");
-			}
-			System.out.println();
-		}
-
-	}
-	
-	
-	/**
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -1380,12 +1219,14 @@ public class Utility {
 	}
 
 	/**
+	 * Purpose:Add Inventory
+	 * 
 	 * @param jsonInventoryArray
 	 */
 	private static void addInventoryObject(JSONArray jsonInventoryArray) 
 	{
 		
-		System.out.print("Enter the Number that you are want to store Inventory :");
+		System.out.print("Enter the Number of Inventory Store :");
 		int number = inputInteger();
 		String array[] = new String[number];
 
@@ -1429,6 +1270,8 @@ public class Utility {
 	}
 
 	/**
+	 * Purpose:Get Cuurent Inventory
+	 * 
 	 * @return
 	 * @throws FileNotFoundException
 	 * @throws IOException
@@ -1444,6 +1287,8 @@ public class Utility {
 	}
 	
 	/**
+	 * Purpose: Display Inventory Details
+	 * 
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws ParseException
@@ -1468,7 +1313,7 @@ public class Utility {
 			price = compareObj.get("price").toString();
 			total =  compareObj.get("total").toString();
 			totalAmount += Double.valueOf(total);
-			System.out.printf("  %10s %10s %30s %10s ", name, weight, price, total);
+			System.out.printf("  %10s %10s %200s %10s ", name, weight, price, total);
 			System.out.println();
 		}
 		System.out.println(" Total Amount in the Inventory  : " + totalAmount);
@@ -1537,6 +1382,8 @@ public class Utility {
 		return false;
 	}
 	/**
+	 * Purpose:Replac String
+	 * 
 	 * @return: Updated String
 	 * 
 	 */
@@ -1577,7 +1424,7 @@ public class Utility {
 	 * 
 	 * @param number
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public static void stockReport(int number) { JSONArray jsonArray = new JSONArray();
 	String[] array = new String[number];
 	int share[] = new int[number];
@@ -1641,7 +1488,7 @@ public class Utility {
 	 * Purpose: Create Account
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public static void createAcc()  
 	{
 		File file = new File("/home/bridgeit/Programs/files/stock.json");
@@ -1705,7 +1552,7 @@ public class Utility {
 	 * Purpose: Buy Share
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public static void buyShare()  {
 		String file ="/home/bridgeit/Programs/files/stock.json";
 		String file1 = "/home/bridgeit/Programs/files/stock1.json";
@@ -1732,9 +1579,7 @@ public class Utility {
 				if (jsonObject.get("Name").equals(name)) {
 					System.out.println("Enter the share sysmbol to buy share:[@,!,#]");
 					String symbol = inputString();
-					/*
-					 * obj.put("Share symbol", sym); if(obj.get("Share Symbol").equals(sym)) {
-					 */
+					
 					while (iterator1.hasNext()) {
 						JSONObject jsonObject1 = (JSONObject) iterator1.next();
 						if (jsonObject1.get("Symbol").equals(symbol)) {
@@ -1939,7 +1784,7 @@ public class Utility {
  * @param suits
  * @param ranks
  */
-@SuppressWarnings("rawtypes")
+
 public void deckOfCardsInQueue(String[] suits, String[] ranks) {
 	QueueStructure cardQueue = new QueueStructure();
 	int lengthOfCards = suits.length * ranks.length;
@@ -2079,7 +1924,7 @@ public void sort() {
  */
 public <T> void deletePerson() throws IOException, ParseException {
 	try {
-		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
+		File file = new File("/home/bridgeit/a.out");
 		if (file.exists()) {
 			if (file.canRead()) {
 				FileReader fileread = new FileReader(file);
@@ -2187,7 +2032,7 @@ public void addPerson() throws IOException, ParseException {
  * @throws IOException
  * @throws ParseException
  */
-@SuppressWarnings("rawtypes")
+
 public void displayDetails() throws IOException, ParseException {
 	try {
 		File file = new File("/home/bridgeit/Programs/files/addressBook.json");
@@ -2304,10 +2149,13 @@ public static void writeFileinteger1(LinkedListStructure<String> linkedlist) {
 
 
 	}
-static String path="/home/bridgeit/Programs/files/orderList";
+
 /**
+ * Purpose:Write File
+ * 
  * @param list1
  */
+static String path="/home/bridgeit/Programs/files/orderList";
 public static void writeFileinteger2(String[] list1) {
 	
 		
@@ -2332,6 +2180,7 @@ public static void writeFileinteger2(String[] list1) {
 	}
 
 /**
+ * Purpose: Check Entered String IS Pallindrom Or NOT
  * 
  * @param string
  */
@@ -2402,9 +2251,9 @@ public static void orderList(String[] words) {
 	
 		orderlist.printlist();
 	}
-String[] list1=orderlist.sortList(orderlist); 
+      String[] list1=orderlist.sortList(orderlist); 
 	
-	Utility.writeFileinteger2(list1);
+	  Utility.writeFileinteger2(list1);
 	
 }
 
@@ -2444,21 +2293,21 @@ public static void balenced(String expression) {
 	
 }
 
+
 /**
  * Purpose:Banking Transactions
  * 
- * 
  */
-public static void bank() {
+public static <T> void bank() {
 	int choice;
-	BankingQueueStructure queueStructure=new BankingQueueStructure();
+	QueueStructure<T> queueStructure=new QueueStructure<T>();
 	do {
 		System.out.println("\n1.For enter to Queue\n2.Procede with Transaction");
 		System.out.println("Enter choice");
 		choice=Utility.inputInteger();
 		if(choice==1)
 			queueStructure.add();
-		if(choice==2&&queueStructure.empty())
+		if(choice==2&&queueStructure.isEmpty())
 			System.out.println("First Enter into Queue");
 	
 	
@@ -2514,7 +2363,7 @@ public static void bank() {
  * @param month
  * @param year
  */
-public static void calenderWithStack1(int month, int year) {
+public static void calender(int month, int year) {
 	String[] months= {"January", "February", "March","April", "May", "June", "July",
 			 "August", "September", "October", "November", "December" };                              
 	            
@@ -2572,12 +2421,14 @@ public static void unorderList(String[] words) {
 }
 
 /**
+ * Purpose:Display Calendar
+ * 
  * @param month
  * @param year
  * @param start
  * @param maxDay
  */
-@SuppressWarnings("rawtypes")
+
 public static void weekDay(int month, int year, int start, int maxDay) {
 	int numberOfObject;
 	Queue week  = new LinkedList<LinkedList>();
@@ -2632,10 +2483,11 @@ public static void weekDay(int month, int year, int start, int maxDay) {
 }
 
 /**
- * Purpose: 
+ * Purpose:Comapny Shares 
  * 
  */
-@SuppressWarnings({ "rawtypes", "unused" })
+
+@SuppressWarnings("unused")
 public static void shareCompany() {
 	Stack stack = new Stack();
 	com.bridgeit.ObjectOriented.Queue queue = new com.bridgeit.ObjectOriented.Queue();
@@ -2731,6 +2583,8 @@ public static void shareCompany() {
 
 
 /**
+ * Purpose:Read File
+ * 
  * @param filename
  * @return
  */
@@ -2752,17 +2606,29 @@ public static JSONObject readFromJsonFile1(String filename)
 	return jsonObject; 
 }
 /**
+ * Purpose: Write File
+ * 
  * @param fileName
  * @param jsonObject
+ * @throws IOException 
  */
-public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject) 
+public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject) throws IOException 
 {
 	PrintWriter printWriter;
+	
 	try {
 		printWriter = new PrintWriter(fileName);
 		printWriter.write(jsonObject.toJSONString());
 		printWriter.flush();
 		printWriter.close();
+	
+		
+		
+		FileWriter file = new FileWriter("/home/bridgeit/Programs/files/stockCustomer.json"); 
+			file.write(jsonObject.toJSONString());
+			System.out.println("Successfully Copied JSON Object to File...");
+			System.out.println("\nJSON Object: " + jsonObject);
+		
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -2771,6 +2637,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 }
 			
 					/**
+					 * Purpose: Add Doctors
+					 * 
 					 * @throws IOException
 					 * @throws Exception
 					 */
@@ -2899,7 +2767,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					 * 
 					 * @throws Exception
 					 */
-					@SuppressWarnings({ "rawtypes", "unused" })
+					 static boolean flag=false;
 					public void searchDoctor() throws Exception {
 
 					try {
@@ -2909,7 +2777,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					String name = inputString();
 					Iterator iterator = array.iterator();
 
-					boolean flag = false;
+					
 					while (iterator.hasNext()) {
 					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_Name").equals(name)) {
@@ -2927,6 +2795,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 
 					/**
+					 * Purpose:Search Doctor
+					 * 
 					 * @throws Exception
 					 */
 					public void searchDoctorm() throws Exception {
@@ -2963,7 +2833,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					 * 
 				     * @throws Exception
 					 */
-					@SuppressWarnings({ "rawtypes", "unused" })
+					
 					public void searchbyName() throws Exception {
 					try {
 					JSONParser parser = new JSONParser();
@@ -2973,7 +2843,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 
 					Iterator iterator = array.iterator();
 
-					boolean flag = false;
+					
 					while (iterator.hasNext()) {
 					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_Name").equals(name)) {
@@ -2998,7 +2868,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					 * 
 					 * @throws Exception
 					 */
-					@SuppressWarnings({ "rawtypes", "unused" })
+					
+					
 					public void searchbyID() throws Exception {
 					try {
 					JSONParser parser = new JSONParser();
@@ -3007,7 +2878,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					String id = inputString();
 					Iterator iterator = array.iterator();
 
-					boolean flag = false;
+					
 					while (iterator.hasNext()) {
 					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_ID").equals(id)) {
@@ -3032,7 +2903,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					 * 
 					 * @throws Exception
 					 */
-					@SuppressWarnings({ "rawtypes", "unused" })
+					
+					
 					public void searchbySpecialization() throws Exception {
 					try {
 					JSONParser parser = new JSONParser();
@@ -3042,7 +2914,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 
 					Iterator iterator = array.iterator();
 
-					boolean flag = false;
+					
 					while (iterator.hasNext()) {
 					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_Specialization").equals(name)) {
@@ -3064,7 +2936,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					 * 
 					 * @throws Exception
 					 */
-					@SuppressWarnings({ "rawtypes", "unused" })
+				
 					public void searchbyAvailability() throws Exception {
 					try {
 					JSONParser parser = new JSONParser();
@@ -3074,7 +2946,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 
 					Iterator iterator = array.iterator();
 
-					boolean flag = false;
+					
 					while (iterator.hasNext()) {
 					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_Availiablity").equals(name)) {
@@ -3096,7 +2968,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					 * 
 					 * @throws Exception
 					 */
-					@SuppressWarnings({ "rawtypes", "unused" })
+					
+					
 					public void searchPatient() throws Exception {
 					try {
 					JSONParser parser = new JSONParser();
@@ -3106,7 +2979,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 
 					Iterator iterator = array.iterator();
 
-					boolean flag = false;
+					
 					while (iterator.hasNext()) {
 					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Patient_Name").equals(name)) {
@@ -3131,7 +3004,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					 * 
 					 * @throws Exception 
 					 */
-					@SuppressWarnings({ "rawtypes", "unused" })
+					
 					public static void searchPatientbyName() throws Exception {
 					try {
 					JSONParser parser = new JSONParser();
@@ -3141,7 +3014,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 
 					Iterator iterator = array.iterator();
 
-					boolean flag = false;
+					
 					while (iterator.hasNext()) {
 					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Patient_Name").equals(name)) {
@@ -3162,12 +3035,13 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 				
 					/**
-					* take an appointment of doctor with date and generate report
+					* Purpose:take an appointment of doctor with date and generate report
 					* 
 					* @throws Exception
 					* @throws IOException
 					*/
-					@SuppressWarnings({ "rawtypes", "unused" })
+					
+					@SuppressWarnings("unused")
 					public void takeAppointment1() throws IOException, Exception {
 					File file = new File("/home/bridgeit/Programs/files/doctor.json");
 					FileReader filereader = new FileReader(file);
@@ -3185,7 +3059,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					JSONArray array = (JSONArray) parser.parse(new FileReader(file));
 					Iterator iterator = array.iterator();
 
-					boolean flag = false;
+					
 					while (iterator.hasNext()) {
 					JSONObject jsonobject = (JSONObject) iterator.next();
 					if (jsonobject.get("Doctor_Name").equals(doctername)) {
@@ -3198,7 +3072,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 					doctorInfo = doctername;
 
-					JSONArray array2 = new JSONArray();
+					//JSONArray array2 = new JSONArray();
 
 					JSONObject jsonobject = (JSONObject) parser.parse(new FileReader("/home/bridgeit/Programs/files/Appointment.json"));
 					JSONArray appointmentFileObj = (JSONArray) jsonobject.get("Doctor_name");
@@ -3227,6 +3101,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 			
 		
 					/**
+					 * Purpose:Print Prime numbers That are Anagram in 2D Array
+					 * 
 					 * @param treeset
 					 */
 					public static void twoDimentionlPrimeAnagramNumber(TreeSet<Integer> treeset) {
@@ -3280,7 +3156,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					/**
 					 * @return
 					 */
-					@SuppressWarnings("rawtypes")
+					
 					Queue cardQueue = new java.util.LinkedList<>();
 
 					public String[] assignDeckOfCards() {
@@ -3297,6 +3173,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 
 					/**
+					 * Purpose: Shuffle Cards
+					 * 
 					 * @param deckCards
 					 * @return
 					 */
@@ -3311,6 +3189,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 
 					/**
+					 * Purpose: Distribute Cards
+					 * 
 					 * @param deckOfShuffleCards
 					 * @param noOfPlayers
 					 * @param noOfCards
@@ -3328,6 +3208,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 
 					/**
+					 * Purpose: Print Distributed Card
+					 * 
 					 * @param cardsOfPlayers
 					 * @param noOfPlayers
 					 * @param noOfCards
@@ -3342,6 +3224,11 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 						}
 					}
 
+					/**
+					 * Purpose: Sort Card
+					 * 
+					 * @param cards
+					 */
 					private void sort(String[] cards) {
 						char[] rank = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K' };
 						for (int i = 0; i < rank.length; i++) {
@@ -3355,6 +3242,8 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 
 					/**
+					 * Purpose: Print Sorted Card
+					 * 
 					 * @param playerCards
 					 * @param noOfPlayers
 					 * @param noOfCards
@@ -3371,7 +3260,7 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 						printSortedQueue(cardQueue);
 					}
 
-					@SuppressWarnings("rawtypes")
+					
 					private void printSortedQueue(Queue cardQueue2) {
 						for (int i = 0; i < 40; i++) {
 							if (i % 10 == 0) {
@@ -3383,9 +3272,104 @@ public static void writeJsonObjectToFile2(String fileName, JSONObject jsonObject
 					}
 
 				
+						/**
+						 * Purpose: Hashing
+						 * 
+						 * @param words
+						 */
+						
+					
+						public static void hashing(String[] words) {
+
+							HashMap<Integer, LinkedListStructure> hashmap = new HashMap<Integer, LinkedListStructure >();
+							int hash = -1;
+							int hasharray[]=new int[words.length];
+							for(int i=0;i<words.length;i++)
+							{
+								hasharray[i]=Integer.parseInt(words[i]);
+							}
+							for(int i=0;i<hasharray.length;i++)
+							{
+								hash=hasharray[i]%11;
+								if(hashmap.containsKey(hash))
+								{
+
+									LinkedListStructure linkedlist=hashmap.get(hash);
+									linkedlist.add(hasharray[i]);
+								}
+								else
+								{
+									hashmap.put(hash, new LinkedListStructure());
+									LinkedListStructure linkedlist=hashmap.get(hash);
+									linkedlist.add(hasharray[i]);
+								}
+							}
+							System.out.println("Enter the key to search");
+							int search = inputInteger();
+					        hash= search % 11;
+							if(hashmap.containsKey(hash))
+							{
+								LinkedListStructure linkedlist=hashmap.get(hash);
+								if(linkedlist.search(search))
+								{
+									
+									linkedlist.remove(search);
+									Utility.writeFileinteger(hashmap);
+
+									System.out.println(search+" Element found and removed from the list");
+									
+								}
+								else
+								{
+									linkedlist.add(search);
+									System.out.println(search+"element Not found and added to the list");
+									Utility.writeFileinteger(hashmap);
+								}
+							}
+							else
+							{
+								hashmap.put(hash, new LinkedListStructure());
+								LinkedListStructure linkedlist=hashmap.get(hash);
+								linkedlist.add(search);
+								
+							}
+							Set<Integer> keys = hashmap.keySet(); 
+							for(Integer key1: keys)
+							{ 
+								LinkedListStructure value = hashmap.get(key1);
+								System.out.print(key1+"->");
+								value.printlist();
+								System.out.println();
+							}
+							
+						}
+
+						/**
+						 * Purpose: Write in file
+						 * 
+						 * @param search
+						 */
+						public static<T> void writeFileinteger(T search) { 
+							String string = search.toString();
+							try {
+								FileWriter writer = new FileWriter("/home/bridgeit/Programs/files/writehashing");
+								BufferedWriter write = new BufferedWriter(writer);
+								write.write(string);
+
+								write.close();
+								
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+
+						}
+
+
 					
 
-	// TODO Auto-generated method stub
+				
 	
 								
 

@@ -17,7 +17,7 @@ public class Calendar {
 		int month=Utility.inputInteger();
 		System.out.println("Enter Year");
 		int year=Utility.inputInteger();
-		Utility.calenderWithStack1(month, year);
+		Utility.calender(month, year);
 		
 		
 	}

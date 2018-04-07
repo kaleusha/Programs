@@ -16,6 +16,9 @@ public class StaticMethods4 {
 
 		System.out.println("enter size of array ");
 		int n = Utility.inputInteger();
+		
+		
+		
 
 		System.out.println("integer array using insertion sort then press 1");
 		System.out.println("string array using insertion sort then press 2");

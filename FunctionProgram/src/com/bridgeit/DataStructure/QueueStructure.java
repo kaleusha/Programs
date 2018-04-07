@@ -106,4 +106,13 @@ public void push(T data)
 	length++;
 	System.out.println(data);
 }
+public void add()
+{
+	length++;
+	System.out.println("queue Size Is: "+length);
+}
+public void exit()
+{
+	length--;
+}
 }
