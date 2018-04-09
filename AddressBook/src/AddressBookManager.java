@@ -27,10 +27,11 @@ public class AddressBookManager {
 			 manager.closeFile();
 			 break;
 			 
-		 case 4:
+		 case 4:ArrayList<Person> arrayList=addressBookImpl.getData();
+		 manager.saveFile(arrayList);
 			
-			 ArrayList<Person> arrayList= addressBookImpl.addPerson();
-			 manager.saveFile(arrayList);
+			/* ArrayList<Person> arrayList= addressBookImpl.addPerson();
+			 manager.saveFile(arrayList);*/
 			 break;
 			 
 		 case 5:

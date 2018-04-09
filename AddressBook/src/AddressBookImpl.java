@@ -47,7 +47,12 @@ public class AddressBookImpl<E> implements AddressBook{
 		
 		
 	}
-				
+	public ArrayList<Person> getData()
+	{
+		System.out.println(arraylist);	
+		return arraylist;
+	
+	}
 		
 	
 

@@ -14,6 +14,8 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 public class ManagerImpl {
 	Scanner scanner=new Scanner(System.in);
+String folderPath="/home/bridgeit/Programs/AddressBook/files/";
+String openFile;
 
 	public void newAddressBook() throws IOException {
 		File path=new File("/home/bridgeit/Programs/AddressBook/files");
@@ -33,7 +35,6 @@ public class ManagerImpl {
 		
 	}
 	
-	 String openFile;
 	public void openFile() throws IOException {
 		
 		File path=new File("/home/bridgeit/Programs/AddressBook/files");
@@ -47,6 +48,7 @@ public class ManagerImpl {
 		    
 				System.out.println("Enter file name to open:");
 				 openFile=scanner.next();
+				 
 				 addressBookOperations();
 				/*String line = null;
 				
@@ -72,11 +74,11 @@ public class ManagerImpl {
 		
 		
 	}
-	
+	AddressBookImpl addressBookImpl=new AddressBookImpl();
 	public void addressBookOperations() throws IOException
 	{
 		int choice;
-		AddressBookImpl addressBookImpl=new AddressBookImpl();
+		
 		do {
 		System.out.println("Enter your choice: ");
 		System.out.println("\n1.addPerson \n2.deletePerson \n3.editPerson \n4.sortByLastName \n5.sortByZip \n6.exit");
@@ -121,12 +123,26 @@ public class ManagerImpl {
 	}
 
 	public void saveFile(ArrayList<Person> arraylist) throws IOException {
-		String arrayToJson = null;
+		ArrayList<Person> arrayList=new ArrayList<Person>();
+		//String path="/home/bridgeit/Programs/AddressBook/files/usha.json";
+		arrayList=addressBookImpl.getData();
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		try {
+			objectMapper.writeValue("/home/bridgeit/Programs/AddressBook/files/usha.json", arrayList);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+		/*String arrayToJson = null;
 		
 
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
-			 arrayToJson = objectMapper.writeValueAsString(arraylist);
+			//arrayToJson = objectMapper.writeValueAsString(arraylist);
+			objectMapper.writeValue(new File(folderPath+openFile), arraylist);
+
 			System.out.println(" Convert List of person objects to JSON :");
 			System.out.println(arrayToJson);
 			
@@ -140,15 +156,14 @@ public class ManagerImpl {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	
 		
-		
-	    String path="/home/bridgeit/Programs/AddressBook/files/";
-		FileWriter filewrite = new FileWriter(path);
+		/*
+		FileWriter filewrite = new FileWriter(folderPath+openFile);
 		filewrite.write(arrayToJson);
 		filewrite.flush();
-		filewrite.close();
+		filewrite.close();*/
 		System.out.println("Added Successfully.");
 		
 		
