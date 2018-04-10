@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,6 +7,7 @@ public class AddressBookManager {
 	public static void main(String[] args) throws IOException {
 		Scanner scanner=new Scanner(System.in);
 		int choice;
+		 File filepath = null;
 		 AddressBookImpl addressBookImpl=new AddressBookImpl<>();
 		
 		System.out.println("Enter your Choice: ");int i=1;
@@ -20,18 +22,18 @@ public class AddressBookManager {
 			 break;
 			 
 		 case 2:
-			 manager.openFile();
+			 filepath=manager.openFile();
 			 break;
 			 
 		 case 3:
 			 manager.closeFile();
 			 break;
 			 
-		 case 4:ArrayList<Person> arrayList=addressBookImpl.getData();
-		 manager.saveFile(arrayList);
+		 case 4:/*ArrayList<Person> arrayList=addressBookImpl.getData();
+		 manager.saveFile(arrayList);*/
 			
-			/* ArrayList<Person> arrayList= addressBookImpl.addPerson();
-			 manager.saveFile(arrayList);*/
+			ArrayList<Person> arrayList= addressBookImpl.addPerson();
+			 manager.saveFile(arrayList,filepath);
 			 break;
 			 
 		 case 5:

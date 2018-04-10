@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +16,8 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 public class ManagerImpl {
 	Scanner scanner=new Scanner(System.in);
 String folderPath="/home/bridgeit/Programs/AddressBook/files/";
-String openFile;
+String openfile;
+File nfile;
 
 	public void newAddressBook() throws IOException {
 		File path=new File("/home/bridgeit/Programs/AddressBook/files");
@@ -35,7 +37,7 @@ String openFile;
 		
 	}
 	
-	public void openFile() throws IOException {
+	public File openFile() throws IOException {
 		
 		File path=new File("/home/bridgeit/Programs/AddressBook/files");
 		File[] listFile=path.listFiles();
@@ -47,9 +49,12 @@ String openFile;
 
 		    
 				System.out.println("Enter file name to open:");
-				 openFile=scanner.next();
-				 
+				  openfile=scanner.next();
+				  
+				 nfile=new File("/home/bridgeit/Programs/AddressBook/files/"+openfile+".json");
 				 addressBookOperations();
+				return nfile;
+				 
 				/*String line = null;
 				
 				 FileReader fileReader = new FileReader(openFile);
@@ -122,52 +127,21 @@ String openFile;
 		
 	}
 
-	public void saveFile(ArrayList<Person> arraylist) throws IOException {
+	public void saveFile(ArrayList<Person> arraylist, File filepath) throws IOException {
 		ArrayList<Person> arrayList=new ArrayList<Person>();
-		//String path="/home/bridgeit/Programs/AddressBook/files/usha.json";
-		arrayList=addressBookImpl.getData();
+		
+		arrayList=arraylist;
+		System.out.println("hii"+arrayList);
 		ObjectMapper objectMapper = new ObjectMapper();
 		
-		try {
-			objectMapper.writeValue("/home/bridgeit/Programs/AddressBook/files/usha.json", arrayList);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		objectMapper.writeValue(new FileOutputStream(filepath), arrayList);
+		System.out.println("Svae Successfully.");
+			
 	}
-		/*String arrayToJson = null;
 		
-
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			//arrayToJson = objectMapper.writeValueAsString(arraylist);
-			objectMapper.writeValue(new File(folderPath+openFile), arraylist);
-
-			System.out.println(" Convert List of person objects to JSON :");
-			System.out.println(arrayToJson);
-			
-			
-		} catch (JsonGenerationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
+		
 	
-		
-		/*
-		FileWriter filewrite = new FileWriter(folderPath+openFile);
-		filewrite.write(arrayToJson);
-		filewrite.flush();
-		filewrite.close();*/
-		System.out.println("Added Successfully.");
-		
-		
-	}
 
 	public void saveAs() {
 		// TODO Auto-generated method stub
