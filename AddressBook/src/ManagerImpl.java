@@ -1,27 +1,26 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.omg.CORBA.PUBLIC_MEMBER;
+import org.codehaus.jackson.type.TypeReference;
 
 public class ManagerImpl {
-	Scanner scanner=new Scanner(System.in);
+static Scanner scanner=new Scanner(System.in);
 String folderPath="/home/bridgeit/Programs/AddressBook/files/";
-String openfile;
-File nfile;
+
+static File file;
+ArrayList< Person> arraylist=new ArrayList<Person>();	
+ObjectMapper mapper=new ObjectMapper(); 
+AddressBookImpl<?> addressBookImpl=new AddressBookImpl();
 
 	public void newAddressBook() throws IOException {
-		File path=new File("/home/bridgeit/Programs/AddressBook/files");
-		File[] listFile=path.listFiles();
+		File filel=new File(folderPath);
+		File[] listFile=filel.listFiles();
 		System.out.println("list of file in folder: ");
 		for(File file1: listFile)
 		{
@@ -29,113 +28,71 @@ File nfile;
 		}
 		System.out.println("Enter the new file name: ");
 		String newFile=scanner.next();
-		File nfile=new File("/home/bridgeit/Programs/AddressBook/files/"+newFile+".json");
-		nfile.createNewFile();
+		file=new File(folderPath+newFile+".json");
+		file.createNewFile();
 		System.out.println("NEw file created");
-		
-		
-		
 	}
 	
-	public File openFile() throws IOException {
+	public void openFile() throws IOException {
 		
-		File path=new File("/home/bridgeit/Programs/AddressBook/files");
-		File[] listFile=path.listFiles();
+		File filel=new File(folderPath);
+		File[] listFile=filel.listFiles();
 		System.out.println("list of file in folder: ");
 		for(File file1: listFile)
 		{
 			System.out.println(file1.getName());
 		}
-
-		    
+      	    
 				System.out.println("Enter file name to open:");
-				  openfile=scanner.next();
-				  
-				 nfile=new File("/home/bridgeit/Programs/AddressBook/files/"+openfile+".json");
-				 addressBookOperations();
-				return nfile;
-				 
-				/*String line = null;
+				file=new File(folderPath+scanner.next()+".json");
+				System.out.println(file);
+				BufferedReader bufferedReader=new BufferedReader(new FileReader(file));
+				String jsonarray;
+				if((jsonarray=bufferedReader.readLine()) != null)
+				{
+					System.out.println(jsonarray);
+					TypeReference<ArrayList<Person>> typeReference=new TypeReference<ArrayList<Person>>() {};
+						arraylist=mapper.readValue(jsonarray,typeReference);
+					System.out.println(arraylist);	
+					
+				}bufferedReader.close();
 				
-				 FileReader fileReader = new FileReader(openFile);
-				 BufferedReader bufferReader=new BufferedReader(fileReader);
-
-				    while((line = bufferReader.readLine()) != null) {
-				        System.out.println(line);
-				    }   
-				    bufferReader.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		  */
-		    
-		   
-		    
-	
-		
+				addressBookImpl.addressBookOperations(arraylist);
 		
 	}
-	AddressBookImpl addressBookImpl=new AddressBookImpl();
-	public void addressBookOperations() throws IOException
-	{
+	public void closeFile	() throws IOException {
 		int choice;
-		
+		System.out.println("enter your choice");
 		do {
-		System.out.println("Enter your choice: ");
-		System.out.println("\n1.addPerson \n2.deletePerson \n3.editPerson \n4.sortByLastName \n5.sortByZip \n6.exit");
+		System.out.println("\n1.do u want to save file \n2.not save \n3.exit ");
 		 choice=scanner.nextInt();
 		switch(choice)
 		{
 		case 1:
-			addressBookImpl.addPerson();
-			 break;
-			 
-		 case 2:
-			 addressBookImpl.deletePerson();
-			 break;
-			 
-		 case 3:
-			 addressBookImpl.editPerson();
-			 break;
-			 
-		 case 4:
-			 addressBookImpl.sortByLastName();
-			 break;
-			 
-		 case 5:
-			 addressBookImpl.sortByZip();
-			 break;
-			 
-		 case 6:
-			 break;
+		saveFile();
+		break;
+		case 2:
+			System.out.println("not save");
+			break;
+		case 3:
+			
+			break;
 		
-			 
-			 
-			 
-		 }
-		}while(choice<6);
+		}
+		}while(choice<3);
 		
-}
-	
-
-	public void closeFile() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	public void saveFile(ArrayList<Person> arraylist, File filepath) throws IOException {
-		ArrayList<Person> arrayList=new ArrayList<Person>();
-		
-		arrayList=arraylist;
-		System.out.println("hii"+arrayList);
+	public void saveFile() throws IOException {
+		ArrayList<Person> List=AddressBookImpl.arraylist;
+	
 		ObjectMapper objectMapper = new ObjectMapper();
 		
-		objectMapper.writeValue(new FileOutputStream(filepath), arrayList);
-		System.out.println("Svae Successfully.");
+		System.out.println(file);
+		
+		objectMapper.writeValue(new FileOutputStream(file),List);
+		System.out.println("Save Successfully.");
 			
 	}
 		
@@ -144,14 +101,50 @@ File nfile;
 	
 
 	public void saveAs() {
-		// TODO Auto-generated method stub
+		System.out.println("enter extention of file");
+		 String extension=scanner.next(); 
+		 System.out.println("Enter the name of address book");
+		 
+	        file=new File("/home/bridgeit/Programs/AddressBook/files/" +""+scanner.next()+ extension);
+	      /*  ArrayList<Person> arrayList=new ArrayList<Person>();
+	        arrayList=addressBookImpl.arraylist();*/
+	        ArrayList<Person> List=AddressBookImpl.arraylist;
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        try {
+	            objectMapper.writeValue(file, List);
+	            System.out.println("File Save Successfully");
+	            System.out.println(List);
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }    
+		
 		
 	}
 
-	public void quit() {
-		// TODO Auto-generated method stub
-		
-	}
 	
-
+	
+/*public static void main(String[] args) throws IOException {
+		
+		ManagerImpl manager=new ManagerImpl();
+		//System.out.println("Welcome to Address");
+		do{
+		System.out.println("Make a choice from below");
+		System.out.println("1.Create \n2.Open \n3.Save \n4.SaveAs \n5.exit");
+		File file = null;
+		switch (scanner.nextInt()) {
+		case 1:	manager.newAddressBook();
+				break;
+		case 2:	manager.openFile();
+				break;
+		case 3:	manager.saveFile();
+				break;
+		case 4:	manager.saveAs();
+				break;
+		
+		case 5:break;
+			
+		}
+		}while(true);
+	}*/
 }

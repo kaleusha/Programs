@@ -2,8 +2,8 @@
 public class Address {
 	private String city;
 	private String state;
-	private int zip;
-	private long phoneNo;
+	private Integer zip;
+	
 	public String getCity() {
 		return city;
 	}
@@ -24,13 +24,7 @@ public class Address {
 	}
 	@Override
 	public String toString() {
-		return "Address [city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + "]";
+		return "Address [city=" + city + ", state=" + state + ", zip=" + zip + "]";
 	}
-	public long getPhoneNo() {
-		return phoneNo;
-	}
-	public void setPhoneNo(long phoneNo) {
-		this.phoneNo = phoneNo;
-	}
-
+	
 }

@@ -9,6 +9,7 @@ public class Person {
 	}
 	private String firstName;
 	private String lastName;
+	private long phoneNo;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -21,10 +22,18 @@ public class Person {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
 	@Override
 	public String toString() {
-		return "Person [address=" + address + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "Person [address=" + address + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNo="
+				+ phoneNo + "]";
 	}
-	
+	public long getPhoneNo() {
+		return phoneNo;
+	}
+	public void setPhoneNo(long phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
 
 }
