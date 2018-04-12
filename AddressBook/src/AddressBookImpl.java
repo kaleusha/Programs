@@ -6,9 +6,9 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class AddressBookImpl<E> implements AddressBook{
+public class AddressBookImpl implements AddressBook{
 
-	static ArrayList<Person> arraylist=new ArrayList<Person>();
+	  static ArrayList<Person> arraylist=new ArrayList<Person>();
 	String arrayToJson;
 	Scanner scanner=new Scanner(System.in);
 	public void addressBookOperations(ArrayList<Person> arraylist2) throws IOException
@@ -48,9 +48,7 @@ public class AddressBookImpl<E> implements AddressBook{
 			 
 		 case 7:
 			
-			 break;
-			 
-			 
+			 break; 
 			 
 		 }
 		}while(choice<6);
@@ -82,21 +80,8 @@ public class AddressBookImpl<E> implements AddressBook{
 		arraylist.add( person);
 		
 		System.out.println(arraylist);
-		//AddressBookManager addressBookManager=new AddressBookManager();
-		//return arraylist;
-		
-		
 		
 	}
-	public ArrayList<Person> getData()
-	{
-		System.out.println(arraylist);	
-		return arraylist;
-	
-	}
-		
-	
-
 	
 	public  void delete() {
 		System.out.println("Enter the name to delete user");
@@ -155,19 +140,14 @@ public class AddressBookImpl<E> implements AddressBook{
 				case 3:
 					break;
 				}
-				//list.add(persn);	
 			}while(field<3);
 		}
-		}
-		
-	
-		
+		}	
 		
 	}
 
 	
 	public void sortByLastName() {
-		//Person person=new Person();
 		for (int i = 0; i < arraylist.size(); i++) {
 	        for (int j = 0; j < arraylist.size(); j++) {
 	            Collections.sort(arraylist, new Comparator<Object>() {

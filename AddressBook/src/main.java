@@ -1,18 +1,15 @@
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class AddressBookManager {
+public class main {
 	public static void main(String[] args) throws IOException {
 		Scanner scanner=new Scanner(System.in);
 		int choice;
-		 File filepath = null;
-		 ManagerImpl manager=new ManagerImpl();
 		System.out.println("Enter your Choice: ");int i=1;
 		do {
 		System.out.println("\n1.newAddressBook \n2.openFile \n3.closeFile \n4.saveFile \n5.saveAs \n6.exit ");
 		 choice=scanner.nextInt();
-		
+		 Manager manager=new ManagerImpl();
 		 switch(choice)
 		 {
 		 case 1:
@@ -37,9 +34,7 @@ public class AddressBookManager {
 			 
 		 case 6:
 			
-			 break;
-			 
-			 
+			 break; 
 			 
 		 }
 		 i++;

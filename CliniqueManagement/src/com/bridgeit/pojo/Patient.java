@@ -1,12 +1,16 @@
 package com.bridgeit.pojo;
 
-public class Patients {
-	private String name;
+public class Patient {
+	
 	private int id;
+	private String name;
 	private long mobileNumber;
 	private int age;
 	public String getName() {
 		return name;
+	}
+	public Patient() {
+		
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -33,6 +37,4 @@ public class Patients {
 	public String toString() {
 		return "Patients [name=" + name + ", id=" + id + ", mobileNumber=" + mobileNumber + ", age=" + age + "]";
 	}
-	
-
 }

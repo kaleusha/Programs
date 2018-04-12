@@ -1,12 +1,16 @@
 package com.bridgeit.pojo;
 
 public class Doctor {
-	private String name;
-	private int id;
 	
+	private int id;
+	private String name;
 	private String specialization;
 	private String availability;
 	private int noOFPatients;
+	
+	public Doctor() {
+	}
+	
 	public String getName() {
 		return name;
 	}

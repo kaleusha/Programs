@@ -7,6 +7,9 @@ public class Address {
 	public String getCity() {
 		return city;
 	}
+	public Address() {
+		
+	}
 	public void setCity(String city) {
 		this.city = city;
 	}

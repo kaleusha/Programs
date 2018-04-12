@@ -7,6 +7,9 @@ public class Person {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+	public Person() {
+		
+	}
 	private String firstName;
 	private String lastName;
 	private long phoneNo;

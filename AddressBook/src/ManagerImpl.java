@@ -4,20 +4,19 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class ManagerImpl {
+public class ManagerImpl implements Manager{
 static Scanner scanner=new Scanner(System.in);
-String folderPath="/home/bridgeit/Programs/AddressBook/files/";
+static String folderPath="/home/bridgeit/Programs/AddressBook/files/";
 
 static File file;
-ArrayList< Person> arraylist=new ArrayList<Person>();	
-ObjectMapper mapper=new ObjectMapper(); 
-AddressBookImpl<?> addressBookImpl=new AddressBookImpl();
-
+ArrayList<Person> arraylist=new ArrayList<Person>();	
+static ObjectMapper mapper=new ObjectMapper(); 
 	public void newAddressBook() throws IOException {
 		File filel=new File(folderPath);
 		File[] listFile=filel.listFiles();
@@ -56,7 +55,7 @@ AddressBookImpl<?> addressBookImpl=new AddressBookImpl();
 					System.out.println(arraylist);	
 					
 				}bufferedReader.close();
-				
+				 AddressBookImpl addressBookImpl=new AddressBookImpl();
 				addressBookImpl.addressBookOperations(arraylist);
 		
 	}
@@ -87,27 +86,19 @@ AddressBookImpl<?> addressBookImpl=new AddressBookImpl();
 	public void saveFile() throws IOException {
 		ArrayList<Person> List=AddressBookImpl.arraylist;
 	
-		ObjectMapper objectMapper = new ObjectMapper();
-		
 		System.out.println(file);
 		
-		objectMapper.writeValue(new FileOutputStream(file),List);
+		mapper.writeValue(new FileOutputStream(file),List);
 		System.out.println("Save Successfully.");
 			
 	}
-		
-		
-		
-	
-
 	public void saveAs() {
 		System.out.println("enter extention of file");
 		 String extension=scanner.next(); 
 		 System.out.println("Enter the name of address book");
 		 
 	        file=new File("/home/bridgeit/Programs/AddressBook/files/" +""+scanner.next()+ extension);
-	      /*  ArrayList<Person> arrayList=new ArrayList<Person>();
-	        arrayList=addressBookImpl.arraylist();*/
+	     
 	        ArrayList<Person> List=AddressBookImpl.arraylist;
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        try {
@@ -115,7 +106,7 @@ AddressBookImpl<?> addressBookImpl=new AddressBookImpl();
 	            System.out.println("File Save Successfully");
 	            System.out.println(List);
 	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
+	            
 	            e.printStackTrace();
 	        }    
 		

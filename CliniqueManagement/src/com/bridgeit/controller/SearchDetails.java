@@ -1,10 +1,24 @@
 package com.bridgeit.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
+
+import com.bridgeit.pojo.Doctor;
+
 public class SearchDetails {
-	
+	ObjectMapper objectMapper = new ObjectMapper();
     Scanner scanner=new Scanner(System.in);
+    List< Doctor> doctors=new ArrayList<>();
+    File file = new File("/home/bridgeit/Programs/CliniqueManagement/files/doctor.json");
+    Doctor doctor=new Doctor();
     int choice;
 	public void search() {
 		System.out.println("Enter your choice");
@@ -31,15 +45,86 @@ public class SearchDetails {
 				
 	}
 	private void searchBySpecialization() {
-		// TODO Auto-generated method stub
+		readFile();
+		System.out.println("Enter the doctor Specialization to search doctor: ");
+	    String doctorName = scanner.next();
+		for(int i=0; i <doctors.size();i++)
+		{
+			doctor = doctors.get(i);
+			if(doctorName.equals(doctor.getSpecialization()))
+			{
+				System.out.println(doctor);
+				System.out.println("doctor avilable");
+				break;
+			}
+			else {
+				System.out.println("No doctor avilable.");
+			}
+
+		}
 		
 	}
 	private void searchByName() {
-		// TODO Auto-generated method stub
+		readFile();
+		System.out.println("Enter the doctor name to search doctor: ");
+	    String doctorName = scanner.next();
+		for(int i=0; i <doctors.size();i++)
+		{
+			doctor = doctors.get(i);
+			if(doctorName.equals(doctor.getName()))
+			{
+				System.out.println(doctor);
+				System.out.println("doctor avilable");
+				break;
+			}
+			else {
+				System.out.println("No doctor avilable.");
+			}
+
+		}
 		
 	}
+		
 	private void searchById() {
-		// TODO Auto-generated method stub
+		
+		readFile();
+		System.out.println("Enter the doctor id to search doctor: ");
+		int doctorId = scanner.nextInt();
+		for(int i=0; i <doctors.size();i++)
+		{
+			doctor = doctors.get(i);
+			if(doctorId==(doctor.getId()))
+			{
+				System.out.println(doctor );
+				System.out.println("doctor avilable");
+				break;
+			}
+			else {
+				System.out.println("No doctor avilable.");
+			}
+
+		}
+		
+		
+	}
+	private void readFile() {
+		try
+		{
+			
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			if((line = reader.readLine()) != null)
+			{
+				TypeReference<ArrayList<Doctor>> type = new TypeReference<ArrayList<Doctor>>() {};
+				doctors = objectMapper.readValue(line, type);
+				
+			}System.out.println(doctors);
+			reader.close();
+		
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 		
 	}
 

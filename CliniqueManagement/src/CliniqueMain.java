@@ -1,7 +1,15 @@
+import java.io.IOException;
 import java.util.Scanner;
-import com.bridgeit.controller.*;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+
+import com.bridgeit.controller.AddDetails;
+import com.bridgeit.controller.DisplayMethods;
+import com.bridgeit.controller.SearchDetails;
 public class CliniqueMain {
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 		int choice;
 		AddDetails addDetails=new AddDetails();
 		SearchDetails searchDetails=new SearchDetails();
