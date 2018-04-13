@@ -1,4 +1,10 @@
-
+/******************************************************************************
+ *  Purpose: Address pojo class
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-04-2018
+ ******************************************************************************/
 public class Address {
 	private String city;
 	private String state;

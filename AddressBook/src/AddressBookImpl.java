@@ -1,4 +1,10 @@
-
+/******************************************************************************
+ *  Purpose: Address Book Implementation 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-04-2018
+ ******************************************************************************/
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,6 +60,11 @@ public class AddressBookImpl implements AddressBook{
 		}while(choice<6);
 		
 }
+	/*Purpose:Add Book
+	 *  
+	 * (non-Javadoc) 
+	 * @see AddressBook#add()
+	 */
 	public void add() throws IOException 
 	{
 		Person person=new Person();
@@ -83,6 +94,11 @@ public class AddressBookImpl implements AddressBook{
 		
 	}
 	
+	/* Purpose:Delete Book
+	 * 
+	 * (non-Javadoc)
+	 * @see AddressBook#delete()
+	 */
 	public  void delete() {
 		System.out.println("Enter the name to delete user");
 		String name =scanner.next();
@@ -100,6 +116,11 @@ public class AddressBookImpl implements AddressBook{
 	}
 
 	
+	/*Purpose:edit Book
+	 * 
+	 *  (non-Javadoc)
+	 * @see AddressBook#edit()
+	 */
 	public void edit() {
 		System.out.println("Enter the person name: ");
 		String name=scanner.next();
@@ -147,6 +168,11 @@ public class AddressBookImpl implements AddressBook{
 	}
 
 	
+	/* Purpose:Sort By Last Name
+	 * 
+	 * (non-Javadoc)
+	 * @see AddressBook#sortByLastName()
+	 */
 	public void sortByLastName() {
 		for (int i = 0; i < arraylist.size(); i++) {
 	        for (int j = 0; j < arraylist.size(); j++) {
@@ -168,6 +194,11 @@ public class AddressBookImpl implements AddressBook{
 	}
 
 	
+	/* Sort by Zip
+	 * 
+	 * (non-Javadoc)
+	 * @see AddressBook#sortByZip()
+	 */
 	public void sortByZip() {
 		class SortByZip implements Comparator<Person>
 		{
@@ -190,6 +221,11 @@ public class AddressBookImpl implements AddressBook{
 	}
 
 	
+	/* Purpose:Display Book
+	 * 
+	 * (non-Javadoc)
+	 * @see AddressBook#print()
+	 */
 	public void print() throws IOException {
 		System.out.println(arraylist);
 		

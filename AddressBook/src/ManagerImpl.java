@@ -1,22 +1,34 @@
+/******************************************************************************
+ *  Purpose: Manager Implementation
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   10-04-2018
+ ******************************************************************************/
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class ManagerImpl implements Manager{
+public class ManagerImpl implements Manager
+{
 static Scanner scanner=new Scanner(System.in);
 static String folderPath="/home/bridgeit/Programs/AddressBook/files/";
 
 static File file;
 ArrayList<Person> arraylist=new ArrayList<Person>();	
 static ObjectMapper mapper=new ObjectMapper(); 
+	/* Purpose:Create new  book
+	 * 
+	 * (non-Javadoc)
+	 * @see Manager#newAddressBook()
+	 */
 	public void newAddressBook() throws IOException {
 		File filel=new File(folderPath);
 		File[] listFile=filel.listFiles();
@@ -32,6 +44,11 @@ static ObjectMapper mapper=new ObjectMapper();
 		System.out.println("NEw file created");
 	}
 	
+	/* Purpose:Open Book
+	 * 
+	 * (non-Javadoc)
+	 * @see Manager#openFile()
+	 */
 	public void openFile() throws IOException {
 		
 		File filel=new File(folderPath);
@@ -59,6 +76,11 @@ static ObjectMapper mapper=new ObjectMapper();
 				addressBookImpl.addressBookOperations(arraylist);
 		
 	}
+	/* Purpose:Close  Book
+	 * 
+	 * (non-Javadoc)
+	 * @see Manager#closeFile()
+	 */
 	public void closeFile	() throws IOException {
 		int choice;
 		System.out.println("enter your choice");
@@ -83,6 +105,11 @@ static ObjectMapper mapper=new ObjectMapper();
 		
 	}
 
+	/* Purpose:Save file
+	 * 
+	 * (non-Javadoc)
+	 * @see Manager#saveFile()
+	 */
 	public void saveFile() throws IOException {
 		ArrayList<Person> List=AddressBookImpl.arraylist;
 	
@@ -92,6 +119,11 @@ static ObjectMapper mapper=new ObjectMapper();
 		System.out.println("Save Successfully.");
 			
 	}
+	/*Purpose:Save file as
+	 * 
+	 *  (non-Javadoc)
+	 * @see Manager#saveAs()
+	 */
 	public void saveAs() {
 		System.out.println("enter extention of file");
 		 String extension=scanner.next(); 

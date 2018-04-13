@@ -1,4 +1,10 @@
-
+/******************************************************************************
+ *  Purpose: Person Pojo class
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-04-2018
+ ******************************************************************************/
 public class Person {
 	Address address=new Address();
 	public Address getAddress() {

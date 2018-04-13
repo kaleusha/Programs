@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Clinique Management 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-04-2018
+ ******************************************************************************/
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -15,9 +22,11 @@ public class CliniqueMain {
 		SearchDetails searchDetails=new SearchDetails();
 		DisplayMethods displayMethods=new DisplayMethods(); 
 		Scanner scanner=new Scanner(System.in);
-		System.out.println("Enter Your Choice: ");
-		System.out.println("\n1.add \n2.search \n3.display \n4.exit");
-		choice=scanner.nextInt();
+		
+		while(true) {
+			System.out.println("Enter Your Choice: ");
+			System.out.println("\n1.add \n2.search \n3.display \n4.famous Doctor \n5.exit");
+			choice=scanner.nextInt();
 		switch(choice)
 		{
 		case 1:
@@ -33,11 +42,15 @@ public class CliniqueMain {
 			break;
 			
 		case 4:
+			displayMethods.famousDoctor();
 			
 			break;
+		case 5:
+			break;
 			
+		}scanner.close();
 		}
-		scanner.close();
+		
 	}
 
 }

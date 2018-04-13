@@ -1,11 +1,19 @@
+/******************************************************************************
+ *  Purpose: Address Book main method 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   10-04-2018
+ ******************************************************************************/
 import java.io.IOException;
 import java.util.Scanner;
 
 public class main {
 	public static void main(String[] args) throws IOException {
+		
 		Scanner scanner=new Scanner(System.in);
 		int choice;
-		System.out.println("Enter your Choice: ");int i=1;
+		System.out.println("Enter your Choice: ");
 		do {
 		System.out.println("\n1.newAddressBook \n2.openFile \n3.closeFile \n4.saveFile \n5.saveAs \n6.exit ");
 		 choice=scanner.nextInt();
@@ -37,10 +45,9 @@ public class main {
 			 break; 
 			 
 		 }
-		 i++;
-		}while(i<6);
-		scanner.close();
+		 
+		}while(true);
 		
 	}
-
+	
 }

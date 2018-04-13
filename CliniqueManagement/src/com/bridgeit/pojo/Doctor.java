@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Pojo Class for Doctor
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-04-2018
+ ******************************************************************************/
 package com.bridgeit.pojo;
 
 public class Doctor {

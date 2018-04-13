@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Search doctor by id ,name and specialization
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-04-2018
+ ******************************************************************************/
 package com.bridgeit.controller;
 
 import java.io.BufferedReader;
@@ -22,6 +29,7 @@ public class SearchDetails {
     int choice;
 	public void search() {
 		System.out.println("Enter your choice");
+		do {
 		System.out.println("search Doctor by: \n1.id \n2.name \n3.specialization \n4.exit");
 		choice=scanner.nextInt();
 		switch(choice)
@@ -42,8 +50,13 @@ public class SearchDetails {
 			break;
 			
 		}
+		}while(choice<4);
 				
 	}
+	/**
+	 * Purpose:Search Doctor by Specialization
+	 * 
+	 */
 	private void searchBySpecialization() {
 		readFile();
 		System.out.println("Enter the doctor Specialization to search doctor: ");
@@ -64,6 +77,10 @@ public class SearchDetails {
 		}
 		
 	}
+	/**
+	 * Purpose:Search Doctor by name
+	 * 
+	 */
 	private void searchByName() {
 		readFile();
 		System.out.println("Enter the doctor name to search doctor: ");
@@ -85,6 +102,10 @@ public class SearchDetails {
 		
 	}
 		
+	/**
+	 * Purpose:Search Doctor by id
+	 * 
+	 */
 	private void searchById() {
 		
 		readFile();
@@ -107,6 +128,10 @@ public class SearchDetails {
 		
 		
 	}
+	/**
+	 * Purpose:Read file
+	 * 
+	 */
 	private void readFile() {
 		try
 		{

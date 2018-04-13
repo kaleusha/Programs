@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Purpose: Pojo class for Appointment 
+ *  
+ *  @author  Usha Kale
+ *  @version 1.0
+ *  @since   12-04-2018
+ ******************************************************************************/
 package com.bridgeit.pojo;
 
 public class Appointment {
@@ -9,7 +16,7 @@ public class Appointment {
 	public void setDoctorName(String doctorName) {
 		this.doctorName = doctorName;
 	}
-	private int id;
+	
 	public Patient getPatient() {
 		return patient;
 	}
@@ -22,15 +29,10 @@ public class Appointment {
 	public void setDate(String date2) {
 		this.date = date2;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	@Override
 	public String toString() {
-		return "Appoinment [Patient=" + patient + ", date=" + date + ", id=" + id + "]";
+		return "Appointment [patient=" + patient + ", date=" + date + ", doctorName=" + doctorName + "]";
 	}
-
+	
+	
 }
