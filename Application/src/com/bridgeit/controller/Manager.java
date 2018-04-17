@@ -13,7 +13,7 @@ import com.bridgeit.pojo.Student;
 public class Manager 
 {
  Scanner scanner=new Scanner(System.in);
-static List<Student> arraylist=new ArrayList<Student>();	
+static List<Student> arraylist=new ArrayList<>();	
 Student student=new Student();
 	
 /**
