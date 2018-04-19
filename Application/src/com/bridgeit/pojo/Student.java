@@ -14,13 +14,18 @@ public class Student {
 	}
 	@Override
 	public boolean equals(Object obj) {
+		 /* if(this == obj)
+	            return true;
+		  if(obj == null || obj.getClass()!= this.getClass())
+	            return false;*/
+		  Student student = (Student) obj;
 		
-		return super.equals(obj);
+		  return (student.lastName == this.lastName && student.id == this.id);
 	}
 	@Override
 	public int hashCode() {
 		
-		return super.hashCode();
+		  return this.id;
 	}
 	
 	public int getId() {
