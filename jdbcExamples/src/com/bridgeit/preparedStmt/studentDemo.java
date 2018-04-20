@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
-
-
-
 public class studentDemo 
 {
 	static Scanner scanner=new Scanner(System.in);
@@ -74,18 +71,25 @@ public class studentDemo
 			e.printStackTrace();
 		}
 		finally {
+			if(preparedStatement!=null)
+			{
+
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 			if(connection!=null)
 			{
 				try {
-					//step 6.connection close
-					preparedStatement.close();
 					connection.close();
 				} catch (SQLException e) {
-					
 					e.printStackTrace();
 				}
 			}
 		}
+		
 		
 	}
 	/**
@@ -94,6 +98,10 @@ public class studentDemo
 	 */
 	private static void insertData() 
 	{
+		System.out.println("Enter how many student insert in database");
+		int number=scanner.nextInt();
+		for(int i=0;i<number;i++)
+		{
 		String insertQuery="insert into student(id,firstname,lastname,address,mobileno)"+"values(?,?,?,?,?)";
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -133,18 +141,24 @@ public class studentDemo
 			e.printStackTrace();
 		}
 		finally {
-			if(connection!=null)
+			if(preparedStatement!=null)
 			{
+
 				try {
-					//step 6.connection close
 					preparedStatement.close();
-					connection.close();
 				} catch (SQLException e) {
-					
 					e.printStackTrace();
 				}
 			}
-		}
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}}
 		
 	}
 	/**
@@ -176,14 +190,20 @@ public class studentDemo
 			e.printStackTrace();
 		}
 		finally {
+			if(preparedStatement!=null)
+			{
+
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 			if(connection!=null)
 			{
 				try {
-					//step 6.connection close
-					preparedStatement.close();
 					connection.close();
 				} catch (SQLException e) {
-					
 					e.printStackTrace();
 				}
 			}
@@ -224,19 +244,24 @@ public class studentDemo
 			e.printStackTrace();
 		}
 		finally {
+			if(preparedStatement!=null)
+			{
+
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 			if(connection!=null)
 			{
 				try {
-					//step 6.connection close
-					preparedStatement.close();
 					connection.close();
 				} catch (SQLException e) {
-					
 					e.printStackTrace();
 				}
 			}
 		}
-		
 		
 	}
 }

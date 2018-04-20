@@ -11,6 +11,11 @@ public class InsertData {
 	public void insertData() 
 	{
 		Scanner scanner=new Scanner(System.in);
+	
+		System.out.println("Enter how many student insert in database");
+		int number=scanner.nextInt();
+		for(int i=0;i<number;i++)
+		{
 		String insertQuery="{call insertdata(?,?,?,?,?,?)}";
 		Connection connection=null;
 		CallableStatement callableStatement=null;
@@ -44,13 +49,17 @@ public class InsertData {
 			e.printStackTrace();
 		}
 		finally {
-			if(connection!=null)
+			if(callableStatement!=null)
 			{
+
 				try {
 					callableStatement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+			}
+			if(connection!=null)
+			{
 				try {
 					connection.close();
 				} catch (SQLException e) {
@@ -58,7 +67,7 @@ public class InsertData {
 				}
 			}
 		}
-		
+		}
 	}
 
 }
