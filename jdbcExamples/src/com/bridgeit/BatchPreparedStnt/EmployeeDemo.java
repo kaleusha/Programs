@@ -18,43 +18,31 @@ public class EmployeeDemo {
     String name=scanner.next();
     System.out.println("enter salary");
     String salary=scanner.next();
+    //String insertQuery = "insert into employee(id,name,salary)values(?,?,?)";
+    System.out.println("Enter 2nd id ");
+    int id1=scanner.nextInt();
+    System.out.println("Enter 2nd name");
+    String name1=scanner.next();
+    System.out.println("enter salary");
+    String salary1=scanner.next();
     String insertQuery = "insert into employee(id,name,salary)values(?,?,?)";
-	String deleteQuery="delete from employee where id=?";
-	String udateQuery="update employee set name=? where id=?";
+	
     try {
 		
 		Class.forName("com.mysql.jdbc.Driver");
 		connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/studentinfo","root","root");
-		connection.setAutoCommit(false);
 		preparedStatement=connection.prepareStatement(insertQuery);
 		preparedStatement.setInt(1,id);
 		preparedStatement.setString(2,name);
 		preparedStatement.setString(3, salary);
 		preparedStatement.addBatch();
-		System.out.println("insert successfully");
-	
-		//delete record
-		System.out.println("Enter id to delete record");
-		int deleteid=scanner.nextInt();
-	
-		preparedStatement=connection.prepareStatement(deleteQuery);
-		preparedStatement.setInt(1, deleteid);
+		//preparedStatement=connection.prepareStatement(insertQuery);
+		preparedStatement.setInt(1,id1);
+		preparedStatement.setString(2,name1);
+		preparedStatement.setString(3, salary1);
 		preparedStatement.addBatch();
-		System.out.println("delete successfully");
-	
-        //update record
-		System.out.println("enter id to update record ");
-		int updateid=scanner.nextInt();
-		System.out.println("enter new name ");
-		String newname=scanner.next();
-		
-		preparedStatement=connection.prepareStatement(udateQuery);
-		preparedStatement.setInt(2, updateid);
-		preparedStatement.setString(1, newname);
-		preparedStatement.addBatch();
-		System.out.println("update successfully");
 		preparedStatement.executeBatch();
-		connection.commit();
+		System.out.println("insert successfully");
 		
 		
 	} catch (ClassNotFoundException | SQLException e) {
@@ -67,7 +55,7 @@ public class EmployeeDemo {
 			try {
 				preparedStatement.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
@@ -76,10 +64,10 @@ public class EmployeeDemo {
 			try {
 				connection.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
-	}
+	}scanner.close();
 	}
 }

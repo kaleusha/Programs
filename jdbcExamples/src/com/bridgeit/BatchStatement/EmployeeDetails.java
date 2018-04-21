@@ -45,7 +45,6 @@ public class EmployeeDetails {
 			statement.executeBatch();
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
@@ -54,7 +53,7 @@ public class EmployeeDetails {
 				try {
 					statement.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			}
@@ -63,11 +62,11 @@ public class EmployeeDetails {
 				try {
 					connection.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			}
-		}
+		}scanner.close();
 
 	} 
 }
