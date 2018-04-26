@@ -10,7 +10,7 @@ public class UpdateData {
 
 	public void updateData() {
 		Scanner scanner=new Scanner(System.in);
-		String updateQuery="{call insertdata(?,?,?,?,?,?)}";
+		String updateQuery="{call crudOperation(?,?,?,?,?,?)}";
 		Connection connection=null;
 		System.out.println("Enter id to update");
 		int id=scanner.nextInt();
@@ -54,7 +54,7 @@ public class UpdateData {
 					e.printStackTrace();
 				}
 			}
-		}
+		}scanner.close();
 		
 	}
 

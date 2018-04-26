@@ -10,7 +10,7 @@ public class DeleteData {
 
 	public void deleteData() {
 		Scanner scanner=new Scanner(System.in);
-		String deleteQuery="{call insertdata(?,?,?,?,?,?)}";
+		String deleteQuery="{call crudOperation(?,?,?,?,?,?)}";
 		Connection connection=null;
 		System.out.println("enter id to delete");
 		int id=scanner.nextInt();
@@ -52,7 +52,7 @@ public class DeleteData {
 					e.printStackTrace();
 				}
 			}
-		}
+		}scanner.close();
 	}
 
 }

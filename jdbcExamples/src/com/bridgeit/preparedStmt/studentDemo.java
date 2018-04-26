@@ -36,7 +36,6 @@ public class studentDemo
 			break;
 		}
 		}while(true);
-
 	}
 	
 	/**
@@ -45,11 +44,11 @@ public class studentDemo
 	 */
 	private static void select() 
 	{
-		String selectQuery="select * from student";
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		//step 1.load driver
+		String selectQuery="select * from student";
 		try {
+			//step 1.load driver
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("---Driver loaded successfully---");
 			//step 2.establish connection with database
@@ -98,23 +97,12 @@ public class studentDemo
 	 */
 	private static void insertData() 
 	{
-		System.out.println("Enter how many student insert in database");
-		int number=scanner.nextInt();
-		for(int i=0;i<number;i++)
-		{
-		String insertQuery="insert into student(id,firstname,lastname,address,mobileno)"+"values(?,?,?,?,?)";
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		System.out.println("enter id");
-		int id=scanner.nextInt();
-		System.out.println("Enter firstname");
-		String firstname=scanner.next();
-		System.out.println("Enter lastname");
-		String lastname=scanner.next();
-		System.out.println("Enter address");
-		String address=scanner.next();
-		System.out.println("Enter mobile number");
-		String mobileno=scanner.next();
+		String insertQuery="insert into student(id,firstname,lastname,address,mobileno)"+"values(?,?,?,?,?)";
+		System.out.println("Enter how many student insert in database");
+		int number=scanner.nextInt();
+		
 		//step 1.load driver
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -125,11 +113,24 @@ public class studentDemo
 			//step 3.create statement
 		  
 		    preparedStatement=connection.prepareStatement(insertQuery);
+		    for(int i=0;i<number;i++)
+			{
+			System.out.println("enter id");
+			int id=scanner.nextInt();
+			System.out.println("Enter firstname");
+			String firstname=scanner.next();
+			System.out.println("Enter lastname");
+			String lastname=scanner.next();
+			System.out.println("Enter address");
+			String address=scanner.next();
+			System.out.println("Enter mobile number");
+			String mobileno=scanner.next();
 			preparedStatement.setInt(1, id );
 			preparedStatement.setString(2, firstname);
 			preparedStatement.setString(3, lastname);
 			preparedStatement.setString(4, address);
 			preparedStatement.setString(5, mobileno);
+			}
 		    System.out.println("---create statemant successfully---");
 		    //step 4.execute query
 		    int result=preparedStatement.executeUpdate();
@@ -158,7 +159,7 @@ public class studentDemo
 					e.printStackTrace();
 				}
 			}
-		}}
+		}
 		
 	}
 	/**
@@ -169,10 +170,10 @@ public class studentDemo
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
+		String deleteQuery="delete from student where id=?";
 		System.out.println("Enter id to delete student details");
 		int id=scanner.nextInt();
 		try {
-			String deleteQuery="delete from student where id=?";
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("---Driver loaded successfully---");
 			//step 2.establish connection with database
@@ -218,11 +219,11 @@ public class studentDemo
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
+		String updateQuery="update student set firstname=? where id=?";
 		System.out.println("Enter id to update");
 		int id=scanner.nextInt();
 		System.out.println("Enter new firstname to update in table");
 		String newname=scanner.next();
-		 String updateQuery="update student set firstname=? where id=?";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("---Driver loaded successfully---");

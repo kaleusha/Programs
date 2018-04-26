@@ -10,7 +10,7 @@ public class Select {
 
 	public void select() {
 		
-		String selectQuery="{call insertdata(?,?,?,?,?,?)}";
+		String selectQuery="{call crudOperation(?,?,?,?,?,?)}";
 		Connection connection=null;
 		CallableStatement callableStatement=null;
 		

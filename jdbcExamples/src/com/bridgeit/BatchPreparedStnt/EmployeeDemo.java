@@ -11,6 +11,7 @@ public class EmployeeDemo {
 	{
 	Connection connection=null;
 	PreparedStatement preparedStatement=null;
+	 String insertQuery = "insert into employee(id,name,salary)values(?,?,?)";
     Scanner scanner=new Scanner(System.in);
     System.out.println("Enter id ");
     int id=scanner.nextInt();
@@ -18,14 +19,12 @@ public class EmployeeDemo {
     String name=scanner.next();
     System.out.println("enter salary");
     String salary=scanner.next();
-    //String insertQuery = "insert into employee(id,name,salary)values(?,?,?)";
     System.out.println("Enter 2nd id ");
     int id1=scanner.nextInt();
     System.out.println("Enter 2nd name");
     String name1=scanner.next();
     System.out.println("enter salary");
     String salary1=scanner.next();
-    String insertQuery = "insert into employee(id,name,salary)values(?,?,?)";
 	
     try {
 		

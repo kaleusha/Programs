@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class log {
+public class LoginValidation {
 	static Scanner scanner=new Scanner(System.in);
 	public static void main(String[] args) {
 		int choice;

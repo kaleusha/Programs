@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class StudentInfo 
-{
+public class StudentInfo {
 	static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -43,11 +42,9 @@ public class StudentInfo
 	 * Purpose: Update Student detail from table
 	 * 
 	 */
-	static Connection connection = null;
-	static Statement statement = null;
-
 	private static void updateData() {
-
+		Connection connection = null;
+	    Statement statement = null;
 		System.out.println("Enter id to update");
 		int id = scanner.nextInt();
 		System.out.println("Enter new firstname to update in table");
@@ -70,9 +67,8 @@ public class StudentInfo
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			if(statement!=null)
-			{
+		} finally {
+			if (statement != null) {
 
 				try {
 					statement.close();
@@ -80,8 +76,7 @@ public class StudentInfo
 					e.printStackTrace();
 				}
 			}
-			if(connection!=null)
-			{
+			if (connection != null) {
 				try {
 					connection.close();
 				} catch (SQLException e) {
@@ -97,6 +92,8 @@ public class StudentInfo
 	 * 
 	 */
 	private static void deleteData() {
+		Connection connection = null;
+	    Statement statement = null;
 		System.out.println("Enter id to delete student details");
 		int id = scanner.nextInt();
 		String deleteQuery = "delete from student where id=" + id;
@@ -119,8 +116,7 @@ public class StudentInfo
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(statement!=null)
-			{
+			if (statement != null) {
 
 				try {
 					statement.close();
@@ -128,15 +124,14 @@ public class StudentInfo
 					e.printStackTrace();
 				}
 			}
-			if(connection!=null)
-			{
+			if (connection != null) {
 				try {
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			}		
 			}
+		}
 
 	}
 
@@ -145,59 +140,61 @@ public class StudentInfo
 	 * 
 	 */
 	private static void insertData() {
-		System.out.println("Enter how many student insert in database");
-		int number=scanner.nextInt();
-		for(int i=0;i<number;i++)
+		Connection connection = null;
+	    Statement statement = null;
+	    String insertQuery=null;
+	    System.out.println("Enter how many student insert in database");
+		int number = scanner.nextInt();
+		for (int i = 0; i < number; i++) 
 		{
-		System.out.println("enter id");
-		int id = scanner.nextInt();
-		System.out.println("Enter firstname");
-		String firstname = scanner.next();
-		System.out.println("Enter lastname");
-		String lastname = scanner.next();
-		System.out.println("Enter address");
-		String address = scanner.next();
-		System.out.println("Enter mobile number");
-		String mobileno = scanner.next();
-		String insertQuery = "insert into student(id,firstname,lastname,address,mobileno)values('" + id + "','"
-				+ firstname + "','" + lastname + "','" + address + "','" + mobileno + "')";
-		try {
-			// Step 1.load driver
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("driver loaded");
-			// step 2.establish connection with database
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentinfo", "root", "root");
-			System.out.println("establish connection successfully");
-			// step 3.create statement
-			statement = connection.createStatement();
-			System.out.println("create statemant successfully");
-			// step 4.Execute query
-			int j = statement.executeUpdate(insertQuery);
-			System.out.println("insert successful");
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(statement!=null)
-			{
-
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(connection!=null)
-			{
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			System.out.println("enter id");
+			int id = scanner.nextInt();
+			System.out.println("Enter firstname");
+			String firstname = scanner.next();
+			System.out.println("Enter lastname");
+			String lastname = scanner.next();
+			System.out.println("Enter address");
+			String address = scanner.next();
+			System.out.println("Enter mobile number");
+			String mobileno = scanner.next();
+			insertQuery = "insert into student(id,firstname,lastname,address,mobileno)values('" + id + "','"
+					+ firstname + "','" + lastname + "','" + address + "','" + mobileno + "')";
 		}
+			try {
+				// Step 1.load driver
+				Class.forName("com.mysql.jdbc.Driver");
+				System.out.println("driver loaded");
+				// step 2.establish connection with database
+				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentinfo", "root", "root");
+				System.out.println("establish connection successfully");
+				// step 3.create statement
+				statement = connection.createStatement();
+				System.out.println("create statemant successfully");
+				// step 4.Execute query
+				int j = statement.executeUpdate(insertQuery);
+				System.out.println("insert successful");
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if (statement != null) {
+
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			
 		}
 
 	}
@@ -207,6 +204,8 @@ public class StudentInfo
 	 * 
 	 */
 	private static void select() {
+		Connection connection = null;
+	    Statement statement = null;
 		String selectQuery = "select firstname, lastname from student";
 		try {
 			// Step 1.load driver
@@ -221,9 +220,12 @@ public class StudentInfo
 			// step 4.Execute query
 			ResultSet resultSet = statement.executeQuery(selectQuery);
 			while (resultSet.next()) {
-				/*System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2) + " " + resultSet.getString(3)
-						+ " " + resultSet.getString(4) + " " + resultSet.getString(5));*/
-				System.out.println(resultSet.getString(1) +""+ resultSet.getString(2));
+				/*
+				 * System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2) + " " +
+				 * resultSet.getString(3) + " " + resultSet.getString(4) + " " +
+				 * resultSet.getString(5));
+				 */
+				System.out.println(resultSet.getString(1) + "" + resultSet.getString(2));
 
 			}
 
@@ -231,9 +233,8 @@ public class StudentInfo
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			if(statement!=null)
-			{
+		} finally {
+			if (statement != null) {
 
 				try {
 					statement.close();
@@ -241,8 +242,7 @@ public class StudentInfo
 					e.printStackTrace();
 				}
 			}
-			if(connection!=null)
-			{
+			if (connection != null) {
 				try {
 					connection.close();
 				} catch (SQLException e) {
