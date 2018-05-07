@@ -3,6 +3,7 @@ package com.bridgelabz.servletdemo;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,12 +31,18 @@ public class LoginController extends HttpServlet
 		System.out.println(uname + " " + pass);
 		if(uname.equals("usha") && pass.equals("kale"))
 		{
-			out.println("login successful");
+			/*RequestDispatcher dispatcher=request.getRequestDispatcher("Success.html");
+			dispatcher.forward(request, response);*/
+			response.sendRedirect("Success.html");
+			//out.println("login successful");
 	    }
 		
 		else
 	    {
-			out.println("invalid login");
+			response.sendRedirect("Error.html");
+			/*RequestDispatcher dispatcher=request.getRequestDispatcher("Error.html");
+			dispatcher.forward(request, response);*/
+
 	    }
 	}
 

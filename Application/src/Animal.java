@@ -7,7 +7,8 @@ public class Animal {
 	{
 		System.out.println("animal eating");
 	}
-	public static <T> void print(ArrayList<T> animals)
+	
+	public static void print(ArrayList<? extends Animal> animals)
 	{
 		System.out.println(animals.toString());
 		
