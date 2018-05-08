@@ -3,11 +3,23 @@
   <display-name>ServletRegistration</display-name>
   <welcome-file-list>
     <welcome-file>Reg.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-   
   </welcome-file-list>
   <servlet>
-  <servlet-name>RegistrationPage</servlet-name>
-  <servlet-class>/registration</servlet-class>
+    <servlet-name>rs</servlet-name>
+    <servlet-class>com.bridgeit.Registration.RegistrationPage</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>log</servlet-name>
+    <servlet-class>com.bridgeit.Registration.LoginCtrl</servlet-class>
+  </servlet>
+  
+  
+  <servlet-mapping>
+    <servlet-name>rs</servlet-name>
+    <url-pattern>/reg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>log</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
 </web-app>
